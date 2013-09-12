@@ -4,10 +4,11 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import biebDomain.User;
-import biebDomain.UserRole;
-import biebService.IBiebService;
-import biebService.ServiceProvider;
+import plarktmaatsDomein.User;
+import plarktmaatsDomein.UserRole;
+import plarktmaatsService.IBiebService;
+import plarktmaatsService.ServiceProvider;
+
 
 import com.opensymphony.xwork2.ActionSupport;
 

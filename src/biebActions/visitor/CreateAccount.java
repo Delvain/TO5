@@ -1,7 +1,7 @@
 package biebActions.visitor;
 
-import biebService.IBiebService;
-import biebService.ServiceProvider;
+import plarktmaatsService.IBiebService;
+import plarktmaatsService.ServiceProvider;
 
 import com.opensymphony.xwork2.ActionSupport;
 

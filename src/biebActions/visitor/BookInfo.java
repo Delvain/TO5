@@ -1,8 +1,8 @@
 package biebActions.visitor;
 
-import biebDomain.Book;
-import biebService.IBiebService;
-import biebService.ServiceProvider;
+import plarktmaatsDomein.Book;
+import plarktmaatsService.IBiebService;
+import plarktmaatsService.ServiceProvider;
 
 import com.opensymphony.xwork2.ActionSupport;
 
