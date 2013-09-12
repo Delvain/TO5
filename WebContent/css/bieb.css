@@ -1,0 +1,33 @@
+body {
+	text-align: left;
+	background-color: #ccccff;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+tr.thcolor {
+	background-color: #bbbbbb;
+	color: black;
+}
+
+tr.tdcolor {
+	background-color: #eeeeee;
+	color: black;
+}
+
+th {
+	border: 2px solid darkblue;
+	padding: 3px;
+}
+
+td {
+	border: 2px solid darkblue;
+	padding: 3px;
+}
+
+span.errorMessage {
+	background-color: #eeeeee;
+	color: red;	
+}
