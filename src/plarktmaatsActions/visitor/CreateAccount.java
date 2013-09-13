@@ -13,7 +13,7 @@ public class CreateAccount extends ActionSupport {
 	private String password;
 
 	public String execute(){
-		ibs.addMember(username,password);
+		//ibs.addMember(username,password);
 		
 		return SUCCESS;
 	}
@@ -25,9 +25,9 @@ public class CreateAccount extends ActionSupport {
 		if (username.length() == 0 ){			
 			addFieldError( "username", "naam is verplicht");
 		}
-		else if ( ibs.userExists(username ) ){		
-			addFieldError("username", "gebruiker bestaat al");
-		}
+//		else if ( ibs.userExists(username ) ){		
+//			addFieldError("username", "gebruiker bestaat al");
+//		}
 		
 		if ( password.length() == 0 ){			
 			addFieldError( "password", "wachtwoord is verplicht");
