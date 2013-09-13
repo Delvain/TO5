@@ -45,32 +45,7 @@
 		<action name="MemberMenu" class="plarktmaatsActions.member.MemberMenu">
 			<result>/jsp/menu/MemberMenu.jsp</result>
 		</action>
-		<action name="BookList" class="plarktmaatsActions.visitor.BookList">
-			<result name="success">/jsp/member/BookList.jsp</result>
-		</action>
-		<action name="BookInfoForm" class="plarktmaatsActions.visitor.BookList">
-		<interceptor-ref name="store">
-				<param name="operationMode">RETRIEVE</param>
-			</interceptor-ref>
-			<result name="success">/jsp/member/BookInfoForm.jsp</result>
-		</action>
-		<action name="BookInfo" class="plarktmaatsActions.visitor.BookInfo">
-			<interceptor-ref name="store">
-				<param name="operationMode">STORE</param>
-			</interceptor-ref>
-			<interceptor-ref name="defaultStack" />
-			<result name="success">/jsp/member/BookInfo.jsp</result>
-			<result name="input" type="redirectAction">BookInfoForm</result>
-		</action>
-		<action name="BookReservationForm">
-			<result name="success">/html/member_not_yet_implemented.html</result>
-		</action>
-		<action name="CancelReservationForm">
-			<result name="success">/html/member_not_yet_implemented.html</result>
-		</action>
-		<action name="MyBookList">
-			<result name="success">/html/member_not_yet_implemented.html</result>
-		</action>
+	
 		<action name="ChangePasswordForm">
 			<result name="success">/html/member_not_yet_implemented.html</result>
 		</action>
