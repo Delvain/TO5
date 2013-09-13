@@ -1,4 +1,4 @@
-package classes;
+package plarktmaatsDomein;
 
 public class Categorie {
 	private String 	naam;

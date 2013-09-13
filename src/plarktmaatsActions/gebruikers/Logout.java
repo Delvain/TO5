@@ -6,7 +6,7 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import plarktmaatsAware.UserAware;
-import plarktmaatsDomein.User;
+import plarktmaatsDomein.Persoon;
 
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class Logout extends ActionSupport implements UserAware, SessionAware {
 	
-	private User user;
+	private Persoon user;
 	
 	@SuppressWarnings("rawtypes")
 	private SessionMap session;
@@ -25,11 +25,11 @@ public class Logout extends ActionSupport implements UserAware, SessionAware {
 		return ActionSupport.SUCCESS;
 	}
 
-	public User getUser() {
+	public Persoon getUser() {
 		return user;
 	}
 	
-	public void setUser(User user) {
+	public void setUser(Persoon user) {
 		this.user = user;
 	}
 

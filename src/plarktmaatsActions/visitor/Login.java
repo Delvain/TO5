@@ -1,11 +1,11 @@
-package biebActions.visitor;
+package plarktmaatsActions.visitor;
 
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import plarktmaatsDomein.User;
-import plarktmaatsDomein.UserRole;
+import plarktmaatsDomein.Persoon;
+import plarktmaatsDomein.Beheerder;
 import plarktmaatsService.IBiebService;
 import plarktmaatsService.ServiceProvider;
 
@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class Login extends ActionSupport implements SessionAware {
 	
 	private IBiebService ibs = ServiceProvider.getBiebService();
-	private User user;
+	private Persoon user;
 	@SuppressWarnings("rawtypes")
 	private Map session;
 	private String username;
@@ -25,10 +25,17 @@ public class Login extends ActionSupport implements SessionAware {
 	@SuppressWarnings("unchecked")
 	public String execute(){
 		session.put( "user", user );
-		if (user.getUr().equals(UserRole.Manager))
+		try {
+			Beheerder beheerder = (Beheerder) user;
 			return "managermenu";
-		if (user.getUr().equals(UserRole.Coworker))
-			return "coworkermenu";
+		} catch (ClassCastException ce) {
+			
+		}
+		
+//		if (user instanceof Beheerder)
+//			return "managermenu";
+//		if (user.getUr().equals(UserRole.Coworker))
+//			return "coworkermenu";
 		return SUCCESS;
 	}
 
@@ -44,10 +51,10 @@ public class Login extends ActionSupport implements SessionAware {
 			addFieldError( "password", "wachtwoord is verplicht" );
 		}
 		
-	    user = ibs.getUserByUsername(username);
-		if ((user == null) || !(user.getPassword().equals(password))){
-			addFieldError("username", "naam of wachtwoord is niet juist");
-		}
+//	    user = ibs.getUserByUsername(username);
+//		if ((user == null) || !(user.getPassword().equals(password))){
+//			addFieldError("username", "naam of wachtwoord is niet juist");
+//		}
 	}
 	
 	public String getUsername() {
@@ -72,7 +79,7 @@ public class Login extends ActionSupport implements SessionAware {
 		
 	}
 	
-	public User getUser() {
+	public Persoon getUser() {
 		return user;
 	}
 

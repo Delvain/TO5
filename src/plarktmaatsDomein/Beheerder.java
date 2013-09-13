@@ -1,4 +1,4 @@
-package classes;
+package plarktmaatsDomein;
 
 public class Beheerder extends Persoon {
 

@@ -1,9 +1,9 @@
 package plarktmaatsAware;
 
-import plarktmaatsDomein.User;
+import plarktmaatsDomein.Persoon;
 
 public interface UserAware {
 	
-	public void setUser( User user );
+	public void setUser( Persoon user );
 	
 }

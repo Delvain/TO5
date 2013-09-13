@@ -3,7 +3,7 @@ package plarktmaatsInterceptors;
 import java.util.Map;
 
 import plarktmaatsAware.UserAware;
-import plarktmaatsDomein.User;
+import plarktmaatsDomein.Persoon;
 
 
 import com.opensymphony.xwork2.Action;
@@ -24,7 +24,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		@SuppressWarnings("rawtypes")
 		Map session = actionInvocation.getInvocationContext().getSession();
 		
-		User user = (User) session.get("user" );
+		Persoon user = (Persoon) session.get("user" );
 		
 		if (user == null) {
 		    return Action.LOGIN;

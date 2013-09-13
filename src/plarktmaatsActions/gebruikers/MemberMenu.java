@@ -1,24 +1,24 @@
 package plarktmaatsActions.gebruikers;
 
 import plarktmaatsAware.UserAware;
-import plarktmaatsDomein.User;
+import plarktmaatsDomein.Persoon;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class MemberMenu extends ActionSupport implements UserAware {
 	
-	private User user;
+	private Persoon user;
 
 	public String execute(){
 		return SUCCESS;
 	}
 
-	public User getUser() {
+	public Persoon getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Persoon user) {
 		this.user = user;
 	}
 }
