@@ -9,7 +9,6 @@ import plarktmaatsDomein.Beheerder;
 import plarktmaatsService.IBiebService;
 import plarktmaatsService.ServiceProvider;
 
-
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")

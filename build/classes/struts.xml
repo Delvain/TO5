@@ -10,6 +10,6 @@
 		</action>
 	</package>	
 		
-    <include file="biebActions/bieb.xml"/>
+    <include file="plarktmaatsActions/plarktmaats.xml"/>
  
 </struts>
