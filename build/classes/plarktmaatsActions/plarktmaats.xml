@@ -23,10 +23,10 @@
 		</action>
 	</package>
 	
-	<package name="member" namespace="/member" extends="struts-default">
+	<package name="gebruikers" namespace="/member" extends="struts-default">
 		<interceptors>
 			<interceptor name="authenticationInterceptor"
-				class="biebInterceptors.AuthenticationInterceptor" />
+				class="plarktmaatsInterceptors.AuthenticationInterceptor" />
 
 			<interceptor-stack name="MemberStack">
 				<interceptor-ref name="authenticationInterceptor" />
