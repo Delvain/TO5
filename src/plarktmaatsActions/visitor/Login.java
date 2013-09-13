@@ -6,15 +6,12 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import plarktmaatsDomein.Persoon;
 import plarktmaatsDomein.Beheerder;
-import plarktmaatsService.IBiebService;
-import plarktmaatsService.ServiceProvider;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class Login extends ActionSupport implements SessionAware {
 	
-	private IBiebService ibs = ServiceProvider.getBiebService();
 	private Persoon user;
 	@SuppressWarnings("rawtypes")
 	private Map session;

@@ -1,14 +1,10 @@
 package plarktmaatsActions.visitor;
 
-import plarktmaatsService.IBiebService;
-import plarktmaatsService.ServiceProvider;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class CreateAccount extends ActionSupport {
 	
-	private IBiebService ibs = ServiceProvider.getBiebService();
 	private String username;
 	private String password;
 
