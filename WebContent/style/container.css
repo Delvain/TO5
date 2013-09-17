@@ -1,0 +1,60 @@
+div.container {
+	width: 980px;
+	margin: 0 auto;
+	min-height: 200px;
+}
+
+div.container div.item {
+	width: 174px;
+	height: 270px;
+	border: 1px solid #BACFE9;
+	margin: 5px;
+	padding: 5px;
+	float: left;
+	color: #000;
+	text-align: center;
+}
+
+div.container div.item a {
+	color: inherit;
+	font-size: 20px;
+	font-weight: bold;
+	overflow: hidden;
+	width: 100%;
+	display: block;
+	height: 25px;
+}
+div.container div.item div.imgBox {
+	height: 140px;
+}
+div.container div.item div.imgBox img {
+	border: 0;
+	max-width: 100%;
+	max-height: 100%;
+}
+div.container div.item p {
+	margin: 0;
+	font-weight: bold;
+	font-size: 31px;
+	line-height: 40px;
+	text-align: right;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 27px;
+}
+div.container div.item p.timer {
+	background-image: url('images/clock.png');
+}
+div.container div.item p.prijs {
+	background-image: url('images/cr.png');
+}
+div.container div.item input.bieden {
+	background: url('images/button.png') repeat;
+	border: 0;
+	height: 29px;
+	color: #fff;
+	width: 100%;
+	font-size: 17px;
+	cursor: pointer;
+}
