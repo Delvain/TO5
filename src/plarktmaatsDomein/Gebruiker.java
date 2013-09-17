@@ -50,4 +50,9 @@ public class Gebruiker extends Persoon {
 	public void setBankNr(String bank) {
 		bankNr = bank; 
 	}
+	
+	//getter alleVeilingen
+	public ArrayList<Veiling> getAlleVeilingen() {
+		return alleVeilingen;
+	}
 }
