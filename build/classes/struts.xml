@@ -6,7 +6,7 @@
 <struts>
 	<package name="default" namespace="/" extends="struts-default"> 
 		<action name="Menu">
-			<result>/jsp/menu/StartMenu.jsp</result>
+			<result>/jsp/menu/index.jsp</result>
 		</action>
 	</package>
 		
