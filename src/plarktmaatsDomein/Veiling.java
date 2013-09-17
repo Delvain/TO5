@@ -16,7 +16,6 @@ public class Veiling {
 	
 	private Gebruiker 	aanbieder;
 	private Categorie	deCategorie;
-	private PlarktMaats plarktMaats;
 	private ArrayList<Bod> alleBiedingen;
 	
 	
@@ -26,12 +25,11 @@ public class Veiling {
 		foto = ft;
 		minBedrag = min;
 		eindTijd = eind;
-		plarktMaats = pl;
 		
 		aanbieder = aanb;
 		deCategorie = cat;
 		alleBiedingen = new ArrayList<Bod>();
-		plarktMaats.voegVeilingToe(this);
+		pl.voegVeilingToe(this);
 		
 		new Timer().schedule(new veilingTimer(), eindTijd.getTime()); //timer starten
 	}
@@ -74,5 +72,61 @@ public class Veiling {
 			else
 				System.out.println("Verkocht aan "+getHoogsteBod().getBieder().getVoornaam()+" voor "+getHoogsteBod().getBedrag());
 		}
+	}
+
+	public String getProductNaam() {
+		return productNaam;
+	}
+
+	public void setProductNaam(String productNaam) {
+		this.productNaam = productNaam;
+	}
+
+	public String getProductOmschrijving() {
+		return productOmschrijving;
+	}
+
+	public void setProductOmschrijving(String productOmschrijving) {
+		this.productOmschrijving = productOmschrijving;
+	}
+
+	public Object getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Object foto) {
+		this.foto = foto;
+	}
+
+	public int getMinBedrag() {
+		return minBedrag;
+	}
+
+	public void setMinBedrag(int minBedrag) {
+		this.minBedrag = minBedrag;
+	}
+
+	public Calendar getEindTijd() {
+		return eindTijd;
+	}
+
+	public void setEindTijd(Calendar eindTijd) {
+		this.eindTijd = eindTijd;
+	}
+
+	public Gebruiker getAanbieder() {
+		return aanbieder;
+	}
+
+	public void setAanbieder(Gebruiker aanbieder) {
+		this.aanbieder = aanbieder;
+	}
+
+	public Categorie getDeCategorie() {
+		return deCategorie;
+	}
+
+	public void setDeCategorie(Categorie deCategorie) {
+		this.deCategorie = deCategorie;
 	}	
 }

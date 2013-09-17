@@ -4,7 +4,15 @@ public class Categorie {
 	private String 	naam;
 	
 	public Categorie(String nm, PlarktMaats pl) {
-		naam = nm;
+		setNaam(nm);
 		pl.voegCategorieToe(this);
+	}
+
+	public String getNaam() {
+		return naam;
+	}
+
+	public void setNaam(String naam) {
+		this.naam = naam;
 	}
 }
