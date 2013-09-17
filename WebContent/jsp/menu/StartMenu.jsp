@@ -2,12 +2,12 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 	<head>
-        <title>MijnBieb: Menu</title>
+        <title>Plarktmaats: Menu</title>
         <link rel="stylesheet" type="text/css" href="css/plarktmaats.css" />
 	</head>
 
 	<body>
-		<h4>Mijn Bieb.</h4> 
+		<h4>Plarktmaats</h4> 
 			
         <hr />
         

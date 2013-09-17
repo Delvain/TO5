@@ -3,7 +3,7 @@
 <html>
 	<head>
         <title>Manager menu</title>
-        <link rel="stylesheet" type="text/css" href="../css/bieb.css" />
+        <link rel="stylesheet" type="text/css" href="../css/plarktmaats.css" />
 	</head>
 
 	<body>

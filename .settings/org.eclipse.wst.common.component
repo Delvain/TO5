@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="HelloWorld">
+    <wb-module deploy-name="TO5">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes/" source-path="/ImportedClasses"/>
-        <property name="java-output-path" value="/HelloWorld/build/classes"/>
-        <property name="context-root" value="MijnBieb_practicum"/>
+        <property name="java-output-path" value="/TO5/build/classes"/>
+        <property name="context-root" value="TO5"/>
     </wb-module>
 </project-modules>
