@@ -74,6 +74,5 @@ public class Veiling {
 			else
 				System.out.println("Verkocht aan "+getHoogsteBod().getBieder().getVoornaam()+" voor "+getHoogsteBod().getBedrag());
 		}
-	}
-	
+	}	
 }

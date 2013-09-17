@@ -25,6 +25,5 @@ public class Main {
 		
 		Bod b4 = new Bod(9, g1);
 		v2.doeBod(b4);
-		
 	}
 }
