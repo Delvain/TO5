@@ -8,7 +8,7 @@
 		<action name="Menu">
 			<result>/jsp/menu/StartMenu.jsp</result>
 		</action>
-	</package>	
+	</package>
 		
     <include file="plarktmaatsActions/plarktmaats.xml" />
  
