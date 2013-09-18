@@ -22,6 +22,7 @@ public class CreateAccount extends ActionSupport {
 		voornaam = voornaam.trim();
 		achternaam = achternaam.trim();
 		password = password.trim();
+		password2 = password2.trim();
 		
 		
 		if (email.length() == 0 ){			
