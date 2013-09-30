@@ -5,35 +5,35 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import plarktmaatsDomein.Gebruiker;
+import plarktmaatsDomein.Veiling;
 
-public class GebruikerDAOImpl implements PlarktmaatsDAOInterface<Gebruiker> {
+public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 	@Override
-	public void create(Gebruiker c) { 
+	public void create(Veiling v) { 
 		
 		//TODO kloppend maken met implementatie van database
 		
-		String voornaam = c.getVoornaam();
-		String achternaam = c.getAchternaam();
-		String email = c.getEmail();
-		String banknr = c.getBankNr();
-		
-		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKER\" VALUES ('"+voornaam+"', '"+achternaam+"', '"+email+"', '"+banknr+"')";
-		Connection con = connect();
-		try {
-			con.createStatement().execute(query);
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		String voornaam = v.getVoornaam();
+//		String achternaam = v.getAchternaam();
+//		String email = v.getEmail();
+//		String banknr = v.getBankNr();
+//		
+//		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"VEILING\" VALUES ('"+voornaam+"', '"+achternaam+"', '"+email+"', '"+banknr+"')";
+//		Connection con = connect();
+//		try {
+//			con.createStatement().execute(query);
+//			con.close();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
-	public Gebruiker read(String pk) {
+	public Veiling read(String pk) {
 		Connection con = connect();
 		try {
-			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"GEBRUIKER\" WHERE naam = ?");
+			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"VEILING\" WHERE naam = ?");
 			read.setString(1, pk);
 			ResultSet rs = read.executeQuery();
 			while(rs.next()) {
@@ -41,7 +41,7 @@ public class GebruikerDAOImpl implements PlarktmaatsDAOInterface<Gebruiker> {
 				String achternaam = rs.getString("ACHTERNAAM");
 				String email = rs.getString("EMAIL");
 				String banknr = rs.getString("BANKNR");
-				return new Gebruiker(voornaam, achternaam, email, banknr);
+			//	return new Veiling(voornaam, achternaam, email, banknr);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -51,28 +51,28 @@ public class GebruikerDAOImpl implements PlarktmaatsDAOInterface<Gebruiker> {
 	}
 
 	@Override
-	public void update(String pk, Gebruiker c) {
-		String voornaam = c.getVoornaam();
-		String achternaam = c.getAchternaam();
-		String email = c.getEmail();
-		String banknr = c.getBankNr();
-		String query = 	"UPDATE \"STUD1626376\".\"GEBRUIKER\" ";
-		query +=		"SET voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',banknr='"+banknr+"' ";
-		query +=		"WHERE naam = '"+pk+"'";
-		Connection con = connect();
-		try {
-			con.createStatement().execute(query);
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void update(String pk, Veiling c) {
+//		String voornaam = c.getVoornaam();
+//		String achternaam = c.getAchternaam();
+//		String email = c.getEmail();
+//		String banknr = c.getBankNr();
+//		String query = 	"UPDATE \"STUD1626376\".\"VEILING\" ";
+//		query +=		"SET voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',banknr='"+banknr+"' ";
+//		query +=		"WHERE naam = '"+pk+"'";
+//		Connection con = connect();
+//		try {
+//			con.createStatement().execute(query);
+//			con.close();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
 	public void delete(String pk) {
 		Connection con = connect();
 		try {
-			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"GEBRUIKER\" WHERE naam = ?");
+			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"VEILING\" WHERE naam = ?");
 			delete.setString(1, pk);
 			delete.execute();
 			con.close();

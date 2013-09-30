@@ -18,6 +18,14 @@ public class Gebruiker extends Persoon {
 		alleVeilingen 	= new ArrayList<Veiling>();
 	}
 	
+	public Gebruiker(String vNm, String aNm, String mail, String bank) {
+		super(vNm, aNm, mail);
+		credits 		= 0;
+		bankNr 			= bank;
+		geblokkeerd		= false;
+		alleVeilingen 	= new ArrayList<Veiling>();
+	}
+	
 	//getters&setters Geblokkeerd:
 	public boolean getGeblokkeerd() {
 		return geblokkeerd;

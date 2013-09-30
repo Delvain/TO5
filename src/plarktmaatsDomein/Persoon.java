@@ -20,6 +20,13 @@ public abstract class Persoon {
 		plarktMaats.voegPersoonToe(this);
 	}
 	
+	public Persoon(String vNm, String aNm, String mail) {
+		id = 0;
+		voornaam = vNm;
+		achternaam 	= aNm;
+		email = mail;
+	}
+	
 
 	public String getAchternaam() {
 		return achternaam;
