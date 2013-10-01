@@ -26,27 +26,27 @@ public class CreateAccount extends ActionSupport {
 		
 		
 		if (email.length() == 0 ){			
-			addFieldError( "email", "email is verplicht");
+			addFieldError("email", "email is verplicht");
 		}
 		
 		if (voornaam.length() == 0) {
-			addFieldError( "voornaam", "voornaam is veprlicht");
+			addFieldError("voornaam", "voornaam is veprlicht");
 		}
 		
 		if (achternaam.length() == 0) {
-			addFieldError( "achternaam", "achternaam is verplicht");
+			addFieldError("achternaam", "achternaam is verplicht");
 		}
 	
-//		else if ( ibs.userExists(username ) ){		
+//		else if (ibs.userExists(username) ){		
 //			addFieldError("username", "gebruiker bestaat al");
 //		}
 		
 		if (password.length() == 0 ) {			
-			addFieldError( "password", "wachtwoord is verplicht");
+			addFieldError("password", "wachtwoord is verplicht");
 		}
 		
 		if (!password.equals(password2)) {
-			addFieldError( "password2", "wachtwoorden komen niet overeen");
+			addFieldError("password2", "wachtwoorden komen niet overeen");
 		}
 	}
 	

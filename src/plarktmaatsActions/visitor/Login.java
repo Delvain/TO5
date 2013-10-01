@@ -20,12 +20,12 @@ public class Login extends ActionSupport implements SessionAware {
 
 	@SuppressWarnings("unchecked")
 	public String execute(){
-		session.put( "user", user );
+		session.put("user", user);
 		try {
 			Beheerder beheerder = (Beheerder) user;
 			return "managermenu";
-		} catch (ClassCastException ce) {
-			
+		} catch(ClassCastException ce) {
+			ce.printStackTrace();
 		}
 		
 //		if (user instanceof Beheerder)
@@ -37,14 +37,14 @@ public class Login extends ActionSupport implements SessionAware {
 
 	public void validate(){
 		
-		password = password.trim();
-		username = username.trim();
+		password = password.trim().toLowerCase();
+		username = username.trim().toLowerCase();
 		
-		if ( username.length() == 0 ){			
-			addFieldError( "username", "naam is verplicht");
+		if(username.length() == 0){			
+			addFieldError("username", "naam is verplicht");
 		}
-		if ( password.length() == 0 ){			
-			addFieldError( "password", "wachtwoord is verplicht" );
+		if(password.length() == 0){			
+			addFieldError("password", "wachtwoord is verplicht");
 		}
 		
 //	    user = ibs.getUserByUsername(username);
@@ -78,5 +78,4 @@ public class Login extends ActionSupport implements SessionAware {
 	public Persoon getUser() {
 		return user;
 	}
-
 }
