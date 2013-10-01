@@ -3,9 +3,8 @@ package plarktmaatsDomein;
 public class Categorie {
 	private String 	naam;
 	
-	public Categorie(String nm, PlarktMaats pl) {
+	public Categorie(String nm) {
 		setNaam(nm);
-		pl.voegCategorieToe(this);
 	}
 
 	public String getNaam() {

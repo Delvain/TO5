@@ -19,7 +19,7 @@ public class Veiling {
 	private ArrayList<Bod> alleBiedingen;
 	
 	
-	public Veiling(String nm, String omsch, Object ft, int min, Calendar eind, Gebruiker aanb, Categorie cat, PlarktMaats pl) {
+	public Veiling(String nm, String omsch, Object ft, int min, Calendar eind, Gebruiker aanb, Categorie cat) {
 		veilingNaam 		= nm;
 		veilingOmschrijving = omsch;
 		foto = ft;
@@ -29,7 +29,6 @@ public class Veiling {
 		aanbieder = aanb;
 		deCategorie = cat;
 		alleBiedingen = new ArrayList<Bod>();
-		pl.voegVeilingToe(this);
 		
 		new Timer().schedule(new veilingTimer(), eindTijd.getTime()); //timer starten
 	}

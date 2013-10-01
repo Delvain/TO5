@@ -9,15 +9,7 @@ public class Gebruiker extends Persoon {
 	private boolean geblokkeerd;
 	
 	private ArrayList<Veiling> alleVeilingen;
-	
-	public Gebruiker(String vNm, String aNm, String mail, String bank, PlarktMaats pl) {
-		super(vNm, aNm, mail, pl);
-		credits 		= 0;
-		bankNr 			= bank;
-		geblokkeerd		= false;
-		alleVeilingen 	= new ArrayList<Veiling>();
-	}
-	
+
 	public Gebruiker(String vNm, String aNm, String mail, String bank) {
 		super(vNm, aNm, mail);
 		credits 		= 0;

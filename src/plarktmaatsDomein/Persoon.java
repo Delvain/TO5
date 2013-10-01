@@ -8,18 +8,6 @@ public abstract class Persoon {
 	private String	achternaam;
 	private String	email;
 	
-	private PlarktMaats plarktMaats;
-	
-	public Persoon(String vNm, String aNm, String mail, PlarktMaats pl) {
-		id = 0;
-		voornaam = vNm;
-		achternaam 	= aNm;
-		email = mail;
-		plarktMaats = pl;
-		
-		plarktMaats.voegPersoonToe(this);
-	}
-	
 	public Persoon(String vNm, String aNm, String mail) {
 		id = 0;
 		voornaam = vNm;
@@ -36,17 +24,6 @@ public abstract class Persoon {
 	public void setAchternaam(String achternaam) {
 		this.achternaam = achternaam;
 	}
-
-
-	public PlarktMaats getPlarktMaats() {
-		return plarktMaats;
-	}
-
-
-	public void setPlarktMaats(PlarktMaats plarktMaats) {
-		this.plarktMaats = plarktMaats;
-	}
-
 
 	public int getId() {
 		return id;
