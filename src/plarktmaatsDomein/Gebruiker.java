@@ -1,6 +1,7 @@
 package plarktmaatsDomein;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Gebruiker extends Persoon {
 	
@@ -10,14 +11,21 @@ public class Gebruiker extends Persoon {
 	
 	private ArrayList<Veiling> alleVeilingen;
 
-	public Gebruiker(String vNm, String aNm, String mail, String bank) {
-		super(vNm, aNm, mail);
+	public Gebruiker(String vNm, String aNm, String mail, Calendar gebdat, String bank) {
+		super(vNm, aNm, mail, gebdat);
 		credits 		= 0;
 		bankNr 			= bank;
 		geblokkeerd		= false;
 		alleVeilingen 	= new ArrayList<Veiling>();
 	}
 	
+	public Gebruiker(int id, String vnm, String anm, String mail,
+			Calendar gebdat, int cred, String bank,
+			boolean geblok) {
+		super(vnm, anm, mail, gebdat);
+		
+	}
+
 	//getters&setters Geblokkeerd:
 	public boolean getGeblokkeerd() {
 		return geblokkeerd;
