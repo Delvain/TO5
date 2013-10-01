@@ -12,6 +12,13 @@
 			<result name="success">/jsp/visitor/AccountCreated.jsp</result>
 			<result name="input">/jsp/visitor/CreateAccountForm.jsp</result>
 		</action>
+		<action name="AlleVeilingenAJAX" class="plarktmaatsActions.visitor.AlleVeilingenAJAX">
+			<result name="success">/jsp/ajax/index.jsp</result>
+			<result name="error" type="redirectAction">
+				<param name="actionName">Menu</param>
+            	<param name="namespace">/</param>
+			</result>
+		</action>
 		<action name="LoginForm" >
 			<result name="success">/jsp/visitor/LoginForm.jsp</result>
 		</action>

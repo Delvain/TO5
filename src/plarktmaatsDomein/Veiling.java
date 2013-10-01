@@ -33,7 +33,7 @@ public class Veiling {
 		new Timer().schedule(new veilingTimer(), eindTijd.getTime()); //timer starten
 	}
 	
-	private Bod getHoogsteBod() {
+	public Bod getHoogsteBod() {
 		Bod hoogsteBod = null;
 		if(alleBiedingen == null){
 			return null;

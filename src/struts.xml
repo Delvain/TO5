@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="default" namespace="/" extends="struts-default"> 
-		<action name="Menu">
+		<action name="Menu" class="plarktmaatsActions.visitor.AlleVeilingen">
 			<result>/jsp/menu/index.jsp</result>
 		</action>
 	</package>

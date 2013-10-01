@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,15 +31,17 @@
 			</div>
 		</div>
 		<div class="container">
-			<div class="item">
-				<a href="#">Stomme Auto</a>
-				<div class="imgBox">
-					<img src="http://fotos.marktplaats.com/kopen/e/85/LHqziqxnW3bz1amvmtSiNg==.jpg" />
+			<s:iterator value="items">
+				<div class="item">
+					<a href="#"><s:property value="titel" /></a>
+					<div class="imgBox">
+						<img src="http://fotos.marktplaats.com/kopen/e/85/LHqziqxnW3bz1amvmtSiNg==.jpg" />
+					</div>
+					<input type="button" class="bieden" value="Bieden" />
+					<p class="timer">23:23:59</p>
+					<p class="prijs">9000</p>
 				</div>
-				<input type="button" class="bieden" value="Bieden" />
-				<p class="timer">23:23:59</p>
-				<p class="prijs">9000</p>
-			</div>
+			</s:iterator>
 			<div class="item">
 				<a href="#">Fiets</a>
 				<div class="imgBox">
