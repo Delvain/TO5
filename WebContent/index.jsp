@@ -7,7 +7,7 @@
     	<style type="text/css">
     		body {
     			font-weight: bold;
-    			font-size: 18px;
+    			font-size: 17px;
     		}
     		div.container {
     			text-align: center;
