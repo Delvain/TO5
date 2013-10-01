@@ -1,6 +1,7 @@
 package plarktmaatsDAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 			String email = g.getEmail();
 			String functie = "Gebruiker";
 			Calendar gebdat = g.getGeboortedatum();
+			Date gebdatum = new java.sql.Date(gebdat.getTimeInMillis());
 			int credits = g.getCredits();
 			String banknr = g.getBankNr();
 			boolean geblokd = g.getGeblokkeerd();
@@ -31,7 +33,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 				geblokkeerd = "1";
 			}
 						
-			String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+id+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', '"+gebdat+"', '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
+			String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+id+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', '"+gebdatum+"', '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
 			Connection con = connect();
 			try {
 				con.createStatement().execute(query);
@@ -163,7 +165,8 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
 	public static void main(String[] args) {
 		PersoonDAOImpl impl = new PersoonDAOImpl();
-		Gebruiker freak = new Gebruiker("Freak", "Holland", "geen", null, "Heul Veul");
+		Calendar gebdat = Calendar.getInstance();
+		Gebruiker freak = new Gebruiker("Freak", "Holland", "geen", gebdat, "8482929");
 		impl.create(freak);
 //		freak.setLand("STAATLOOS :O");
 //		impl.update(freak.getNaam(), freak);
