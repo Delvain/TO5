@@ -6,7 +6,6 @@
     	<link rel="stylesheet" type="text/css" href="style/style.css" />
     	<style type="text/css">
     		body {
-    			font-family: Trebuchet MS;
     			font-weight: bold;
     			font-size: 18px;
     		}
