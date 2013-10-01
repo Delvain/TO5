@@ -7,7 +7,7 @@
     		body {
     			font-family: Trebuchet MS;
     			font-weight: bold;
-    			font-size: 20px;
+    			font-size: 18px;
     		}
     		div.container {
     			margin-top: 50px;
@@ -19,9 +19,10 @@
     			position: relative;
     		}
     		img {
-    			margin-top: -180px;
+    			margin-top: -100px;
     			z-index: 50;
     			position: relative;
+    			height: 300px;
     		}
     	</style>
 	</head>

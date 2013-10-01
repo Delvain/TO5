@@ -81,7 +81,7 @@
 				</div>
 				<input type="button" class="bieden" value="Bieden" />
 				<p class="timer">00:01</p>
-				<p class="prijs">9999999999</p>
+				<p class="prijs">0</p>
 			</div>
 			<div style="clear: both"></div>
 		</div>
