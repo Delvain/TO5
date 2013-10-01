@@ -17,6 +17,7 @@ div.header {
 	height: 47px;
 	border-bottom: 1px solid #a6784b;
 	background-color: #f2b479;
+	min-width: 1024px;
 }
 div.header div.content div.logo {
 	width: 200px;
@@ -39,7 +40,7 @@ div.header div.content div.right p a {
 }
 
 div.top_bar {
-	width: 100%;
+	min-width: 1024px;
 	height: 69px;
 	background-color: #e1e8f5;
 	border-bottom: 1px solid #BACFE9;
@@ -69,7 +70,7 @@ div.top_bar div.content div.search input {
 }
 
 div.footer {
-	width: 100%;
+	min-width: 1024px;
 	background-color: #e1e8f5;
 	border-top: 1px solid #BACFE9;
 	padding: 30px 0;
