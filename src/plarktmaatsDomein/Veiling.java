@@ -8,8 +8,8 @@ import java.util.TimerTask;
 
 public class Veiling {
 	
-	private String 		productNaam;
-	private String 		productOmschrijving;
+	private String 		veilingNaam;
+	private String 		veilingOmschrijving;
 	private Object 		foto;
 	private int 		minBedrag;
 	private Calendar 	eindTijd;
@@ -20,8 +20,8 @@ public class Veiling {
 	
 	
 	public Veiling(String nm, String omsch, Object ft, int min, Calendar eind, Gebruiker aanb, Categorie cat, PlarktMaats pl) {
-		productNaam 		= nm;
-		productOmschrijving = omsch;
+		veilingNaam 		= nm;
+		veilingOmschrijving = omsch;
 		foto = ft;
 		minBedrag = min;
 		eindTijd = eind;
@@ -66,7 +66,7 @@ public class Veiling {
 	private class veilingTimer extends TimerTask {
 		public void run() {
 			//TODO
-			System.out.println("De veiling van "+productNaam+" is afgelopen. ");
+			System.out.println("De veiling van "+veilingNaam+" is afgelopen. ");
 			if(getHoogsteBod() == null)	
 				System.out.println("Niet verkocht");
 			else
@@ -75,19 +75,19 @@ public class Veiling {
 	}
 
 	public String getProductNaam() {
-		return productNaam;
+		return veilingNaam;
 	}
 
 	public void setProductNaam(String productNaam) {
-		this.productNaam = productNaam;
+		this.veilingNaam = productNaam;
 	}
 
 	public String getProductOmschrijving() {
-		return productOmschrijving;
+		return veilingOmschrijving;
 	}
 
 	public void setProductOmschrijving(String productOmschrijving) {
-		this.productOmschrijving = productOmschrijving;
+		this.veilingOmschrijving = productOmschrijving;
 	}
 
 	public Object getFoto() {
