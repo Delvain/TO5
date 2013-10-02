@@ -10,13 +10,15 @@ public abstract class Persoon {
 	private String	achternaam;
 	private String	email;
 	private Calendar geboortedatum;
+	private String wachtwoord;
 	
-	public Persoon(String gNm, String vNm, String aNm, String mail, Calendar gebdat) {
+	public Persoon(String gNm, String vNm, String aNm, String mail, Calendar gebdat, String ww) {
 		gebruikersnaam = gNm;
 		voornaam = vNm;
 		achternaam 	= aNm;
 		email = mail;
 		setGeboortedatum(gebdat);
+		setWachtwoord(ww);
 	}
 
 	public String getAchternaam() {
@@ -64,5 +66,13 @@ public abstract class Persoon {
 
 	public void setGeboortedatum(Calendar geboortedatum) {
 		this.geboortedatum = geboortedatum;
+	}
+
+	public String getWachtwoord() {
+		return wachtwoord;
+	}
+
+	public void setWachtwoord(String wachtwoord) {
+		this.wachtwoord = wachtwoord;
 	}
 }
