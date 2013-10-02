@@ -70,11 +70,17 @@ div.top_bar div.content div.search input {
 }
 
 div.footer {
+	width: 100%;
 	min-width: 1024px;
 	background-color: #e1e8f5;
 	border-top: 1px solid #BACFE9;
-	padding: 30px 0;
-	margin-top: 20px;
+	padding: 10px 0;
+	position: fixed;
+	bottom: 0;
+	font-size: 12px;
+}
+div.footer p {
+	margin: 2px 0;
 }
 div.content {
 	width: 980px;
