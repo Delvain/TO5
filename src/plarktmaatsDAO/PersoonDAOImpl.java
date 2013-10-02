@@ -16,48 +16,38 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
 	@Override
 	public void create(Persoon p) { 
+		int id = p.getId();
+		String voornaam = p.getVoornaam();
+		String achternaam = p.getAchternaam();
+		String email = p.getEmail();
+		String functie = "Beheerder";
+		Calendar gebdat = p.getGeboortedatum();
+		Date gebdatum = null;
+		if (gebdat != null) {
+			gebdatum = new java.sql.Date(gebdat.getTimeInMillis());
+		} else {
+			gebdatum = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+		}
+		int credits = 0;
+		String banknr = null;
+		String geblokkeerd = "0";
 		if (p instanceof Gebruiker) {
 			Gebruiker g = (Gebruiker)p;
-			int id = g.getId();
-			String voornaam = g.getVoornaam();
-			String achternaam = g.getAchternaam();
-			String email = g.getEmail();
-			String functie = "Gebruiker";
-			Calendar gebdat = g.getGeboortedatum();
-			Date gebdatum = new java.sql.Date(gebdat.getTimeInMillis());
-			int credits = g.getCredits();
-			String banknr = g.getBankNr();
+			functie = "Gebruiker";
+			credits = g.getCredits();
+			banknr = g.getBankNr();
 			boolean geblokd = g.getGeblokkeerd();
-			String geblokkeerd = "0";
-			if (geblokd = true) {
+			if (geblokd == true) {
 				geblokkeerd = "1";
 			}
-						
-			String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+id+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', '"+gebdatum+"', '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
-			Connection con = connect();
-			try {
-				con.createStatement().execute(query);
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else if (p instanceof Beheerder) {
-			Beheerder b = (Beheerder)p;
-			int id = b.getId();
-			String voornaam = b.getVoornaam();
-			String achternaam = b.getAchternaam();
-			String email = b.getEmail();
-			String functie = "Beheerder";
-			Calendar gebdat = b.getGeboortedatum();
-						
-			String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+id+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', '"+gebdat+"', '"+null+"', '"+null+"', '"+null+"')";
-			Connection con = connect();
-			try {
-				con.createStatement().execute(query);
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		} 
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+id+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', To_Date('"+gebdatum+"','yyyy-mm-dd'), '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
+		Connection con = connect();
+		try {
+			con.createStatement().execute(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		
 	}
@@ -97,45 +87,41 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 	@Override
 	public void update(String pk, Persoon p) {
 		int primaryk = Integer.parseInt(pk);
+		int id = p.getId();
+		String voornaam = p.getVoornaam();
+		String achternaam = p.getAchternaam();
+		String email = p.getEmail();
+		String functie = "Beheerder";
+		Calendar gebdat = p.getGeboortedatum();
+		Date gebdatum = null;
+		if (gebdat != null) {
+			gebdatum = new java.sql.Date(gebdat.getTimeInMillis());
+		} else {
+			gebdatum = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+		}
+		int credits = 0;
+		String banknr = null;
+		String geblokkeerd = "0";
+		
 		if (p instanceof Gebruiker) {
 			Gebruiker g = (Gebruiker)p;
-			int id = g.getId();
-			String voornaam = g.getVoornaam();
-			String achternaam = g.getAchternaam();
-			String email = g.getEmail();
-			String functie = "Gebruiker";
-			Calendar gebdat = g.getGeboortedatum();
-			int credits = g.getCredits();
-			String banknr = g.getBankNr();
-			boolean geblokkeerd = g.getGeblokkeerd();
-			String query = 	"UPDATE \"STUD1626376\".\"GEBRUIKERS\" ";
-			query +=		"SET id='"+id+"',voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',functie='"+functie+"',gebdatum='"+gebdat+"',credits='"+credits+"',banknr='"+banknr+"',geblokkeerd='"+geblokkeerd+"' ";
-			query +=		"WHERE id = '"+primaryk+"'";
-			Connection con = connect();
-			try {
-				con.createStatement().execute(query);
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			functie = "Gebruiker";
+			credits = g.getCredits();
+			banknr = g.getBankNr();
+			boolean geblokd = g.getGeblokkeerd();
+			if (geblokd == true) {
+				geblokkeerd = "1";
 			}
-		} else if (p instanceof Beheerder) {
-			Beheerder b = (Beheerder)p;
-			int id = b.getId();
-			String voornaam = b.getVoornaam();
-			String achternaam = b.getAchternaam();
-			String email = b.getEmail();
-			String functie = "Gebruiker";
-			Calendar gebdat = b.getGeboortedatum();
-			String query = 	"UPDATE \"STUD1626376\".\"GEBRUIKERS\" ";
-			query +=		"SET id='"+id+"',voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',functie='"+functie+"',gebdatum='"+gebdat+"',credits='"+null+"',banknr='"+null+"',geblokkeerd='"+null+"' ";
-			query +=		"WHERE id = '"+primaryk+"'";
-			Connection con = connect();
-			try {
-				con.createStatement().execute(query);
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		}
+		String query = 	"UPDATE \"STUD1630460\".\"GEBRUIKERS\" ";
+		query +=		"SET id='"+id+"',voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',functie='"+functie+"',gebdatum= To_Date('"+gebdatum+"','yyyy-mm-dd'),credits='"+credits+"',banknr='"+banknr+"',geblokkeerd='"+geblokkeerd+"' ";
+		query +=		"WHERE id = '"+primaryk+"'";
+		Connection con = connect();
+		try {
+			con.createStatement().execute(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -164,10 +150,17 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 	}
 
 	public static void main(String[] args) {
-		PersoonDAOImpl impl = new PersoonDAOImpl();
-		Calendar gebdat = Calendar.getInstance();
-		Gebruiker freak = new Gebruiker("Freak", "Holland", "geen", gebdat, "8482929");
-		impl.create(freak);
+		// TESTS
+		
+//		PersoonDAOImpl impl = new PersoonDAOImpl();
+//		Calendar gebdat = Calendar.getInstance();
+//		Gebruiker freak = new Gebruiker("Freek", "Holland", "geen", gebdat, "8482929");
+//		impl.create(freak);
+//		impl.delete("0");
+//		Persoon p = impl.read("2");
+//		System.out.println(p);
+//		p.setAchternaam("yolo");
+//		impl.update("2", p);
 //		freak.setLand("STAATLOOS :O");
 //		impl.update(freak.getNaam(), freak);
 //		System.out.println(impl.read("Freak").getLand());

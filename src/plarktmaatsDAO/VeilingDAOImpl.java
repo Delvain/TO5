@@ -1,10 +1,14 @@
 package plarktmaatsDAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+
+import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Veiling;
 
 public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
@@ -12,21 +16,39 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	@Override
 	public void create(Veiling v) { 
 		
-		//TODO kloppend maken met implementatie van database
-		
-//		String voornaam = v.getVoornaam();
-//		String achternaam = v.getAchternaam();
-//		String email = v.getEmail();
-//		String banknr = v.getBankNr();
-//		
-//		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"VEILING\" VALUES ('"+voornaam+"', '"+achternaam+"', '"+email+"', '"+banknr+"')";
-//		Connection con = connect();
-//		try {
-//			con.createStatement().execute(query);
-//			con.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+		int id = v.getId();
+		String voornaam = p.getVoornaam();
+		String achternaam = p.getAchternaam();
+		String email = p.getEmail();
+		String functie = "Beheerder";
+		Calendar gebdat = p.getGeboortedatum();
+		Date gebdatum = null;
+		if (gebdat != null) {
+			gebdatum = new java.sql.Date(gebdat.getTimeInMillis());
+		} else {
+			gebdatum = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+		}
+		int credits = 0;
+		String banknr = null;
+		String geblokkeerd = "0";
+		if (p instanceof Gebruiker) {
+			Gebruiker g = (Gebruiker)p;
+			functie = "Gebruiker";
+			credits = g.getCredits();
+			banknr = g.getBankNr();
+			boolean geblokd = g.getGeblokkeerd();
+			if (geblokd == true) {
+				geblokkeerd = "1";
+			}
+		} 
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+id+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', To_Date('"+gebdatum+"','yyyy-mm-dd'), '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
+		Connection con = connect();
+		try {
+			con.createStatement().execute(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
