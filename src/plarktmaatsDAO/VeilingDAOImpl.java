@@ -6,7 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
@@ -83,6 +85,36 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<Veiling> getAll() {
+		ArrayList<Veiling> array = new ArrayList<Veiling>();
+		Connection con = connect();
+		try {
+			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"VEILINGEN\" ");
+			ResultSet rs = read.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("ID");
+				String naam = rs.getString("NAAM");
+				String omschrijving = rs.getString("OMSCHRIJVING");
+				int minbedrag = rs.getInt("MINBEDRAG");
+				Calendar eindtijd = null; //rs.getDate("GEBDATUM");
+				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
+				
+//				InputStream imgStream = resultSet.getBinaryStream(2);
+				
+				PersoonDAOImpl dao = new PersoonDAOImpl();
+				Gebruiker aanbieder = (Gebruiker)dao.read(gebruikersnaam);
+				Categorie cat = new Categorie(categorienaam);
+				array.add(new Veiling(naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat));
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return array;
 	}
 
 	@Override
@@ -162,6 +194,8 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 //		System.out.println(veil);
 //		veil = new Veiling("freak", "superfreak non-original", null, 5, gebdat, freak, cat);
 //		impl.update("0", veil);
-		impl.delete("0");
+//		impl.delete("0");
+		ArrayList<Veiling> array = impl.getAll();
+		System.out.println(array.toString());
 	}
 }
