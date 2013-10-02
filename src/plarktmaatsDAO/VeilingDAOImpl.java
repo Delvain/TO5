@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Veiling;
 
@@ -16,32 +17,26 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	@Override
 	public void create(Veiling v) { 
 		
-		int id = v.getId();
-		String voornaam = p.getVoornaam();
-		String achternaam = p.getAchternaam();
-		String email = p.getEmail();
-		String functie = "Beheerder";
-		Calendar gebdat = p.getGeboortedatum();
-		Date gebdatum = null;
-		if (gebdat != null) {
-			gebdatum = new java.sql.Date(gebdat.getTimeInMillis());
+		int id = v.getVeilingId();
+		String naam = v.getProductNaam();
+		String omschrijving = v.getProductOmschrijving();
+		int minbedrag = v.getMinBedrag();
+		Calendar eindtijd = v.getEindTijd();
+		//TODO Date goed omzetten voor sql
+		Date einddatum = null;
+		if (eindtijd != null) {
+			einddatum = new java.sql.Date(eindtijd.getTimeInMillis());
 		} else {
-			gebdatum = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+			Calendar morgen = Calendar.getInstance();
+			morgen.add(Calendar.DAY_OF_MONTH, 1);
+			einddatum = new java.sql.Date(morgen.getTimeInMillis());
 		}
-		int credits = 0;
-		String banknr = null;
-		String geblokkeerd = "0";
-		if (p instanceof Gebruiker) {
-			Gebruiker g = (Gebruiker)p;
-			functie = "Gebruiker";
-			credits = g.getCredits();
-			banknr = g.getBankNr();
-			boolean geblokd = g.getGeblokkeerd();
-			if (geblokd == true) {
-				geblokkeerd = "1";
-			}
-		} 
-		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+id+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', To_Date('"+gebdatum+"','yyyy-mm-dd'), '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
+		
+		int gebruikersId = v.getAanbieder().getId();
+		String categorieNaam = v.getDeCategorie().getNaam();
+		Object foto = v.getFoto();
+		
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"VEILINGEN\" VALUES ('"+id+"', '"+naam+"', '"+omschrijving+"', '"+minbedrag+"', To_Date('"+einddatum+"','yyyy-mm-dd'), '"+gebruikersId+"', '"+categorieNaam+"', '"+foto+"')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -114,8 +109,13 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	}
 
 	public static void main(String[] args) {
-//		GebruikerDAOImpl impl = new GebruikerDAOImpl();
-//		Gebruiker freak = new Gebruiker("Freak", "Holland", "geen", "Heul Veul");
+		VeilingDAOImpl impl = new VeilingDAOImpl();
+		Calendar gebdat = Calendar.getInstance();
+		Gebruiker freak = new Gebruiker("Freek", "Holland", "geen", gebdat, "8482929");
+		Categorie cat = new Categorie("superlosers");
+		Veiling veil = new Veiling("freak", "superfreak original", null, 5, gebdat, freak, cat);
+		impl.create(veil);
+		
 //		impl.create(freak);
 //		freak.setLand("STAATLOOS :O");
 //		impl.update(freak.getNaam(), freak);

@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 public class Veiling {
 	
+	private int			veilingId;
 	private String 		veilingNaam;
 	private String 		veilingOmschrijving;
 	private Object 		foto;
@@ -127,5 +128,13 @@ public class Veiling {
 
 	public void setDeCategorie(Categorie deCategorie) {
 		this.deCategorie = deCategorie;
+	}
+
+	public int getVeilingId() {
+		return veilingId;
+	}
+
+	public void setVeilingId(int veilingId) {
+		this.veilingId = veilingId;
 	}	
 }
