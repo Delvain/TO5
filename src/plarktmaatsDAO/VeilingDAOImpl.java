@@ -36,7 +36,14 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String categorieNaam = v.getDeCategorie().getNaam();
 		
 		//TODO foto erin zetten als blob
-		//Object foto = v.getFoto();
+		//File image = new File(path);
+//		FileInputStream fis = new FileInputStream ( image );
+//
+//		String sql="insert into imgtst (username,image) values (?, ?)";
+//		pst=con.prepareStatement(sql);
+//
+//		pst.setString(1, user);
+//		pst.setBinaryStream (2, fis, (int) file.length() );
 		
 		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"VEILINGEN\" VALUES ('"+id+"', '"+naam+"', '"+omschrijving+"', '"+minbedrag+"', To_Date('"+einddatum+"','yyyy-mm-dd'), '"+gebruikersId+"', '"+categorieNaam+"', '"+4371938+"')";
 		Connection con = connect();
@@ -56,14 +63,20 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			read.setString(1, pk);
 			ResultSet rs = read.executeQuery();
 			while(rs.next()) {
-				
-				String voornaam = rs.getString("VOORNAAM");
-				String achternaam = rs.getString("ACHTERNAAM");
-				String email = rs.getString("EMAIL");
-				String banknr = rs.getString("BANKNR");
+				int id = rs.getInt("ID");
+				String naam = rs.getString("NAAM");
+				String omschrijving = rs.getString("OMSCHRIJVING");
+				int minbedrag = rs.getInt("MINBEDRAG");
+				Calendar eindtijd = null; //rs.getDate("GEBDATUM");
+				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
 				
 //				InputStream imgStream = resultSet.getBinaryStream(2);
-			//	return new Veiling(voornaam, achternaam, email, banknr);
+				
+				PersoonDAOImpl dao = new PersoonDAOImpl();
+				Gebruiker aanbieder = (Gebruiker)dao.read(gebruikersnaam);
+				Categorie cat = new Categorie(categorienaam);
+				return new Veiling(naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat);
 			}
 			con.close();
 		} catch (SQLException e) {
