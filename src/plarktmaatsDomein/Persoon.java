@@ -5,27 +5,19 @@ import java.util.Calendar;
 
 public abstract class Persoon {
 	
-	private int 	id;
+	private String 	gebruikersnaam;
 	private String	voornaam;
 	private String	achternaam;
 	private String	email;
 	private Calendar geboortedatum;
 	
-	public Persoon(String vNm, String aNm, String mail, Calendar gebdat) {
-		id = 0;
+	public Persoon(String gNm, String vNm, String aNm, String mail, Calendar gebdat) {
+		gebruikersnaam = gNm;
 		voornaam = vNm;
 		achternaam 	= aNm;
 		email = mail;
 		setGeboortedatum(gebdat);
 	}
-	
-	public Persoon(int id, String vNm, String aNm, String mail, Calendar gebdat) {
-		this.id = id;
-		voornaam = vNm;
-		achternaam 	= aNm;
-		email = mail;
-		setGeboortedatum(gebdat);
-	}	
 
 	public String getAchternaam() {
 		return achternaam;
@@ -36,13 +28,13 @@ public abstract class Persoon {
 		this.achternaam = achternaam;
 	}
 
-	public int getId() {
-		return id;
+	public String getGebruikersnaam() {
+		return gebruikersnaam;
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
+	public void setGebruikersnaam(String gNm) {
+		this.gebruikersnaam = gNm;
 	}
 
 

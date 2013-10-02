@@ -11,18 +11,18 @@ public class Gebruiker extends Persoon {
 	
 	private ArrayList<Veiling> alleVeilingen;
 
-	public Gebruiker(String vNm, String aNm, String mail, Calendar gebdat, String bank) {
-		super(vNm, aNm, mail, gebdat);
+	public Gebruiker(String gNm, String vNm, String aNm, String mail, Calendar gebdat, String bank) {
+		super(gNm, vNm, aNm, mail, gebdat);
 		credits 		= 0;
 		bankNr 			= bank;
 		geblokkeerd		= false;
 		alleVeilingen 	= new ArrayList<Veiling>();
 	}
 	
-	public Gebruiker(int id, String vnm, String anm, String mail,
+	public Gebruiker(String gNm, String vNm, String aNm, String mail,
 			Calendar gebdat, int cred, String bank,
 			boolean geblok) {
-		super(vnm, anm, mail, gebdat);
+		super(gNm, vNm, aNm, mail, gebdat);
 		
 	}
 
