@@ -34,9 +34,11 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		
 		int gebruikersId = v.getAanbieder().getId();
 		String categorieNaam = v.getDeCategorie().getNaam();
-		Object foto = v.getFoto();
 		
-		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"VEILINGEN\" VALUES ('"+id+"', '"+naam+"', '"+omschrijving+"', '"+minbedrag+"', To_Date('"+einddatum+"','yyyy-mm-dd'), '"+gebruikersId+"', '"+categorieNaam+"', '"+foto+"')";
+		//TODO foto erin zetten als blob
+		//Object foto = v.getFoto();
+		
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"VEILINGEN\" VALUES ('"+id+"', '"+naam+"', '"+omschrijving+"', '"+minbedrag+"', To_Date('"+einddatum+"','yyyy-mm-dd'), '"+gebruikersId+"', '"+categorieNaam+"', '"+4371938+"')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -54,10 +56,13 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			read.setString(1, pk);
 			ResultSet rs = read.executeQuery();
 			while(rs.next()) {
+				
 				String voornaam = rs.getString("VOORNAAM");
 				String achternaam = rs.getString("ACHTERNAAM");
 				String email = rs.getString("EMAIL");
 				String banknr = rs.getString("BANKNR");
+				
+//				InputStream imgStream = resultSet.getBinaryStream(2);
 			//	return new Veiling(voornaam, achternaam, email, banknr);
 			}
 			con.close();
