@@ -16,7 +16,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
 	@Override
 	public void create(Persoon p) { 
-		int id = p.getId();
+		String gebruikersnaam = p.getGebruikersnaam();
 		String voornaam = p.getVoornaam();
 		String achternaam = p.getAchternaam();
 		String email = p.getEmail();
@@ -41,7 +41,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 				geblokkeerd = "1";
 			}
 		} 
-		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+id+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', To_Date('"+gebdatum+"','yyyy-mm-dd'), '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+gebruikersnaam+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', To_Date('"+gebdatum+"','yyyy-mm-dd'), '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -55,13 +55,12 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 	@Override
 	public Persoon read(String pk) {
 		Connection con = connect();
-		int primaryk = Integer.parseInt(pk);
 		try {
-			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"GEBRUIKERS\" WHERE id = ?");
-			read.setInt(1, primaryk);
+			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"GEBRUIKERS\" WHERE gebruikersnaam = ?");
+			read.setString(1, pk);
 			ResultSet rs = read.executeQuery();
 			while(rs.next()) {
-				int id = rs.getInt("ID");
+				String gebruikersnaam = rs.getString("GEBRUIKERSNAAM");
 				String voornaam = rs.getString("VOORNAAM");
 				String achternaam = rs.getString("ACHTERNAAM");
 				String email = rs.getString("EMAIL");
@@ -73,9 +72,9 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 				
 				con.close();
 				if (functie.equals("Gebruiker")) {
-					return new Gebruiker(id, voornaam, achternaam, email, gebdat, credits, banknr, geblokkeerd);
+					return new Gebruiker(gebruikersnaam, voornaam, achternaam, email, gebdat, credits, banknr, geblokkeerd);
 				} else if (functie.equals("Beheerder")) {
-					return new Beheerder(id, voornaam, achternaam, email, gebdat);
+					return new Beheerder(gebruikersnaam, voornaam, achternaam, email, gebdat);
 				}
 			}
 		} catch (SQLException e) {
@@ -86,8 +85,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
 	@Override
 	public void update(String pk, Persoon p) {
-		int primaryk = Integer.parseInt(pk);
-		int id = p.getId();
+		String gebruikersnaam = p.getGebruikersnaam();
 		String voornaam = p.getVoornaam();
 		String achternaam = p.getAchternaam();
 		String email = p.getEmail();
@@ -114,8 +112,8 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 			}
 		}
 		String query = 	"UPDATE \"STUD1630460\".\"GEBRUIKERS\" ";
-		query +=		"SET id='"+id+"',voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',functie='"+functie+"',gebdatum= To_Date('"+gebdatum+"','yyyy-mm-dd'),credits='"+credits+"',banknr='"+banknr+"',geblokkeerd='"+geblokkeerd+"' ";
-		query +=		"WHERE id = '"+primaryk+"'";
+		query +=		"SET gebruikersnaam='"+gebruikersnaam+"',voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',functie='"+functie+"',gebdatum= To_Date('"+gebdatum+"','yyyy-mm-dd'),credits='"+credits+"',banknr='"+banknr+"',geblokkeerd='"+geblokkeerd+"' ";
+		query +=		"WHERE id = '"+pk+"'";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -127,11 +125,10 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
 	@Override
 	public void delete(String pk) {
-		int primaryk = Integer.parseInt(pk);
 		Connection con = connect();
 		try {
 			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"GEBRUIKERS\" WHERE id = ?");
-			delete.setInt(1, primaryk);
+			delete.setString(1, pk);
 			delete.execute();
 			con.close();
 		} catch (SQLException e) {
@@ -152,10 +149,10 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 	public static void main(String[] args) {
 		// TESTS
 		
-//		PersoonDAOImpl impl = new PersoonDAOImpl();
-//		Calendar gebdat = Calendar.getInstance();
-//		Gebruiker freak = new Gebruiker("Freek", "Holland", "geen", gebdat, "8482929");
-//		impl.create(freak);
+		PersoonDAOImpl impl = new PersoonDAOImpl();
+		Calendar gebdat = Calendar.getInstance();
+		Gebruiker freak = new Gebruiker("Freak","Freek", "Holland", "geen", gebdat, "8482929");
+		impl.create(freak);
 //		impl.delete("0");
 //		Persoon p = impl.read("2");
 //		System.out.println(p);

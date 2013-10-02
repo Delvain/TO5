@@ -32,7 +32,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			einddatum = new java.sql.Date(morgen.getTimeInMillis());
 		}
 		
-		int gebruikersId = v.getAanbieder().getId();
+		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
 		
 		//TODO foto erin zetten als blob
@@ -45,7 +45,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 //		pst.setString(1, user);
 //		pst.setBinaryStream (2, fis, (int) file.length() );
 		
-		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"VEILINGEN\" VALUES ('"+id+"', '"+naam+"', '"+omschrijving+"', '"+minbedrag+"', To_Date('"+einddatum+"','yyyy-mm-dd'), '"+gebruikersId+"', '"+categorieNaam+"', '"+4371938+"')";
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"VEILINGEN\" VALUES ('"+id+"', '"+naam+"', '"+omschrijving+"', '"+minbedrag+"', To_Date('"+einddatum+"','yyyy-mm-dd'), '"+gebruikersNaam+"', '"+categorieNaam+"', '"+4371938+"')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -129,7 +129,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	public static void main(String[] args) {
 		VeilingDAOImpl impl = new VeilingDAOImpl();
 		Calendar gebdat = Calendar.getInstance();
-		Gebruiker freak = new Gebruiker("Freek", "Holland", "geen", gebdat, "8482929");
+		Gebruiker freak = new Gebruiker("Freak", "Freek", "Holland", "geen", gebdat, "8482929");
 		Categorie cat = new Categorie("superlosers");
 		Veiling veil = new Veiling("freak", "superfreak original", null, 5, gebdat, freak, cat);
 		impl.create(veil);
