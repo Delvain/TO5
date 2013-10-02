@@ -31,6 +31,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		int credits = 0;
 		String banknr = null;
 		String geblokkeerd = "0";
+		String wachtwoord = p.getWachtwoord();
 		if (p instanceof Gebruiker) {
 			Gebruiker g = (Gebruiker)p;
 			functie = "Gebruiker";
@@ -41,7 +42,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 				geblokkeerd = "1";
 			}
 		} 
-		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+gebruikersnaam+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', To_Date('"+gebdatum+"','yyyy-mm-dd'), '"+credits+"', '"+banknr+"', '"+geblokkeerd+"')";
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+gebruikersnaam+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', To_Date('"+gebdatum+"','yyyy-mm-dd'), '"+credits+"', '"+banknr+"', '"+geblokkeerd+"', '"+wachtwoord+"')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -69,12 +70,13 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 				int credits = rs.getInt("CREDITS");
 				String banknr = rs.getString("BANKNR");
 				boolean geblokkeerd = rs.getBoolean("GEBLOKKEERD");
+				String wachtwoord = rs.getString("WACHTWOORD");
 				
 				con.close();
 				if (functie.equals("Gebruiker")) {
-					return new Gebruiker(gebruikersnaam, voornaam, achternaam, email, gebdat, credits, banknr, geblokkeerd);
+					return new Gebruiker(gebruikersnaam, voornaam, achternaam, email, gebdat, credits, banknr, geblokkeerd, wachtwoord);
 				} else if (functie.equals("Beheerder")) {
-					return new Beheerder(gebruikersnaam, voornaam, achternaam, email, gebdat);
+					return new Beheerder(gebruikersnaam, voornaam, achternaam, email, gebdat, wachtwoord);
 				}
 			}
 		} catch (SQLException e) {
@@ -100,6 +102,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		int credits = 0;
 		String banknr = null;
 		String geblokkeerd = "0";
+		String wachtwoord = p.getWachtwoord();
 		
 		if (p instanceof Gebruiker) {
 			Gebruiker g = (Gebruiker)p;
@@ -112,8 +115,8 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 			}
 		}
 		String query = 	"UPDATE \"STUD1630460\".\"GEBRUIKERS\" ";
-		query +=		"SET gebruikersnaam='"+gebruikersnaam+"',voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',functie='"+functie+"',gebdatum= To_Date('"+gebdatum+"','yyyy-mm-dd'),credits='"+credits+"',banknr='"+banknr+"',geblokkeerd='"+geblokkeerd+"' ";
-		query +=		"WHERE id = '"+pk+"'";
+		query +=		"SET gebruikersnaam='"+gebruikersnaam+"',voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',functie='"+functie+"',gebdatum= To_Date('"+gebdatum+"','yyyy-mm-dd'),credits='"+credits+"',banknr='"+banknr+"',geblokkeerd='"+geblokkeerd+"',wachtwoord='"+wachtwoord+"' ";
+		query +=		"WHERE gebruikersnaam = '"+pk+"'";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -127,7 +130,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 	public void delete(String pk) {
 		Connection con = connect();
 		try {
-			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"GEBRUIKERS\" WHERE id = ?");
+			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"GEBRUIKERS\" WHERE gebruikersnaam = ?");
 			delete.setString(1, pk);
 			delete.execute();
 			con.close();
@@ -151,17 +154,12 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		
 		PersoonDAOImpl impl = new PersoonDAOImpl();
 		Calendar gebdat = Calendar.getInstance();
-		Gebruiker freak = new Gebruiker("Freak","Freek", "Holland", "geen", gebdat, "8482929");
+		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superloser@superfreak.com", gebdat, "8482929", "super");
 		impl.create(freak);
-//		impl.delete("0");
-//		Persoon p = impl.read("2");
+//		Persoon p = impl.read("Freak");
 //		System.out.println(p);
 //		p.setAchternaam("yolo");
-//		impl.update("2", p);
-//		freak.setLand("STAATLOOS :O");
-//		impl.update(freak.getNaam(), freak);
-//		System.out.println(impl.read("Freak").getLand());
+//		impl.update("Freak", freak);
 //		impl.delete("Freak");
-//		System.out.println(impl.genereerWachtwoord(new Gebruiker("Hennk", "Duistland", "geen", "geen")));
 	}
 }

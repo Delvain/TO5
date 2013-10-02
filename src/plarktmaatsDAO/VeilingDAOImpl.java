@@ -117,7 +117,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		
 		
 		String query = 	"UPDATE \"STUD1630460\".\"VEILINGEN\" ";
-		query +=		"SET id='"+id+"',naam='"+naam+"',omschrijving='"+omschrijving+"',minbedrag='"+minbedrag+"',eindtijd= To_Date('"+eindtijd+"','yyyy-mm-dd'),gebruikers_gebruikersnaam='"+gebruikersNaam+"',categorieen_naam='"+categorieNaam+"',foto='"+null+"' ";
+		query +=		"SET id='"+id+"',naam='"+naam+"',omschrijving='"+omschrijving+"',minbedrag='"+minbedrag+"',eindtijd= To_Date('"+einddatum+"','yyyy-mm-dd'),gebruikers_gebruikersnaam='"+gebruikersNaam+"',categorieen_naam='"+categorieNaam+"',foto='"+78374+"' ";
 		query +=		"WHERE id = '"+pk+"'";
 		Connection con = connect();
 		try {
@@ -132,7 +132,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	public void delete(String pk) {
 		Connection con = connect();
 		try {
-			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"VEILING\" WHERE naam = ?");
+			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"VEILINGEN\" WHERE id = ?");
 			delete.setString(1, pk);
 			delete.execute();
 			con.close();
@@ -154,16 +154,14 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	public static void main(String[] args) {
 		VeilingDAOImpl impl = new VeilingDAOImpl();
 		Calendar gebdat = Calendar.getInstance();
-		Gebruiker freak = new Gebruiker("Freak", "Freek", "Holland", "geen", gebdat, "8482929");
-		Categorie cat = new Categorie("superlosers");
+		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superloser@superfreak.com", gebdat, "8482929", "super");
+		Categorie cat = new Categorie("Personen");
 		Veiling veil = new Veiling("freak", "superfreak original", null, 5, gebdat, freak, cat);
-		impl.create(veil);
-		
-//		impl.create(freak);
-//		freak.setLand("STAATLOOS :O");
-//		impl.update(freak.getNaam(), freak);
-//		System.out.println(impl.read("Freak").getLand());
-//		impl.delete("Freak");
-//		System.out.println(impl.genereerWachtwoord(new Gebruiker("Hennk", "Duistland", "geen", "geen")));
+//		impl.create(veil);
+//		veil = impl.read("freak");
+//		System.out.println(veil);
+//		veil = new Veiling("freak", "superfreak non-original", null, 5, gebdat, freak, cat);
+//		impl.update("0", veil);
+		impl.delete("0");
 	}
 }
