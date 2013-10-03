@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
 import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Veiling;
@@ -79,7 +77,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker)dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				return new Veiling(naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat);
+				return new Veiling(id, naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -110,7 +108,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker)dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				array.add(new Veiling(naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat));
+				array.add(new Veiling(id, naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -190,7 +188,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		Calendar gebdat = Calendar.getInstance();
 		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superloser@superfreak.com", gebdat, "8482929", "super");
 		Categorie cat = new Categorie("Personen");
-		Veiling veil = new Veiling("freak", "superfreak original", null, 5, gebdat, freak, cat);
+		Veiling veil = new Veiling(0, "freak", "superfreak original", null, 5, gebdat, freak, cat);
 //		impl.create(veil);
 //		veil = impl.read("freak");
 //		System.out.println(veil);

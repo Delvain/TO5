@@ -20,7 +20,8 @@ public class Veiling {
 	private ArrayList<Bod> alleBiedingen;
 	
 	
-	public Veiling(String nm, String omsch, Object ft, int min, Calendar eind, Gebruiker aanb, Categorie cat) {
+	public Veiling(int id, String nm, String omsch, Object ft, int min, Calendar eind, Gebruiker aanb, Categorie cat) {
+		veilingId			= id;
 		veilingNaam 		= nm;
 		veilingOmschrijving = omsch;
 		foto = ft;
