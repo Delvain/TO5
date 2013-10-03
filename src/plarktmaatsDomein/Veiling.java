@@ -141,5 +141,8 @@ public class Veiling {
 
 	public void setVeilingId(int veilingId) {
 		this.veilingId = veilingId;
-	}	
+	}
+	public ArrayList<Bod> getAlleBiedingen() {
+		return alleBiedingen;
+	}
 }
