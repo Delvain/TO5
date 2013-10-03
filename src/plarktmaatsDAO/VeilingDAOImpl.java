@@ -61,7 +61,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	public Veiling read(String pk) {
 		Connection con = connect();
 		try {
-			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"VEILINGEN\" WHERE naam = ?");
+			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"VEILINGEN\" WHERE ID = ?");
 			read.setString(1, pk);
 			ResultSet rs = read.executeQuery();
 			while(rs.next()) {
@@ -69,7 +69,9 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String naam = rs.getString("NAAM");
 				String omschrijving = rs.getString("OMSCHRIJVING");
 				int minbedrag = rs.getInt("MINBEDRAG");
-				Calendar eindtijd = null; //rs.getDate("GEBDATUM");
+				Date eindtijdTemp = rs.getDate("EINDTIJD"); //rs.getDate("GEBDATUM");
+				Calendar eindtijd = Calendar.getInstance();
+				eindtijd.setTime(eindtijdTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
 				

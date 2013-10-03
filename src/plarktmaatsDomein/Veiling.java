@@ -31,7 +31,11 @@ public class Veiling {
 		deCategorie = cat;
 		alleBiedingen = new ArrayList<Bod>();
 		
-		new Timer().schedule(new veilingTimer(), eindTijd.getTime()); //timer starten
+		Date eindDate 	= eindTijd.getTime();
+		Date nuDate 	= Calendar.getInstance().getTime();
+		long verschil	= eindDate.getTime() - nuDate.getTime();
+		if(verschil > 0)	
+			new Timer().schedule(new veilingTimer(), eindTijd.getTime()); //timer starten
 	}
 	
 	public Bod getHoogsteBod() {
@@ -66,7 +70,8 @@ public class Veiling {
 	private class veilingTimer extends TimerTask {
 		public void run() {
 			//TODO
-			System.out.println("De veiling van "+veilingNaam+" is afgelopen. ");
+			this.cancel();
+			//System.out.println("De veiling van "+veilingNaam+" is afgelopen. ");
 			if(getHoogsteBod() == null)	
 				System.out.println("Niet verkocht");
 			else
