@@ -66,9 +66,9 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
-				int veilingId = rs.getInt("VEILINGEN_ID");
 				
-//				InputStream imgStream = resultSet.getBinaryStream(2);
+				//iets doen met veiling?
+				int veilingId = rs.getInt("VEILINGEN_ID");
 				
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
