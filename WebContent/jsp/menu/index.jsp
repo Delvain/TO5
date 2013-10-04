@@ -6,7 +6,6 @@
 		<jsp:include page="/jsp/include/head.jsp" />
 		<script type="text/javascript">
             function getRequestObject(){
-            	setInterval(function() {sendRequest(1);},5000);
            		if (window.ActiveXObject){
             		return (new ActiveXObject("Microsoft.XMLHTTP"));
             	} else if (window.XMLHttpRequest){
@@ -24,7 +23,7 @@
             	};
             	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action?id="+id, true);
             	request.send(null);
-            	setTimeout(function() {sendRequest(id, index);},5000);
+            	setTimeout(function() {sendRequest(id, index);},1000);
             }
 		</script>
 	</head>
