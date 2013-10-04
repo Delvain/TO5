@@ -20,6 +20,10 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 	@Override
 	public void create(Bod b) { 
 		
+	}
+	
+public void create(int veilingId, Bod b) { 
+		
 		int id = b.getId();
 		int bedrag = b.getBedrag();
 		Calendar tijdstip = b.getDatum();
@@ -32,14 +36,6 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 			bodtijdstip = new java.sql.Date(morgen.getTimeInMillis());
 		}
 		String gebruikersNaam = b.getBieder().getGebruikersnaam();
-		int veilingId = 1;
-		//TODO veilingid opzoeken:
-		for (Veiling v: new VeilingDAOImpl().getAll()) {
-			for (Bod bied : v.getAlleBiedingen()) {
-				
-			}
-		}
-		
 		
 		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"BIEDINGEN\" VALUES ('"+id+"', '"+bedrag+"', To_Date('"+bodtijdstip+"','yyyy-mm-dd'), '"+gebruikersNaam+"', '"+veilingId+"')";
 		Connection con = connect();
@@ -50,6 +46,8 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	@Override
 	public Bod read(String pk) {
@@ -66,10 +64,7 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
-				
-				//TODO iets doen met veiling?
-				//int veilingId = rs.getInt("VEILINGEN_ID");
-				
+
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
 				return new Bod(id, bedrag, tijdstip, bieder);
@@ -90,13 +85,11 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 			while(rs.next()) {
 				int id = rs.getInt("ID");
 				int bedrag = rs.getInt("BEDRAG");;
-				Date tijdstipTemp = rs.getDate("TIJDSTIP"); //rs.getDate("GEBDATUM");
+				Date tijdstipTemp = rs.getDate("TIJDSTIP");
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				
-				//TODO iets doen met veilingid?
-				//int veilingId = rs.getInt("VEILINGEN_ID");
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
 				array.add(new Bod(id, bedrag, tijdstip, bieder));
@@ -149,16 +142,9 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 			bodtijdstip = new java.sql.Date(morgen.getTimeInMillis());
 		}
 		String gebruikersNaam = b.getBieder().getGebruikersnaam();
-		int veilingId = 1;
-		//TODO veilingid opzoeken:
-		for (Veiling v: new VeilingDAOImpl().getAll()) {
-			for (Bod bied : v.getAlleBiedingen()) {
-				
-			}
-		}
 		
 		String query = 	"UPDATE \"STUD1630460\".\"BIEDINGEN\" ";
-		query +=		"SET id='"+id+"',bedrag='"+bedrag+"',tijdstip= To_Date('"+tijdstip+"','yyyy-mm-dd'),gebruikers_gebruikersnaam='"+gebruikersNaam+"',veilingen_id='"+veilingId+"' ";
+		query +=		"SET id='"+id+"',bedrag='"+bedrag+"',tijdstip= To_Date('"+tijdstip+"','yyyy-mm-dd'),gebruikers_gebruikersnaam='"+gebruikersNaam+"' ";
 		query +=		"WHERE id = '"+primaryKey+"'";
 		Connection con = connect();
 		try {
