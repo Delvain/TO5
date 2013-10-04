@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import plarktmaatsDAO.PersoonDAOImpl;
 import plarktmaatsDomein.Persoon;
 import plarktmaatsDomein.Beheerder;
 
@@ -12,6 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class Login extends ActionSupport implements SessionAware {
 	
+	PersoonDAOImpl database = new PersoonDAOImpl();
 	private Persoon user;
 	@SuppressWarnings("rawtypes")
 	private Map session;
@@ -28,29 +30,26 @@ public class Login extends ActionSupport implements SessionAware {
 			ce.printStackTrace();
 		}
 		
-//		if (user instanceof Beheerder)
+//		if (user.getFunctie().equals("Beheerder"))
 //			return "managermenu";
-//		if (user.getUr().equals(UserRole.Coworker))
-//			return "coworkermenu";
 		return SUCCESS;
 	}
 
 	public void validate(){
-		
+		user = database.read(username);
 		password = password.trim().toLowerCase();
 		username = username.trim().toLowerCase();
 		
 		if(username.length() == 0){			
-			addFieldError("username", "naam is verplicht");
+			addFieldError("username", "Voer uw gebruikersnaam in.");
 		}
 		if(password.length() == 0){			
-			addFieldError("password", "wachtwoord is verplicht");
+			addFieldError("password", "Voer uw wachtwoord in.");
 		}
 		
-//	    user = ibs.getUserByUsername(username);
-//		if ((user == null) || !(user.getPassword().equals(password))){
-//			addFieldError("username", "naam of wachtwoord is niet juist");
-//		}
+		if(user == null || !password.equals(user.getWachtwoord())) {
+			addFieldError("username", "Gebruikersnaam of wachtwoord is onjuist");
+		}
 	}
 	
 	public String getUsername() {
@@ -61,9 +60,9 @@ public class Login extends ActionSupport implements SessionAware {
 		this.username = username;
 	}
 	
-//	public String getPassword() {
-//		return password;
-//	}
+	public String getPassword() {
+		return password;
+	}
 	
 	public void setPassword(String password) {
 		this.password = password;

@@ -63,7 +63,6 @@ public abstract class Persoon {
 		return geboortedatum;
 	}
 
-
 	public void setGeboortedatum(Calendar geboortedatum) {
 		this.geboortedatum = geboortedatum;
 	}
