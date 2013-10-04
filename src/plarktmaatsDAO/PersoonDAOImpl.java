@@ -74,11 +74,9 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 				
 				con.close();
 				if (functie.equals("Gebruiker")) {
-					String fc = "Gebruiker";
-					return new Gebruiker(gebruikersnaam, voornaam, achternaam, email, fc, gebdat, credits, banknr, geblokkeerd, wachtwoord);
+					return new Gebruiker(gebruikersnaam, voornaam, achternaam, email, gebdat, credits, banknr, geblokkeerd, wachtwoord);
 				} else if (functie.equals("Beheerder")) {
-					String fc = "Beheerder";
-					return new Beheerder(gebruikersnaam, voornaam, achternaam, email, fc, gebdat, wachtwoord);
+					return new Beheerder(gebruikersnaam, voornaam, achternaam, email, gebdat, wachtwoord);
 				}
 			}
 		} catch (SQLException e) {
@@ -156,7 +154,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		
 		PersoonDAOImpl impl = new PersoonDAOImpl();
 		Calendar gebdat = Calendar.getInstance();
-		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superbaas@superfreak.com", "Gebruiker", gebdat, "8482929", "super");
+		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superloser@superfreak.com", gebdat, "8482929", "super");
 		impl.create(freak);
 //		Persoon p = impl.read("Freak");
 //		System.out.println(p);

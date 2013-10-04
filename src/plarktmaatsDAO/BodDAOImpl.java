@@ -195,7 +195,7 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 	public static void main(String[] args) {
 		BodDAOImpl impl = new BodDAOImpl();
 		Calendar gebdat = Calendar.getInstance();
-		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superbaas@superfreak.com", "Gebruiker", gebdat, "8482929", "super");
+		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superloser@superfreak.com", gebdat, "8482929", "super");
 		Bod bod = new Bod(2, 50, Calendar.getInstance(), freak);
 //		impl.create(bod);
 //		bod = impl.read("2");

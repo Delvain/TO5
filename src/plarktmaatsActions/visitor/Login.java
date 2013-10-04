@@ -23,18 +23,21 @@ public class Login extends ActionSupport implements SessionAware {
 	@SuppressWarnings("unchecked")
 	public String execute(){
 		session.put("user", user);
-		
-		if (user.getFunctie().equals("Beheerder")) {
+		try {
+			Beheerder beheerder = (Beheerder) user;
 			return "managermenu";
+		} catch(ClassCastException ce) {
+			ce.printStackTrace();
 		}
-		if (user.getFunctie().equals("Gebruiker")) {
-			return "gebruikermenu";
-		}
+		
+//		if (user.getFunctie().equals("Beheerder"))
+//			return "managermenu";
 		return SUCCESS;
 	}
 
 	public void validate(){
 		user = database.read(username);
+		password = password.trim().toLowerCase();
 		username = username.trim().toLowerCase();
 		
 		if(username.length() == 0){			

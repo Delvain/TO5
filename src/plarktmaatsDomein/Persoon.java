@@ -9,16 +9,14 @@ public abstract class Persoon {
 	private String	voornaam;
 	private String	achternaam;
 	private String	email;
-	private String 	functie;
 	private Calendar geboortedatum;
 	private String wachtwoord;
 	
-	public Persoon(String gNm, String vNm, String aNm, String mail, String fc, Calendar gebdat, String ww) {
+	public Persoon(String gNm, String vNm, String aNm, String mail, Calendar gebdat, String ww) {
 		gebruikersnaam = gNm;
 		voornaam = vNm;
 		achternaam 	= aNm;
 		email = mail;
-		setFunctie(fc);
 		setGeboortedatum(gebdat);
 		setWachtwoord(ww);
 	}
@@ -75,13 +73,5 @@ public abstract class Persoon {
 
 	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
-	}
-
-	public String getFunctie() {
-		return functie;
-	}
-
-	public void setFunctie(String functie) {
-		this.functie = functie;
 	}
 }
