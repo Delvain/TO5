@@ -8,6 +8,7 @@
 	</head>
 
 	<body>
+	<jsp:include page="/jsp/include/top.jsp" />
 	    <h4>Inloggen.</h4> 	
 	    
 	    <hr />

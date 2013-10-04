@@ -3,7 +3,7 @@
 		<div class="logo"></div>
 		<div class="right">
 			<p>
-				<a href="jsp/visitor/LoginForm.jsp">Inloggen</a> | <a href="#">Registreren</a>
+				<a href="<s:url action='LoginForm' namespace="/visitor"/>">Log in</a>
 			</p>
 		</div>
 		<div style="clear: both"></div>
