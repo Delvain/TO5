@@ -36,9 +36,8 @@ public class Login extends ActionSupport implements SessionAware {
 	}
 
 	public void validate(){
-		user = database.read(username);
-		password = password.trim().toLowerCase();
 		username = username.trim().toLowerCase();
+		user = database.read(username);
 		
 		if(username.length() == 0){			
 			addFieldError("username", "Voer uw gebruikersnaam in.");

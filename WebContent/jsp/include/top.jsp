@@ -3,7 +3,7 @@
 		<div class="logo"></div>
 		<div class="right">
 			<p>
-				<a href="#">Inloggen</a> | <a href="#">Registreren</a>
+				<a href="jsp/visitor/LoginForm.jsp">Inloggen</a> | <a href="#">Registreren</a>
 			</p>
 		</div>
 		<div style="clear: both"></div>
