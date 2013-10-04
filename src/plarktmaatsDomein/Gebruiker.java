@@ -11,17 +11,17 @@ public class Gebruiker extends Persoon {
 	
 	private ArrayList<Veiling> alleVeilingen;
 
-	public Gebruiker(String gNm, String vNm, String aNm, String mail, Calendar gebdat, String bank, String ww) {
-		super(gNm, vNm, aNm, mail, gebdat, ww);
+	public Gebruiker(String gNm, String vNm, String aNm, String mail, String fc, Calendar gebdat, String bank, String ww) {
+		super(gNm, vNm, aNm, mail, fc, gebdat, ww);
 		credits 		= 0;
 		bankNr 			= bank;
 		geblokkeerd		= false;
 		alleVeilingen 	= new ArrayList<Veiling>();
 	}
 	
-	public Gebruiker(String gNm, String vNm, String aNm, String mail, Calendar gebdat,
+	public Gebruiker(String gNm, String vNm, String aNm, String mail, String fc, Calendar gebdat,
 						int cred, String bank,	boolean geblok, String ww) {
-		super(gNm, vNm, aNm, mail, gebdat, ww);		
+		super(gNm, vNm, aNm, mail, fc, gebdat, ww);		
 	}
 
 	//getters&setters Geblokkeerd:
