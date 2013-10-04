@@ -24,6 +24,9 @@
 			<result name="coworkermenu">/html/not_yet_implemented.html</result>
 			<result name="input">/jsp/visitor/LoginForm.jsp</result>
 		</action>
+		<action name="ToonVeiling" class="plarktmaatsActions.visitor.ToonVeiling">
+			<result name="success">/jsp/visitor/ToonVeiling.jsp</result>
+		</action>
 	</package>
 	
 	<package name="gebruikers" namespace="/member" extends="struts-default">
@@ -50,10 +53,10 @@
 		</action>
 	
 		<action name="ChangePasswordForm">
-			<result name="success">/html/member_not_yet_implemented.html</result>
+			<result name="success">/jsp/member/ChangePasswordForm.jsp</result>
 		</action>
 		<action name="Logout" class="plarktmaatsActions.gebruikers.Logout">
 			<result name="success">/jsp/member/LoggedOut.jsp</result>
-		</action>	
+		</action>
 	</package>
 </struts>

@@ -67,8 +67,8 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				
-				//iets doen met veiling?
-				int veilingId = rs.getInt("VEILINGEN_ID");
+				//TODO iets doen met veiling?
+				//int veilingId = rs.getInt("VEILINGEN_ID");
 				
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
@@ -94,7 +94,35 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
-				int veilingId = rs.getInt("VEILINGEN_ID");
+				
+				//TODO iets doen met veilingid?
+				//int veilingId = rs.getInt("VEILINGEN_ID");
+				PersoonDAOImpl dao = new PersoonDAOImpl();
+				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
+				array.add(new Bod(id, bedrag, tijdstip, bieder));
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return array;
+	}
+	
+	public ArrayList<Bod> getAllFromVeiling(int veilingId) {
+		ArrayList<Bod> array = new ArrayList<Bod>();
+		Connection con = connect();
+		try {
+			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"BIEDINGEN\" WHERE VEILINGEN_ID = ?");
+			read.setInt(1, veilingId);
+			ResultSet rs = read.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("ID");
+				int bedrag = rs.getInt("BEDRAG");;
+				Date tijdstipTemp = rs.getDate("TIJDSTIP"); //rs.getDate("GEBDATUM");
+				Calendar tijdstip = Calendar.getInstance();
+				tijdstip.setTime(tijdstipTemp);
+				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
 				array.add(new Bod(id, bedrag, tijdstip, bieder));

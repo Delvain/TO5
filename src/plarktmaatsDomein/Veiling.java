@@ -19,6 +19,9 @@ public class Veiling {
 	private Categorie	deCategorie;
 	private ArrayList<Bod> alleBiedingen;
 	
+	public Veiling() {
+		alleBiedingen = new ArrayList<Bod>();
+	}
 	
 	public Veiling(int id, String nm, String omsch, Object ft, int min, Calendar eind, Gebruiker aanb, Categorie cat) {
 		veilingId			= id;
@@ -53,6 +56,11 @@ public class Veiling {
 			}
 		}
 		return hoogsteBod;
+	}
+	
+	//alleen voor ophalen bij database
+	public void voegBodToe(Bod b) {
+		alleBiedingen.add(b);
 	}
 	
 	public boolean doeBod(Bod b) {

@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Veiling;
@@ -71,13 +73,19 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				eindtijd.setTime(eindtijdTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
-				
+	
+//				TODO foto toevoegen
 //				InputStream imgStream = resultSet.getBinaryStream(2);
 				
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker)dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				return new Veiling(id, naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat);
+				Veiling veil = new Veiling(id, naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat);
+				BodDAOImpl boddao = new BodDAOImpl();
+				for (Bod b : boddao.getAllFromVeiling(id)) {
+					veil.voegBodToe(b);
+				}
+				return veil;
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -103,6 +111,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
 				
+//				TODO foto toevoegen
 //				InputStream imgStream = resultSet.getBinaryStream(2);
 				
 				PersoonDAOImpl dao = new PersoonDAOImpl();
