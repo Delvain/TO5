@@ -5,6 +5,9 @@
 
 <struts>
 	<package name="visitor" namespace="/visitor" extends="struts-default">
+		<action name="Menu" class="plarktmaatsActions.visitor.AlleVeilingen">
+			<result>/jsp/menu/index.jsp</result>
+		</action>
 		<action name="CreateAccountForm" >
 			<result name="success">/jsp/visitor/CreateAccountForm.jsp</result>
 		</action>
@@ -19,9 +22,8 @@
 			<result name="success">/jsp/visitor/LoginForm.jsp</result>
 		</action>
 		<action name="Login" class="plarktmaatsActions.visitor.Login">
-			<result name="success">/jsp/menu/MemberMenu.jsp</result>
-			<result name="managermenu">/html/not_yet_implemented.html</result>
-			<result name="coworkermenu">/html/not_yet_implemented.html</result>
+			<result name="success" type="redirectAction">Menu</result>
+			<result name="managermenu" type="redirectAction">Menu</result>
 			<result name="input">/jsp/visitor/LoginForm.jsp</result>
 		</action>
 		<action name="ToonVeiling" class="plarktmaatsActions.visitor.ToonVeiling">
