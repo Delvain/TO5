@@ -8,7 +8,7 @@
 						
 			var request;
             function getRequestObject(){
-            	setInterval(function() {sendRequest();},1000);
+            	setInterval(function() {sendRequest();},2000);
            		if (window.ActiveXObject){
             		return (new ActiveXObject("Microsoft.XMLHTTP"));
             	} else if (window.XMLHttpRequest){
