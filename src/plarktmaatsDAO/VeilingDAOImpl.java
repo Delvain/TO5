@@ -20,8 +20,8 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	public void create(Veiling v) {
 
 		int id = v.getVeilingId();
-		String naam = v.getProductNaam();
-		String omschrijving = v.getProductOmschrijving();
+		String naam = v.getVeilingNaam();
+		String omschrijving = v.getVeilingOmschrijving();
 		int minbedrag = v.getMinBedrag();
 		Calendar eindtijd = v.getEindTijd();
 		Date einddatum = null;
@@ -143,8 +143,8 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	@Override
 	public void update(String pk, Veiling v) {
 		int id = v.getVeilingId();
-		String naam = v.getProductNaam();
-		String omschrijving = v.getProductOmschrijving();
+		String naam = v.getVeilingNaam();
+		String omschrijving = v.getVeilingOmschrijving();
 		int minbedrag = v.getMinBedrag();
 		Calendar eindtijd = v.getEindTijd();
 		Date einddatum = null;

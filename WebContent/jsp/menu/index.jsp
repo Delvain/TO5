@@ -8,7 +8,7 @@
 						
 			var request;
             function getRequestObject(){
-            	setInterval(function() {sendRequest();},2000);
+            	setInterval(function() {sendRequest();},5000);
            		if (window.ActiveXObject){
             		return (new ActiveXObject("Microsoft.XMLHTTP"));
             	} else if (window.XMLHttpRequest){
@@ -20,7 +20,7 @@
             function sendRequest(){
             	request = getRequestObject();
             	request.onreadystatechange = handleResponse;
-            	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action", true);
+            	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action?id=1", true);
             	request.send(null);
             }
             function handleResponse(){
@@ -34,15 +34,14 @@
 	<body onload="getRequestObject()">
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
-			<s:iterator value="items">
+			<s:iterator value="items" status="status">
 				<div class="item">
-					<a href="#"><s:property value="titel" /></a>
+					<a href="#"><s:property value="veilingNaam" /></a>
 					<div class="imgBox">
 						<img src="http://fotos.marktplaats.com/kopen/e/85/LHqziqxnW3bz1amvmtSiNg==.jpg" />
 					</div>
 					<input type="button" class="bieden" value="Bieden" />
-					<div id="ajaxData">
-											</div>
+					<s:div id="ajaxData%{#status.index}" />
 				</div>
 			</s:iterator>
 			<div class="item">
@@ -55,15 +54,7 @@
 					Laden...
 				</div>
 			</div>
-			<div class="item">
-				<a href="#">Mark Rutte</a>
-				<div class="imgBox">
-					<img src="http://www.gewoon-nieuws.nl/wp-content/uploads/2013/03/mark-rutte31.jpg" />
-				</div>
-				<input type="button" class="bieden" value="Bieden" />
-				<p class="timer">00:21</p>
-				<p class="prijs">0</p>
-			</div>
+			
 			<div style="clear: both"></div>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />

@@ -1,9 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Refresh" content="5;URL=Menu.action" />
-    	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    	<link rel="stylesheet" type="text/css" href="style/style.css" />
+    	<jsp:include page="/jsp/include/head.jsp" />
     	<style type="text/css">
     		div.container {
     			text-align: center;
@@ -54,16 +53,6 @@
 			</div>
 			<img src="/TO5/style/images/spinner.gif" />
 		</div>
-		<div class="footer">
-			<div style="margin: 0 auto; width: 980px">
-				<h1>Themaopdracht 5</h1>
-				<p>Freek de Bruin</p>
-				<p>Jonathan Karssen</p>
-				<p>Jordan Melendez</p>
-				<p>Ridley Ruiz</p>
-				<p>Maarten Zonneveld</p>
-				<p style="text-align: center"><i>&copy;2013<br/>Team 4 | V2B | Hogeschool Utrecht</i></p>
-			</div>
-		</div>
+		<jsp:include page="/jsp/include/footer.jsp" />
 	</body>	
 </html>

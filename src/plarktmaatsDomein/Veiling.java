@@ -89,20 +89,20 @@ public class Veiling {
 		}
 	}
 
-	public String getProductNaam() {
+	public String getVeilingNaam() {
 		return veilingNaam;
 	}
 
-	public void setProductNaam(String productNaam) {
-		this.veilingNaam = productNaam;
+	public void setVeilingNaam(String veilingNaam) {
+		this.veilingNaam = veilingNaam;
 	}
 
-	public String getProductOmschrijving() {
+	public String getVeilingOmschrijving() {
 		return veilingOmschrijving;
 	}
 
-	public void setProductOmschrijving(String productOmschrijving) {
-		this.veilingOmschrijving = productOmschrijving;
+	public void setVeilingOmschrijving(String veilingOmschrijving) {
+		this.veilingOmschrijving = veilingOmschrijving;
 	}
 
 	public Object getFoto() {

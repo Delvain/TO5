@@ -12,7 +12,7 @@ public class AlleVeilingenAJAX extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String timer = "Error";
 	private String prijs = "Error";
-	private String id = "1";
+	private String id = "";
 
 	public String execute(){
 		id = id.trim();
@@ -41,9 +41,9 @@ public class AlleVeilingenAJAX extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	//public void setId(String id) {
-	//	this.id = id;
-	//}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getPrijs() {
 		return prijs;
 	}
