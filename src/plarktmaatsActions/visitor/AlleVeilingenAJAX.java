@@ -20,7 +20,12 @@ public class AlleVeilingenAJAX extends ActionSupport {
 			return SUCCESS;
 		
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
-		Veiling v = vDI.read(id);
+		Veiling v = null;
+		try {
+			v = vDI.read(id);
+		} catch(Exception e) {
+			//niks doen
+		}
 		if(v == null)
 			return SUCCESS;
 		

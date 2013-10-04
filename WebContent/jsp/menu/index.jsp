@@ -5,33 +5,30 @@
 	<head>
 		<jsp:include page="/jsp/include/head.jsp" />
 		<script type="text/javascript">
-						
-			var request;
             function getRequestObject(){
-            	setInterval(function() {sendRequest();},5000);
+            	setInterval(function() {sendRequest(1);},5000);
            		if (window.ActiveXObject){
             		return (new ActiveXObject("Microsoft.XMLHTTP"));
             	} else if (window.XMLHttpRequest){
             		return(new XMLHttpRequest());
-            	} else {
-            		return (null);
             	}
             }
-            function sendRequest(){
-            	request = getRequestObject();
-            	request.onreadystatechange = handleResponse;
-            	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action?id=1", true);
+            
+            function sendRequest(id, index){
+            	var request = getRequestObject();
+            	request.onreadystatechange = function() {
+            		if((request.readyState == 4) && (request.status == 200)){
+               			var serverResponse = request.responseText;
+                		document.getElementById("ajaxData"+index).innerHTML=serverResponse;
+                	}
+            	};
+            	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action?id="+id, true);
             	request.send(null);
-            }
-            function handleResponse(){
-            	if((request.readyState == 4) && (request.status == 200)){
-           			var serverResponse = request.responseText;
-            		document.getElementById("ajaxData").innerHTML=serverResponse;
-            }
+            	setTimeout(function() {sendRequest(id, index);},5000);
             }
 		</script>
 	</head>
-	<body onload="getRequestObject()">
+	<body>
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
 			<s:iterator value="items" status="status">
@@ -42,19 +39,9 @@
 					</div>
 					<input type="button" class="bieden" value="Bieden" />
 					<s:div id="ajaxData%{#status.index}" />
+					<script>sendRequest('<s:property value="VeilingId" />', '<s:property value="#status.index" />');</script>
 				</div>
-			</s:iterator>
-			<div class="item">
-				<a href="#">Fiets</a>
-				<div class="imgBox">
-					<img src="http://carpediem2.punt.nl/_files/2012-09-22/img-1308.JPG" />
-				</div>
-				<input type="button" class="bieden" value="Bieden" />
-				<div id="ajaxData">
-					Laden...
-				</div>
-			</div>
-			
+			</s:iterator>			
 			<div style="clear: both"></div>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
