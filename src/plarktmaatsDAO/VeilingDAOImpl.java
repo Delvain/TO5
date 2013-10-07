@@ -108,7 +108,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return null;
 	}
 	
-	public int readBedrag(int pk) {
+	public String readBedrag(int pk) {
 		Connection con = connect();
 		try {
 			String read = "SELECT minbedrag FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE ID = "+pk;
@@ -122,13 +122,13 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 					if(b.getBedrag() > bedrag)
 						bedrag = b.getBedrag();
 				}
-				return bedrag;
+				return bedrag+"";
 			}
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return -1;
+		return null;
 	}
 
 	public ArrayList<Veiling> getAll() {
