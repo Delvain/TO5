@@ -8,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Categorie;
@@ -102,6 +106,29 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public int readBedrag(int pk) {
+		Connection con = connect();
+		try {
+			String read = "SELECT minbedrag FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE ID = "+pk;
+			ResultSet rs = con.createStatement().executeQuery(read);
+			while (rs.next()) {
+				int bedrag = rs.getInt("MINBEDRAG");
+
+				BodDAOImpl boddao = new BodDAOImpl();
+				ArrayList<Bod> biedingen = boddao.getAllFromVeiling(pk);
+				for(Bod b : biedingen) {
+					if(b.getBedrag() > bedrag)
+						bedrag = b.getBedrag();
+				}
+				return bedrag;
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	public ArrayList<Veiling> getAll() {

@@ -17,13 +17,15 @@
             	var request = getRequestObject();
             	request.onreadystatechange = function() {
             		if((request.readyState == 4) && (request.status == 200)){
-               			var serverResponse = request.responseText;
-                		document.getElementById("ajaxData"+index).innerHTML=serverResponse;
+               			if(request.responseText != "Error") {
+                   			var serverResponse = request.responseText;
+                			document.getElementById("ajaxData"+index).innerHTML="<p class=\"prijs\">"+serverResponse+"</p>";
+               			}
                 	}
             	};
             	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action?id="+id, true);
             	request.send(null);
-            	setTimeout(function() {sendRequest(id, index);},1000);
+            	setTimeout(function() {sendRequest(id, index);},2000);
             }
 		</script>
 	</head>
