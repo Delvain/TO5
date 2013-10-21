@@ -1,17 +1,13 @@
 package plarktmaatsDAO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.Date;
 
 import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Categorie;
@@ -108,13 +104,15 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return null;
 	}
 	
-	public String readBedrag(int pk) {
+	public ArrayList<String> readBedragTijd(int pk) {
+		ArrayList<String> returnVal = new ArrayList<String>();
+		
 		Connection con = connect();
 		try {
-			String read = "SELECT minbedrag FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE ID = "+pk;
+			String read = "SELECT minbedrag, eindtijd FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE ID = "+pk;
 			ResultSet rs = con.createStatement().executeQuery(read);
 			while (rs.next()) {
-				int bedrag = rs.getInt("MINBEDRAG");
+				int bedrag = rs.getInt("MINBEDRAG");				
 
 				BodDAOImpl boddao = new BodDAOImpl();
 				ArrayList<Bod> biedingen = boddao.getAllFromVeiling(pk);
@@ -122,13 +120,20 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 					if(b.getBedrag() > bedrag)
 						bedrag = b.getBedrag();
 				}
-				return bedrag+"";
-			}
+				returnVal.add(0, bedrag+"");
+				
+				Date eindtijd = rs.getDate("EINDTIJD");
+				Date nu = (Date)Calendar.getInstance().getTime();
+				
+				long diff = (eindtijd.getTime() - nu.getTime())/1000;
+				
+				returnVal.add(1, diff+"");
+				}
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return returnVal;
 	}
 
 	public ArrayList<Veiling> getAll() {
@@ -136,7 +141,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		Connection con = connect();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "
-					+ ConnectionData.DATABASE + ".\"VEILINGEN\" ");
+					+ ConnectionData.DATABASE + ".\"VEILINGEN\" ORDER BY eindtijd DESC");
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");

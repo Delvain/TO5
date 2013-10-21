@@ -9,12 +9,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AlleVeilingen extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Veiling> items;
+	private ArrayList<Veiling> items = new ArrayList<Veiling>();
 
 	public String execute(){
 		VeilingDAOImpl dAI = new VeilingDAOImpl();
 		
-		items = dAI.getAll();
+		try {
+			items = dAI.getAll();
+		} catch(Exception e) {}
 		
 		return SUCCESS;
 	}

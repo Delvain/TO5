@@ -1,2 +1,3 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<s:property value="prijs"/>
+<p class="prijs"><s:property value="prijs"/></p>
+<p class="timer"><s:property value="timer"/></p>

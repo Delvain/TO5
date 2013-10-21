@@ -17,10 +17,8 @@
             	var request = getRequestObject();
             	request.onreadystatechange = function() {
             		if((request.readyState == 4) && (request.status == 200)){
-               			if(request.responseText != "Error") {
                    			var serverResponse = request.responseText;
-                			document.getElementById("ajaxData"+index).innerHTML="<p class=\"prijs\">"+serverResponse+"</p>";
-               			}
+                			document.getElementById("ajaxData"+index).innerHTML=serverResponse;
                 	}
             	};
             	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action?id="+id, true);
