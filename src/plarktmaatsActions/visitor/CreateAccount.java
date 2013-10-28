@@ -1,61 +1,78 @@
 package plarktmaatsActions.visitor;
 
+import java.util.Calendar;
+
+import plarktmaatsDAO.PersoonDAOImpl;
+import plarktmaatsDAO.PlarktmaatsDAOInterface;
+import plarktmaatsDomein.Gebruiker;
+import plarktmaatsDomein.Persoon;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class CreateAccount extends ActionSupport {
 	
-	private String email;
+	PersoonDAOImpl pdi = new PersoonDAOImpl();
+	private String gebruikersnaam;
 	private String voornaam;
 	private String achternaam;
-	private String password;
-	private String password2;
-
+	private String email;
+	private String wachtwoord;
+	private String wachtwoord2;
+	private Calendar geboorteDatum;
+	private String bankRekening;
+	private Persoon p;
+	
 	public String execute(){
-		//ibs.addMember(username,password);
+		p = new Gebruiker(gebruikersnaam, voornaam, achternaam, email, geboorteDatum, bankRekening, wachtwoord);
+		pdi.create(p);
 		
 		return SUCCESS;
 	}
 
 	public void validate(){
-		email = email.trim();
+		gebruikersnaam = gebruikersnaam.toLowerCase();
 		voornaam = voornaam.trim();
 		achternaam = achternaam.trim();
-		password = password.trim();
-		password2 = password2.trim();
+		email = email.trim();
+		wachtwoord = wachtwoord.trim();
+		wachtwoord2 = wachtwoord2.trim();
 		
+		if (gebruikersnaam.length() == 0 ){			
+			addFieldError("gebruikersnaam", "Gebruikersnaam is verplicht");
+		}
 		
 		if (email.length() == 0 ){			
-			addFieldError("email", "email is verplicht");
+			addFieldError("email", "Email is verplicht");
 		}
 		
 		if (voornaam.length() == 0) {
-			addFieldError("voornaam", "voornaam is veprlicht");
+			addFieldError("voornaam", "Voornaam is veprlicht");
 		}
 		
 		if (achternaam.length() == 0) {
-			addFieldError("achternaam", "achternaam is verplicht");
+			addFieldError("achternaam", "Achternaam is verplicht");
 		}
 	
-//		else if (ibs.userExists(username) ){		
-//			addFieldError("username", "gebruiker bestaat al");
-//		}
-		
-		if (password.length() == 0 ) {			
-			addFieldError("password", "wachtwoord is verplicht");
+		else if (((PlarktmaatsDAOInterface<Persoon>) p).read(gebruikersnaam) != null){		
+			addFieldError("bestaat", "Gebruiker bestaat al");
 		}
 		
-		if (!password.equals(password2)) {
-			addFieldError("password2", "wachtwoorden komen niet overeen");
+		if (wachtwoord.length() == 0 ) {			
+			addFieldError("wachtwoord", "Wachtwoord is verplicht");
+		}
+		
+		if (!wachtwoord.equals(wachtwoord2)) {
+			addFieldError("wachtwoord2", "Wachtwoorden komen niet overeen");
 		}
 	}
 	
-	public String getEmail() {
+	public String getGebruikersnaam() {
 		return email;
 	}
 	
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGebruikersnaam(String gebruikersnaam) {
+		this.gebruikersnaam = gebruikersnaam;
 	}
 	
 	public String getVoornaam() {
@@ -69,20 +86,44 @@ public class CreateAccount extends ActionSupport {
 	public String getAchternaam() {
 		return achternaam;
 	}
-	               
+	       
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	public void setAchternaam(String achternaam) {
 		this.achternaam = achternaam;
 	}
-
-//	public String getPassword() {
-//		return password;
-//	}
 	
-	public void setPassword(String password) {
-		this.password = password;
+	public void setGeboorteDatum(Calendar geboorteDatum) {
+		this.geboorteDatum = geboorteDatum;
 	}
 	
-	public void setPassword2(String password2) {
-		this.password2 = password2;
+	public Calendar getGeboorteDatum() {
+		return geboorteDatum;
+	}
+	
+	public String getBankRekening() {
+		return bankRekening;
+	}
+	
+	public void setBankRekening(String bankRekening) {
+		this.bankRekening = bankRekening;
+	}
+	
+	public String getWachtwoord() {
+		return wachtwoord;
+	}
+	
+	public void setWachtwoord(String wachtwoord) {
+		this.wachtwoord = wachtwoord;
+	}
+	
+	public void setWachtwoord2(String wachtwoord2) {
+		this.wachtwoord2 = wachtwoord2;
 	}
 }
