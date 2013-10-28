@@ -21,8 +21,6 @@
     			height: 300px;
     		}
     		div.footer {
-    			margin-top: -80px;
-    			position: relative;
     			z-index: 900;
     		}
     	</style>

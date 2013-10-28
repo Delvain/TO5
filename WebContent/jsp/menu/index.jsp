@@ -31,15 +31,20 @@
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
 			<s:iterator value="items" status="status">
-				<div class="item">
-					<a href="#"><s:property value="veilingNaam" /></a>
-					<div class="imgBox">
-						<img src="http://fotos.marktplaats.com/kopen/e/85/LHqziqxnW3bz1amvmtSiNg==.jpg" />
+				<s:if test="%{#status.index < 3}">
+					<div class="item">
+						<a href="#"><s:property value="veilingNaam" /></a>
+						<div class="imgBox">
+							<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Vraagteken.png" />
+						</div>
+						<input type="button" class="bieden" value="Bieden" />
+						<s:div id="ajaxData%{#status.index}" />
+						<script>sendRequest('<s:property value="VeilingId" />', '<s:property value="#status.index" />');</script>
 					</div>
-					<input type="button" class="bieden" value="Bieden" />
-					<s:div id="ajaxData%{#status.index}" />
-					<script>sendRequest('<s:property value="VeilingId" />', '<s:property value="#status.index" />');</script>
-				</div>
+				</s:if>
+				<s:else>
+					<p class="meer">- <a href="#"><s:property value="veilingNaam" /></a></p>
+				</s:else>
 			</s:iterator>			
 			<div style="clear: both"></div>
 		</div>

@@ -16,7 +16,7 @@ public class AlleVeilingen extends ActionSupport {
 		
 		try {
 			items = dAI.getAll();
-		} catch(Exception e) {}
+		} catch(NullPointerException e) {}
 		
 		return SUCCESS;
 	}

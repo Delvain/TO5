@@ -1,0 +1,54 @@
+div.header {
+	height: 47px;
+	border-bottom: 1px solid #a6784b;
+	background-color: #f2b479;
+	min-width: 1024px;
+}
+div.header div.content div.logo {
+	width: 200px;
+	height: 100%;
+	float: left;
+	background-image: url('images/logo.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+div.header div.content div.right {
+	float: right;
+	height: 100%;
+}
+div.header div.content div.right p {
+	height: 100%;
+	margin-top: 15px;
+}
+div.header div.content div.right p a {
+	color: #000;
+}
+div.top_bar {
+	min-width: 1024px;
+	height: 69px;
+	background-color: #e1e8f5;
+	border-bottom: 1px solid #BACFE9;
+}
+div.top_bar div.content a.plaats_ad_but {
+	display: block;
+	float: left;
+	text-decoration: none;
+	width: 155px;
+	height: 100%;
+	background-image: url('images/plaats_ad.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+div.top_bar p.welkom {
+	margin: 0;
+	float: left;
+	font-size: 20px;
+	margin: 20px;
+}
+div.top_bar div.content div.search {
+	float: right;
+	height: 100%;
+}
+div.top_bar div.content div.search input {
+	margin-top: 20px;
+}
