@@ -27,7 +27,8 @@
 			<result name="input">/jsp/visitor/LoginForm.jsp</result>
 		</action>
 		<action name="ToonVeiling" class="plarktmaatsActions.visitor.ToonVeiling">
-			<result name="success">/jsp/visitor/ToonVeiling.jsp</result>
+			<result name="success">/jsp/visitor/Veiling.jsp</result>
+			<result name="input" type="redirectAction">Menu</result>
 		</action>
 	</package>
 	

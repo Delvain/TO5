@@ -3,6 +3,7 @@ package plarktmaatsActions.visitor;
 import java.util.ArrayList;
 
 import plarktmaatsDAO.VeilingDAOImpl;
+import tools.ProjectTools;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -24,7 +25,7 @@ public class AlleVeilingenAJAX extends ActionSupport {
 			prijs = data.get(0);
 			String timerTemp = data.get(1);
 			if(Integer.parseInt(timerTemp) > 0)
-				timer = timerTemp+"s";
+				timer = ProjectTools.SecToString(timerTemp);
 			else
 				timer = "Gesloten";
 		} catch(Exception e) {

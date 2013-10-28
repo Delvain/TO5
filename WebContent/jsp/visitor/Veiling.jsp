@@ -30,23 +30,7 @@
 	<body>
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
-			<s:iterator value="items" status="status">
-				<s:if test="%{#status.index < 3}">
-					<div class="item">
-						<a href="<s:url namespace="visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a>
-						<div class="imgBox">
-							<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Vraagteken.png" />
-						</div>
-						<input type="button" class="bieden" value="Bieden" onclick="javascript: window.location='<s:url namespace="visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>'" />
-						<s:div id="ajaxData%{#status.index}" />
-						<script>sendRequest('<s:property value="VeilingId" />', '<s:property value="#status.index" />');</script>
-					</div>
-				</s:if>
-				<s:else>
-					<p class="meer">- <a href="<s:url namespace="visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></p>
-				</s:else>
-			</s:iterator>			
-			<div style="clear: both"></div>
+			<h2><s:property value="veiling.VeilingNaam" /></h2>			
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
 	</body>
