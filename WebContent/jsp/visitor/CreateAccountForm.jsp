@@ -15,7 +15,7 @@
 	    	  <s:textfield name="email" label="E-mailadres"/>
 	    	  <s:password name="wachtwoord" label="Wachtwoord"/>
 	    	  <s:password name="wachtwoord2" label="Hehaal wachtwoord"/>
-	    	  <s:textfield name="bankRekening" label="Hehaal wachtwoord"/>
+	    	  <s:textfield name="bankRekening" label="Bankrekeningnummer"/>
 	    	  <%-- <s:calendar name="geboorteDatum" label="Geboortedatum"/> --%>
 	    	  <s:submit value="Registreer"/>
 			</s:form>
