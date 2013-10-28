@@ -18,7 +18,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	private String productnaam;
 	private String productomschrijving;
 	private Object img;
-	private int minbedrag;
+	private String minbedrag;
 	private Date eindDatum;
 	private Persoon user;
 	
@@ -31,7 +31,8 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		Calendar eindtijd = Calendar.getInstance();
 		eindtijd.setTime(eindDatum);
 		Gebruiker gebruiker = (Gebruiker) user;
-		Veiling veiling = new Veiling(id, productnaam, productomschrijving, img, minbedrag, eindtijd, gebruiker, cat);
+		int min = Integer.parseInt(minbedrag);
+		Veiling veiling = new Veiling(id, productnaam, productomschrijving, img, min, eindtijd, gebruiker, cat);
 		VeilingDAOImpl database = new VeilingDAOImpl();
 		database.create(veiling);
 		return SUCCESS;
@@ -46,9 +47,17 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 			System.out.println(cat.getNaam());
 		}
 		if (cat == null) {
-			//categorie bestaat niet
 			System.out.println("categorie bestaat niet");
 			addFieldError("categorie", "Deze categorie bestaat niet!");
+		}
+		//checken of minbedrag een getal is
+		try {
+			int min = Integer.parseInt(minbedrag);
+			if (min < 0) {
+				addFieldError("minbedrag","Geen geldig minimumbod!");
+			}
+		} catch (NumberFormatException nfe) {
+			addFieldError("minbedrag","Geen geldig minimumbod!");
 		}
 	}
 
@@ -84,11 +93,11 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		this.img = img;
 	}
 
-	public int getMinbedrag() {
+	public String getMinbedrag() {
 		return minbedrag;
 	}
 
-	public void setMinbedrag(int minbedrag) {
+	public void setMinbedrag(String minbedrag) {
 		this.minbedrag = minbedrag;
 	}
 
