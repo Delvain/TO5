@@ -7,11 +7,9 @@
     </head>
 	<body>
 	    <h4>Account aangemaakt.</h4>
-		Welkom <s:property value="username"/>!<br>
-		Je account is aangemaakt.
-		
-	    <hr />
-	    
+			Welkom <s:property value="username"/>!<br>
+			Uw account is aangemaakt.
+	    <hr />	    
 	    <a href=" <s:url value="/"/> ">Terug naar het startmenu</a><br/>
 	    <a href="<s:url action='LoginForm' namespace="/visitor"/>">Log in</a>
 	</body> 

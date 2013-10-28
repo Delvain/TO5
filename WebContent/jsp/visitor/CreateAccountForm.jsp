@@ -2,10 +2,12 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 	<head>
+		<jsp:include page="/jsp/include/head.jsp" />
         <title>Plarktmaats - Registreren</title>
         <link rel="stylesheet" type="text/css" href="../css/plarktmaats.css" />
 	</head>
 	<body>
+	<jsp:include page="/jsp/include/top.jsp" />
 	    <h4>Registreer uw account</h4> 	    
 	    <hr />	    
 			<s:form action="CreateAccount">
@@ -21,5 +23,6 @@
 			</s:form>
 	    <hr />	    
 	    <a href=" <s:url value="/"/> ">Terug naar het startmenu</a>
+	    <jsp:include page="/jsp/include/footer.jsp" />
 	</body> 
 </html>

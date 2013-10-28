@@ -13,7 +13,7 @@
 		</action>
 		<action name="CreateAccount" class="plarktmaatsActions.visitor.CreateAccount">
 			<result name="success">/jsp/visitor/AccountCreated.jsp</result>
-			<result name="input" type="redirectAction">/jsp/visitor/CreateAccountForm</result>
+			<result name="input" type="redirectAction">CreateAccountForm</result>
 		</action>
 		<action name="AlleVeilingenAJAX" class="plarktmaatsActions.visitor.AlleVeilingenAJAX">
 			<result name="success">/jsp/ajax/index.jsp</result>
@@ -60,12 +60,9 @@
 		<action name="Logout" class="plarktmaatsActions.gebruikers.Logout">
 			<result name="success">/jsp/member/LoggedOut.jsp</result>
 		</action>
-		<action name="VoegVeilingToeForm">
-			<result name="success">/jsp/member/VeilingToevoegen.jsp</result>
-		</action>
 		<action name="VoegVeilingToe" class="plarktmaatsActions.gebruikers.VoegVeilingToe">
 			<result name="success">/jsp/menu/index.jsp</result>
-			<result name="input" type="redirectAction">VoegVeilingToeForm</result>
+			<result name="input">/jsp/member/VeilingToevoegen.jsp</result>
 		</action>
 	</package>
 </struts>
