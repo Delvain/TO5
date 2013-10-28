@@ -12,7 +12,7 @@
 </div>
 <div class="top_bar">
 	<div class="content">
-		<a href="#" class="plaats_ad_but">&nbsp;</a>
+		<a href=" <s:url value="/jsp/member/VeilingToevoegen.jsp"/> " class="plaats_ad_but">&nbsp;</a>
 		<p class="welkom">Welkom, Piet. U heeft 290 Credits.</p>
 		<div class="search">
 			<form method="post" action="#zoeken">

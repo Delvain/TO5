@@ -23,15 +23,9 @@ public class Login extends ActionSupport implements SessionAware {
 	@SuppressWarnings("unchecked")
 	public String execute(){
 		session.put("user", user);
-		try {
-			Beheerder beheerder = (Beheerder) user;
+		if (user instanceof Beheerder) {
 			return "managermenu";
-		} catch(ClassCastException ce) {
-			ce.printStackTrace();
-		}
-		
-//		if (user.getFunctie().equals("Beheerder"))
-//			return "managermenu";
+		} 
 		return SUCCESS;
 	}
 

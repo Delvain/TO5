@@ -8,7 +8,7 @@
 	<body>
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
-			<h1>Template</h1>
+			<h1>Voeg een veiling toe</h1>
 
 			<s:form action="VoegVeilingToe">
 				<s:textfield name="categorie" value="categorie"/><br/>
