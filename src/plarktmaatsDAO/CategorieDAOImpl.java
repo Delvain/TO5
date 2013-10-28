@@ -32,6 +32,7 @@ public class CategorieDAOImpl implements PlarktmaatsDAOInterface<Categorie> {
 			read.setString(1, pk);
 			ResultSet rs = read.executeQuery();
 			while(rs.next()) {
+				System.out.println("categorie bestaat");
 				String naam = rs.getString("NAAM");
 				return new Categorie(naam);
 			}

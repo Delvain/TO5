@@ -24,7 +24,9 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	
 	
 	public String execute() {
+		System.out.println("voegveilingtoe execute");
 		Categorie cat = new Categorie(categorie);
+		img = null; //TODO foto toevoegen
 		int id = 0; //TODO hoogste id pakken
 		Calendar eindtijd = Calendar.getInstance();
 		eindtijd.setTime(eindDatum);
@@ -36,9 +38,16 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	}
 	
 	public void validate() {
+		System.out.println("voegveilingtoe validate");
 		//checken of categorie bestaat
 		CategorieDAOImpl categoriecheck = new CategorieDAOImpl();
-		if (categoriecheck.read(categorie) == null) {
+		Categorie cat = categoriecheck.read(categorie);
+		if (cat != null) {
+			System.out.println(cat.getNaam());
+		}
+		if (cat == null) {
+			//categorie bestaat niet
+			System.out.println("categorie bestaat niet");
 			addFieldError(categorie, "Deze categorie bestaat niet!");
 		}
 	}
