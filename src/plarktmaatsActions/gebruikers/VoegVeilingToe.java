@@ -48,7 +48,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		if (cat == null) {
 			//categorie bestaat niet
 			System.out.println("categorie bestaat niet");
-			addFieldError(categorie, "Deze categorie bestaat niet!");
+			addFieldError("categorie", "Deze categorie bestaat niet!");
 		}
 	}
 
