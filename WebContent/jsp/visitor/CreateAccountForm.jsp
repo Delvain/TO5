@@ -16,7 +16,7 @@
 			<s:textfield name="achternaam" label="Achternaam" />
 			<s:textfield name="email" label="E-mailadres" />
 			<s:password name="wachtwoord" label="Wachtwoord" />
-			<s:password name="wachtwoord2" label="Hehaal wachtwoord" />
+			<s:password name="wachtwoord2" label="Wachtwoord (controle)" />
 			<s:textfield name="bankRekening" label="Bankrekeningnummer" />
 			<s:textfield name="strGeboorteDatum" label="Geboortedatum (DD-MM-YYYY)" />
 			<s:submit value="Registreer" />
