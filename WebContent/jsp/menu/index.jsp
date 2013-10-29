@@ -35,7 +35,7 @@
 					<div class="item">
 						<a href="<s:url namespace="visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a>
 						<div class="imgBox">
-							<img src="http://us.123rf.com/400wm/400/400/marinini/marinini1209/marinini120900040/15179199-vraagteken--blauw-zingen-dan-kwadraat-vel-papier.jpg" />
+							<img src="/TO5/style/images/freak.png" />
 						</div>
 						<input type="button" class="bieden" value="Bieden" onclick="javascript: window.location='<s:url namespace="visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>'" />
 						<s:div id="ajaxData%{#status.index}" />
