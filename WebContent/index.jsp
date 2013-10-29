@@ -28,7 +28,7 @@
 	<body>
 		<div class="header">
 			<div class="content">
-				<div class="logo"></div>
+				<a href="#" class="logo">&nbsp;</a>
 				<div style="clear: both"></div>
 			</div>
 		</div>
