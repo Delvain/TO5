@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<jsp:include page="/jsp/include/head.jsp" />
+		<sx:head />
 	</head>
 	<body>
 		<jsp:include page="/jsp/include/top.jsp" />
@@ -17,7 +18,7 @@
 				<s:textfield name="productomschrijving" label="productomschrijving" /><br/>
 
 				<s:textfield name="minbedrag" label="minbedrag" /><br/>
-				<sx:datetimepicker name="eindDatum" label="Eindtijdstip (yyyy-MM-dd)" displayFormat="yyyy-MM-dd" value="todayDate" /><br/>
+				<sx:datetimepicker name="eindDatum" label="Eindtijdstip (yyyy-MM-dd-HH-mm)" displayFormat="yyyy-MM-dd-HH-mm" value="todayDate" /><br/>
 				<s:submit value="Maak veiling aan" />
 			</s:form>
 		</div>
