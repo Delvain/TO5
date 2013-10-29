@@ -43,18 +43,14 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		//checken of categorie bestaat
 		CategorieDAOImpl categoriecheck = new CategorieDAOImpl();
 		Categorie cat = categoriecheck.read(categorie);
-		if (cat != null) {
-			System.out.println(cat.getNaam());
-		}
 		if (cat == null) {
-			System.out.println("categorie bestaat niet");
 			addFieldError("categorie", "Deze categorie bestaat niet!");
 		}
 		//checken of minbedrag een getal is
 		try {
 			int min = Integer.parseInt(minbedrag);
 			if (min < 0) {
-				addFieldError("minbedrag","Geen geldig minimumbod!");
+				addFieldError("minbedrag","Minimumbod mag geen negatief getal zijn!");
 			}
 		} catch (NumberFormatException nfe) {
 			addFieldError("minbedrag","Geen geldig minimumbod!");
@@ -116,6 +112,5 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	@Override
 	public void setUser(Persoon user) {
 		this.user = user;
-		
 	}
 }

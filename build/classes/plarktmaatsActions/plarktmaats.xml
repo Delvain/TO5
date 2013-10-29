@@ -63,11 +63,19 @@
 			<result name="success">/jsp/member/LoggedOut.jsp</result>
 		</action>
 		<action name="VoegVeilingToeForm">
+			<interceptor-ref name="store">
+				<param name="operationMode">RETRIEVE</param>
+			</interceptor-ref>
+			<interceptor-ref name="MemberStack" />
 			<result name="success">/jsp/member/VeilingToevoegen.jsp</result>
 		</action>
 		<action name="VoegVeilingToe" class="plarktmaatsActions.gebruikers.VoegVeilingToe">
+			<interceptor-ref name="store">
+				<param name="operationMode">STORE</param>
+			</interceptor-ref>
+			<interceptor-ref name="MemberStack" />
 			<result name="success">/jsp/menu/index.jsp</result>
-			<result name="input" type="redirectAction">VeilingToevoegen.jsp</result>
+			<result name="input" type="redirectAction">VoegVeilingToeForm</result>
 		</action>
 	</package>
 </struts>
