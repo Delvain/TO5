@@ -18,10 +18,11 @@
 	    	  <s:password name="wachtwoord" label="Wachtwoord"/>
 	    	  <s:password name="wachtwoord2" label="Hehaal wachtwoord"/>
 	    	  <s:textfield name="bankRekening" label="Bankrekeningnummer"/>
-	    	  <%-- <s:calendar name="geboorteDatum" label="Geboortedatum"/> --%>
+	    	  <s:textfield name="strGeboorteDatum" label="Geboortedatum (DD-MM-YYYY)"/>
 	    	  <s:submit value="Registreer"/>
 			</s:form>
-	    <hr />	    
+			<s:actionerror />
+	    <hr />
 	    <a href=" <s:url value="/"/> ">Terug naar het startmenu</a>
 	    <jsp:include page="/jsp/include/footer.jsp" />
 	</body> 

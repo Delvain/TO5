@@ -1,5 +1,8 @@
 package plarktmaatsActions.visitor;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import plarktmaatsDAO.PersoonDAOImpl;
@@ -19,9 +22,11 @@ public class CreateAccount extends ActionSupport {
 	private String email;
 	private String wachtwoord;
 	private String wachtwoord2;
-	private Calendar geboorteDatum;
+	private String strGeboorteDatum;
+	private Calendar geboorteDatum = Calendar.getInstance();
 	private String bankRekening;
 	private Persoon p;
+	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 	
 	public String execute(){
 		p = new Gebruiker(gebruikersnaam, voornaam, achternaam, email, geboorteDatum, bankRekening, wachtwoord);
@@ -37,9 +42,21 @@ public class CreateAccount extends ActionSupport {
 		email = email.trim();
 		wachtwoord = wachtwoord.trim();
 		wachtwoord2 = wachtwoord2.trim();
+		geboorteDatum = Calendar.getInstance();
+		
+		// Geboortedatum omzetten naar Calendar
+		if (strGeboorteDatum != null) {
+			try {
+				geboorteDatum.setTime(df.parse(strGeboorteDatum));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		} else {
+			addActionError("Geboortedatum is verplicht");			
+		}
 		
 		if (gebruikersnaam.length() == 0 ){			
-			addFieldError("gebruikersnaam", "Gebruikersnaam is verplicht");
+			addActionError("Gebruikersnaam is verplicht");
 		}
 		
 		if (email.length() == 0 ){			
@@ -54,7 +71,7 @@ public class CreateAccount extends ActionSupport {
 			addFieldError("achternaam", "Achternaam is verplicht");
 		}
 	
-		else if (((PlarktmaatsDAOInterface<Persoon>) p).read(gebruikersnaam) != null){		
+		else if (pdi.read(gebruikersnaam) != null){		
 			addFieldError("bestaat", "Gebruiker bestaat al");
 		}
 		
@@ -67,6 +84,7 @@ public class CreateAccount extends ActionSupport {
 		}
 	}
 	
+//	Getters&Setters
 	public String getGebruikersnaam() {
 		return email;
 	}
@@ -105,6 +123,14 @@ public class CreateAccount extends ActionSupport {
 	
 	public Calendar getGeboorteDatum() {
 		return geboorteDatum;
+	}
+	
+	public String getStrGeboorteDatum() {
+		return strGeboorteDatum;
+	}
+
+	public void setStrGeboorteDatum(String strGeboorteDatum) {
+		this.strGeboorteDatum = strGeboorteDatum;
 	}
 	
 	public String getBankRekening() {
