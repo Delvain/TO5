@@ -141,7 +141,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		Connection con = connect();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "
-					+ ConnectionData.DATABASE + ".\"VEILINGEN\" ORDER BY eindtijd DESC");
+					+ ConnectionData.DATABASE + ".\"VEILINGEN\" ORDER BY eindtijd ASC");
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");
