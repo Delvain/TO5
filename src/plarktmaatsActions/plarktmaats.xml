@@ -9,12 +9,12 @@
 			<result>/jsp/menu/index.jsp</result>
 		</action>
 		<action name="CreateAccountForm" >
-			<interceptor-ref name="store"><param name="operationMode">RETRIEVE</param></interceptor-ref>
+			<interceptor-ref name="createAccountStore"><param name="createAccountOperationMode">RETRIEVE</param></interceptor-ref>
 			<result name="success">/jsp/visitor/CreateAccountForm.jsp</result>
 		</action>
 		<action name="CreateAccount" class="plarktmaatsActions.visitor.CreateAccount">
 			<result name="success">/jsp/visitor/AccountCreated.jsp</result>
-			<result name="fielderror">/jsp/vistor/CreateAccountForm.jsp</result>
+			<interceptor-ref name="createAccountStore"><param name="createAccountOperationMode">RETRIEVE</param></interceptor-ref>
 			<result name="input" type="redirectAction">CreateAccountForm</result>
 		</action>
 		<action name="AlleVeilingenAJAX" class="plarktmaatsActions.visitor.AlleVeilingenAJAX">
