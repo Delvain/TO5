@@ -9,8 +9,7 @@
 <body>
 	<jsp:include page="/jsp/include/top.jsp" />
 	<div class="container">
-		<h4>Registreer uw account</h4>
-		<hr />
+		<h1>Registreer uw account</h1>
 		<s:form action="CreateAccount">
 			<s:textfield name="gebruikersnaam" label="Gebruikersnaam" />
 			<s:textfield name="voornaam" label="Voornaam" />
@@ -19,13 +18,9 @@
 			<s:password name="wachtwoord" label="Wachtwoord" />
 			<s:password name="wachtwoord2" label="Hehaal wachtwoord" />
 			<s:textfield name="bankRekening" label="Bankrekeningnummer" />
-			<s:textfield name="strGeboorteDatum"
-				label="Geboortedatum (DD-MM-YYYY)" />
+			<s:textfield name="strGeboorteDatum" label="Geboortedatum (DD-MM-YYYY)" />
 			<s:submit value="Registreer" />
 		</s:form>
-		<s:actionerror />
-		<hr />
-		<a href=" <s:url value="/"/> ">Terug naar het startmenu</a>
 	</div>
 	<jsp:include page="/jsp/include/footer.jsp" />
 </body>

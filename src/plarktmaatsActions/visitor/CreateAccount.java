@@ -52,11 +52,11 @@ public class CreateAccount extends ActionSupport {
 				e.printStackTrace();
 			}
 		} else {
-			addActionError("Geboortedatum is verplicht");			
+			addFieldError("strGeboorteDatum", "Geboortedatum is verplicht");			
 		}
 		
 		if (gebruikersnaam.length() == 0 ){			
-			addActionError("Gebruikersnaam is verplicht");
+			addFieldError("gebruikersnaam", "Gebruikersnaam is verplicht");
 		}
 		
 		if (email.length() == 0 ){			
@@ -72,7 +72,7 @@ public class CreateAccount extends ActionSupport {
 		}
 	
 		else if (pdi.read(gebruikersnaam) != null){		
-			addFieldError("bestaat", "Gebruiker bestaat al");
+			addFieldError("gebruikersnaam", "Gebruiker bestaat al");
 		}
 		
 		if (wachtwoord.length() == 0 ) {			
@@ -81,6 +81,10 @@ public class CreateAccount extends ActionSupport {
 		
 		if (!wachtwoord.equals(wachtwoord2)) {
 			addFieldError("wachtwoord2", "Wachtwoorden komen niet overeen");
+		}
+		
+		if (bankRekening.length() == 0 ) {			
+			addFieldError("bankrRekening", "Bankrekeningnummer is verplicht");
 		}
 	}
 	
