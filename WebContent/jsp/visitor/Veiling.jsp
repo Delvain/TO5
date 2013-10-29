@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="/TO5/style/veiling.css" />
 		<jsp:include page="/jsp/include/head.jsp" />
 		<script type="text/javascript">
             function getRequestObject(){
@@ -30,7 +31,14 @@
 	<body>
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
-			<h2><s:property value="veiling.VeilingNaam" /></h2>			
+			<h1><s:property value="veiling.VeilingNaam" /></h1>
+			<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Vraagteken.png" />
+			<p><s:property value="veiling.VeilingOmschrijving" /></p>
+			<div style="clear: both"></div>
+			<s:form action="">
+				<s:textfield name="credits" />
+				<s:submit value="Bieden" />
+			</s:form>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
 	</body>
