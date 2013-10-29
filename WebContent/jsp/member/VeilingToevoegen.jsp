@@ -17,7 +17,7 @@
 				<s:textfield name="productomschrijving" label="productomschrijving" /><br/>
 
 				<s:textfield name="minbedrag" label="minbedrag" /><br/>
-				<s:date name="eindDatum" nice="true" /><br/>
+				<sx:datetimepicker name="eindDatum" label="Eindtijdstip (yyyy-MM-dd)" displayFormat="yyyy-MM-dd" value="todayDate" /><br/>
 				<s:submit value="Maak veiling aan" />
 			</s:form>
 		</div>
