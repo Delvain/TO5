@@ -19,3 +19,15 @@ div.content {
 	margin: 0 auto;
 	height: 100%;
 }
+
+input[type=text], input[type=password] {
+	border: 1px solid #BACFE9;
+	padding: 5px;
+}
+input[type=submit] {
+	background: url('images/button.png') repeat;
+	color: #fff;
+	border: 0;
+	font-size: 17px;
+	padding: 5px 10px;
+}

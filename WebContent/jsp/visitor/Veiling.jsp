@@ -32,7 +32,7 @@
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
 			<h1><s:property value="veiling.VeilingNaam" /></h1>
-			<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Vraagteken.png" />
+			<img src="http://us.123rf.com/400wm/400/400/marinini/marinini1209/marinini120900040/15179199-vraagteken--blauw-zingen-dan-kwadraat-vel-papier.jpg" />
 			<p><s:property value="veiling.VeilingOmschrijving" /></p>
 			<div style="clear: both"></div>
 			<s:form action="">
