@@ -61,9 +61,8 @@ div.container div.item input.bieden {
 }
 
 div.container p.meer {
-	margin: 10px 30px;
+	margin: 0;
 }
 div.container p.meer a {
 	color: #000;
-	text-decoration: underline;
 }

@@ -4,13 +4,15 @@ div.header {
 	background-color: #f2b479;
 	min-width: 1024px;
 }
-div.header div.content div.logo {
+div.header div.content a.logo {
+	display: block;
 	width: 200px;
 	height: 100%;
 	float: left;
 	background-image: url('images/logo.png');
 	background-repeat: no-repeat;
 	background-position: center;
+	text-decoration: none;
 }
 div.header div.content div.right {
 	float: right;

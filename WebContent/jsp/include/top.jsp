@@ -1,7 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <div class="header">
 	<div class="content">
-		<div class="logo"></div>
+		<a class="logo" href="<s:url action="Menu" namespace="/visitor" />">&nbsp;</a>
 		<div class="right">
 			<p>
 				<a href="<s:url action='LoginForm' namespace="/visitor"/>">Log in</a>
