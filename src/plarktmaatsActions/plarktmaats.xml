@@ -14,7 +14,7 @@
 		</action>
 		<action name="CreateAccount" class="plarktmaatsActions.visitor.CreateAccount">
 			<result name="success">/jsp/visitor/AccountCreated.jsp</result>
-			<interceptor-ref name="createAccountStore"><param name="createAccountOperationMode">RETRIEVE</param></interceptor-ref>
+			<interceptor-ref name="createAccountStore"><param name="createAccountOperationMode">STORE</param></interceptor-ref>
 			<result name="input" type="redirectAction">CreateAccountForm</result>
 		</action>
 		<action name="AlleVeilingenAJAX" class="plarktmaatsActions.visitor.AlleVeilingenAJAX">
