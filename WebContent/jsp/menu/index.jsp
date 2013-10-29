@@ -42,6 +42,10 @@
 						<script>sendRequest('<s:property value="VeilingId" />', '<s:property value="#status.index" />');</script>
 					</div>
 				</s:if>
+				<s:elseif test="%{#status.index == 3}">
+					<h2>Meer veilingen:</h2>
+					<p class="meer">- <a href="<s:url namespace="visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></p>
+				</s:elseif>
 				<s:else>
 					<p class="meer">- <a href="<s:url namespace="visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></p>
 				</s:else>
