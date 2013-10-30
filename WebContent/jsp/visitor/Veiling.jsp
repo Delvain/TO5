@@ -34,7 +34,8 @@
 			<h1><s:property value="veiling.VeilingNaam" /></h1>
 			<div class="left">
 				<img src="http://us.123rf.com/400wm/400/400/marinini/marinini1209/marinini120900040/15179199-vraagteken--blauw-zingen-dan-kwadraat-vel-papier.jpg" />
-				<s:form action="">
+				<s:form action="VoegBodToe" namespace="/member">
+					<s:hidden name="id" value="%{veiling.veilingId}" />
 					<s:textfield name="credits" />
 					<s:submit value="Bieden" />
 				</s:form>
