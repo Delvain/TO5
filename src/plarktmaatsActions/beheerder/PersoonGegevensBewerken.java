@@ -1,4 +1,4 @@
-package plarktmaatsActions.gebruikers;
+package plarktmaatsActions.beheerder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +12,7 @@ import plarktmaatsDomein.Beheerder;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class GegevensAanpassen extends ActionSupport implements UserAware{
+public class PersoonGegevensBewerken extends ActionSupport implements UserAware{
 	PersoonDAOImpl pdi = new PersoonDAOImpl();
 	private String voornaam;
 	private String achternaam;

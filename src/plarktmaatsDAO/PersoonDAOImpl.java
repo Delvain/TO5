@@ -6,11 +6,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import plarktmaatsDomein.Beheerder;
+import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Persoon;
+import plarktmaatsDomein.Veiling;
 
 public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
@@ -66,7 +69,9 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 				String achternaam = rs.getString("ACHTERNAAM");
 				String email = rs.getString("EMAIL");
 				String functie = rs.getString("FUNCTIE");
-				Calendar gebdat = null; //rs.getDate("GEBDATUM");
+				Date gebdatTemp = rs.getDate("GEBDATUM");
+				Calendar gebdat = Calendar.getInstance();
+				gebdat.setTime(gebdatTemp);
 				int credits = rs.getInt("CREDITS");
 				String banknr = rs.getString("BANKNR");
 				boolean geblokkeerd = rs.getBoolean("GEBLOKKEERD");
@@ -83,6 +88,39 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<Gebruiker> getAllGebruikers() {
+		ArrayList<Gebruiker> array = new ArrayList<Gebruiker>();
+		Connection con = connect();
+		try {
+			PreparedStatement read = con.prepareStatement("SELECT * FROM "
+					+ ConnectionData.DATABASE + ".\"GEBRUIKERS\" ");
+			ResultSet rs = read.executeQuery();
+			while (rs.next()) {
+				String functie = rs.getString("FUNCTIE");
+				if (functie.equals("Gebruiker")) {
+					String gebruikersnaam = rs.getString("GEBRUIKERSNAAM");
+					String voornaam = rs.getString("VOORNAAM");
+					String achternaam = rs.getString("ACHTERNAAM");
+					String email = rs.getString("EMAIL");
+					
+					Date gebdatTemp = rs.getDate("GEBDATUM");
+					Calendar gebdat = Calendar.getInstance();
+					gebdat.setTime(gebdatTemp);
+					int credits = rs.getInt("CREDITS");
+					String banknr = rs.getString("BANKNR");
+					boolean geblokkeerd = rs.getBoolean("GEBLOKKEERD");
+					String wachtwoord = rs.getString("WACHTWOORD");
+					array.add(new Gebruiker(gebruikersnaam, voornaam, achternaam, email, gebdat, credits, banknr, geblokkeerd, wachtwoord));
+				}
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return array;
 	}
 
 	@Override
@@ -105,6 +143,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		String wachtwoord = p.getWachtwoord();
 		
 		if (p instanceof Gebruiker) {
+			System.out.println("persoonDAO persoon is gebruiker");
 			Gebruiker g = (Gebruiker)p;
 			functie = "Gebruiker";
 			credits = g.getCredits();

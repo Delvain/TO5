@@ -84,4 +84,36 @@
 		</action>
 		
 	</package>
+	
+	<package name="beheerder" namespace="/beheerder" extends="struts-default">
+		<interceptors>
+			<interceptor name="beheerderInterceptor"
+				class="plarktmaatsInterceptors.BeheerderInterceptor" />
+
+			<interceptor-stack name="BeheerderStack">
+				<interceptor-ref name="beheerderInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+	
+		<default-interceptor-ref name="BeheerderStack" />	
+		
+		<global-results>
+			<result name="login" type="redirect">
+				/visitor/LoginForm.action
+			</result>
+		</global-results>
+		<action name="SelecteerGebruikerForm" class="plarktmaatsActions.beheerder.AlleGebruikers">
+			<result name="success">/jsp/beheerder/SelecteerPersoon.jsp</result>
+		</action>
+		<action name="SelecteerGebruiker" class="plarktmaatsActions.beheerder.SelecteerGebruiker">
+			<result name="success">/jsp/beheerder/PersoonGegevensBewerken.jsp</result>
+		</action>
+		<action name="BewerkGegevens" class="plarktmaatsActions.beheerder.PersoonGegevensBewerken">
+			<result name="success">/jsp/menu/index.jsp</result>
+			<result name="input">/jsp/beheerder/PersoonGegevensBewerken.jsp</result>
+		</action>
+		
+	</package>
+	
 </struts>
