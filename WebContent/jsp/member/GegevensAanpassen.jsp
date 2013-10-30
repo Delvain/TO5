@@ -8,13 +8,16 @@
 	<body>
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
-			<h1>Template</h1>
-			<p>Dit is de template. Maak er wat leuks van ;)</p>
-			<p>Laat het aub even weten aan Maarten als er problemen of suggesties zijn voor de lay out. Ga niet zelf
-			dingen veranderen en voeg zelf geen CSS toe aan je JSP's.</p>
+			<h1>Verander hier uw gegevens</h1>
+			<p>Lege velden worden niet veranderd</p>
 			<s:form>
-				<s:textfield label="Textfield" />
-				<s:textfield label="Textfield 2" />
+				<s:textfield name="voornaam" label="Voornaam" />
+				<s:textfield name="achternaam" label="Achternaam" />
+				<s:textfield name="email" label="E-mailadres" />
+				<s:password name="wachtwoord" label="Wachtwoord" />
+				<s:password name="wachtwoord2" label="Wachtwoord (controle)" />
+				<s:textfield name="bankRekening" label="Bankrekeningnummer" />
+				<s:textfield name="strGeboorteDatum" label="Geboortedatum (DD-MM-YYYY)" />
 				<s:submit value="Knop" />
 			</s:form>
 		</div>

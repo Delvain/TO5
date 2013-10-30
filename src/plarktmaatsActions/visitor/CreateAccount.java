@@ -50,7 +50,7 @@ public class CreateAccount extends ActionSupport {
 			try {
 				geboorteDatum.setTime(df.parse(strGeboorteDatum));
 			} catch (ParseException e) {
-				e.printStackTrace();
+				addFieldError("strGeboorteDatum","Geen geldige datum!");
 			}
 		} else {
 			addFieldError("strGeboorteDatum", "Geboortedatum is verplicht");			
@@ -83,7 +83,7 @@ public class CreateAccount extends ActionSupport {
 		}
 		
 		if (bankRekening.length() == 0 ) {			
-			addFieldError("bankrRekening", "Bankrekeningnummer is verplicht");
+			addFieldError("bankRekening", "Bankrekeningnummer is verplicht");
 		}
 	}
 	
