@@ -10,12 +10,23 @@ div.container div.right {
 div.container div#ajaxData {
 	float: right;
 	width: 660px;
+	font-weight: bold;
+	font-size: 110px;
+	line-height: 120px;
 }
-
-div.container img {
-	border: 1px solid #BACFE9;
+div.container object {
+	border: 0;
 	padding: 0;
 	margin: 0;
+	width: 100%;
+	max-width: 100%;
+}
+div.container object img {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	max-width: 100%;
 }
 div.container p {
 	margin: 0;
@@ -41,9 +52,6 @@ div.container table tr td {
 
 div.container div#ajaxData p {
 	margin: 0;
-	font-weight: bold;
-	font-size: 110px;
-	line-height: 120px;
 	text-align: right;
 	width: 100%;
 	background-repeat: no-repeat;

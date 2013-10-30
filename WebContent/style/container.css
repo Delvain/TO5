@@ -28,7 +28,7 @@ div.container div.item a {
 div.container div.item div.imgBox {
 	height: 240px;
 }
-div.container div.item div.imgBox img {
+div.container div.item div.imgBox object, div.container div.item div.imgBox object img {
 	border: 0;
 	max-width: 100%;
 	max-height: 100%;

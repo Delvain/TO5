@@ -33,7 +33,9 @@
 		<div class="container">
 			<h1><s:property value="veiling.VeilingNaam" /></h1>
 			<div class="left">
-				<img src="http://us.123rf.com/400wm/400/400/marinini/marinini1209/marinini120900040/15179199-vraagteken--blauw-zingen-dan-kwadraat-vel-papier.jpg" />
+				<object data="<s:property value="veiling.foto" />">
+    				<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Vraagteken.png" />
+  				</object>
 				<s:form action="">
 					<s:textfield name="credits" />
 					<s:submit value="Bieden" />
