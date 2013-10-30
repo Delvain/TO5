@@ -11,7 +11,7 @@
 		<div class="container">
 			<h1>Mijn veilingen</h1>
 			<s:iterator value = "mijnVeilingen">
-				<li><s:property /></li>
+				<a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a>
 			</s:iterator>			
 		</div>
 		<div class="container">

@@ -25,6 +25,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 	private List<String> mijnBiedingenData;
 
 	public String execute() {
+		System.out.println("Executing PersoonPagina.java for user " + user);
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
 		mijnVeilingen = vDI.mijnVeilingen(gebruikersNaam);
 		mijnBiedingen = vDI.mijnBiedingen(gebruikersNaam);

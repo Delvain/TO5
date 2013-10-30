@@ -108,11 +108,13 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				Calendar eindtijd = Calendar.getInstance();
 				eindtijd.setTime(eindtijdTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String foto = rs.getString("FOTO");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				Veiling v = new Veiling(id, naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat);
+				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat);
+				mijnVeilingen.add(v);
 			}
 			con.close();
 		} catch (SQLException e) {
