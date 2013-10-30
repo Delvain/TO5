@@ -18,8 +18,6 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 	@Override
 	public void create(Veiling v) {
-
-		int id = v.getVeilingId();
 		String naam = v.getVeilingNaam();
 		String omschrijving = v.getVeilingOmschrijving();
 		int minbedrag = v.getMinBedrag();
@@ -47,7 +45,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		// pst.setBinaryStream (2, fis, (int) file.length() );
 
 		String query = "INSERT INTO " + ConnectionData.DATABASE
-				+ ".\"VEILINGEN\" VALUES ('" + id + "', '" + naam + "', '"
+				+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '"
 				+ omschrijving + "', '" + minbedrag + "', To_Date('"
 				+ einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '"
 				+ categorieNaam + "', '" + 4371938 + "')";

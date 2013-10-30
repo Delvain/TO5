@@ -23,8 +23,6 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 	}
 	
 public void create(int veilingId, Bod b) { 
-		
-		int id = b.getId();
 		int bedrag = b.getBedrag();
 		Calendar tijdstip = b.getDatum();
 		Date bodtijdstip = null;
@@ -37,7 +35,7 @@ public void create(int veilingId, Bod b) {
 		}
 		String gebruikersNaam = b.getBieder().getGebruikersnaam();
 		
-		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"BIEDINGEN\" VALUES ('"+id+"', '"+bedrag+"', To_Date('"+bodtijdstip+"','yyyy-mm-dd'), '"+gebruikersNaam+"', '"+veilingId+"')";
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"BIEDINGEN\" VALUES (seq_bod.nextval, '"+bedrag+"', To_Date('"+bodtijdstip+"','yyyy-mm-dd'), '"+gebruikersNaam+"', '"+veilingId+"')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);

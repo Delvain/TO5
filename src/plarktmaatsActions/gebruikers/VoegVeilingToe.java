@@ -35,6 +35,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		Veiling veiling = new Veiling(id, productnaam, productomschrijving, img, min, eindtijd, gebruiker, cat);
 		VeilingDAOImpl database = new VeilingDAOImpl();
 		database.create(veiling);
+		System.out.println("voegveilingtoe execute succes");
 		return SUCCESS;
 	}
 	
