@@ -67,7 +67,10 @@
 		<action name="MijnVeilingen" class="plarktmaatsActions.gebruikers.MijnVeilingen">
 			<result name="success">/jsp/member/PersoonPagina.jsp</result>
 		</action>
-		<action name="VoegVeilingToeForm" class="plarktmaatsActions.visitor.AlleCategorieen">
+		<action name="MijnBiedingen" class="plarktmaatsActions.gebruikers.MijnBiedingen">
+			<result name="success">/jsp/member/PersoonPagina.jsp</result>
+		</action>
+		<action name="VoegVeilingToeForm">
 			<interceptor-ref name="store">
 				<param name="operationMode">RETRIEVE</param>
 			</interceptor-ref>

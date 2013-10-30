@@ -10,29 +10,29 @@ import tools.ProjectTools;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class MijnVeilingen extends ActionSupport implements UserAware {
+public class MijnBiedingen extends ActionSupport implements UserAware {
 	private static final long serialVersionUID = 1L;
-	private List mijnVeilingen = null;
+	private List mijnBiedingen = null;
 	private String gebruikersNaam;
 	private String prijs = "Error";
 	private String timer = "Error";
 	private String id = "";
 	private Persoon user;
-	private List<String> data;
+	private List<String> mijnBiedingenData;
 
 	public String execute() {
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
-		mijnVeilingen = vDI.mijnVeilingen(gebruikersNaam);
+		mijnBiedingen = vDI.mijnBiedingen(gebruikersNaam);
 		
-		if(mijnVeilingen.size() < 1) {
+		if(mijnBiedingen.size() < 1) {
 			return SUCCESS;
 		}
 		
-		for (int i = 0; i < mijnVeilingen.size(); i++) {
+		for (int i = 0; i < mijnBiedingen.size(); i++) {
 			try {
-				data = vDI.readBedragTijd((Integer) mijnVeilingen.get(i));
-				prijs = data.get(0);
-				String timerTemp = data.get(1);
+				mijnBiedingenData = vDI.readBedragTijd((Integer) mijnBiedingen.get(i));
+				prijs = mijnBiedingenData.get(0);
+				String timerTemp = mijnBiedingenData.get(1);
 				if(Integer.parseInt(timerTemp) > 0) {
 					timer = ProjectTools.SecToString(timerTemp);
 				} else {
@@ -55,7 +55,7 @@ public class MijnVeilingen extends ActionSupport implements UserAware {
 	}
 	
 	public void setData(List<String> data) {
-		this.data = data;
+		this.mijnBiedingenData = data;
 	}
 	
 	public String getPrijs() {

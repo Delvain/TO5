@@ -9,7 +9,7 @@
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
 			<h1>Mijn veilingen</h1>
-			<s:iterator value = "mijnVeilingen">
+			<s:iterator value = "data">
 				<li><s:property /></li>
 			</s:iterator>			
 		</div>
