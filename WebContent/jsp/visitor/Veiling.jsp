@@ -14,17 +14,17 @@
             	}
             }
             
-            function sendRequest(id, index){
+            function sendRequest(id){
             	var request = getRequestObject();
             	request.onreadystatechange = function() {
             		if((request.readyState == 4) && (request.status == 200)){
                    			var serverResponse = request.responseText;
-                			document.getElementById("ajaxData"+index).innerHTML=serverResponse;
+                			document.getElementById("ajaxData").innerHTML=serverResponse;
                 	}
             	};
             	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action?id="+id, true);
             	request.send(null);
-            	setTimeout(function() {sendRequest(id, index);},2000);
+            	setTimeout(function() {sendRequest(id);},2000);
             }
 		</script>
 	</head>
@@ -34,16 +34,20 @@
 			<h1><s:property value="veiling.VeilingNaam" /></h1>
 			<div class="left">
 				<img src="http://us.123rf.com/400wm/400/400/marinini/marinini1209/marinini120900040/15179199-vraagteken--blauw-zingen-dan-kwadraat-vel-papier.jpg" />
+				<s:form action="">
+					<s:textfield name="credits" />
+					<s:submit value="Bieden" />
+				</s:form>
 			</div>
+			<div id="ajaxData">Laden...</div>
+			<script>sendRequest('<s:property value="veiling.VeilingId" />');</script>
 			<div class="right">
+				<p><b>Categorie:</b> <s:property value="veiling.deCategorie.naam" /></p>
+				<p><b>Aangeboden door:</b> <s:property value="veiling.aanbieder.gebruikersnaam" /></p>
 				<p><b>Omschrijving:</b></p>
 				<p><s:property value="veiling.VeilingOmschrijving" /></p>
 			</div>
 			<div style="clear: both"></div>
-			<s:form action="">
-				<s:textfield name="credits" />
-				<s:submit value="Bieden" />
-			</s:form>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
 	</body>

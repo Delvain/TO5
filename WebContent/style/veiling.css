@@ -4,7 +4,12 @@ div.container div.left {
 }
 div.container div.right {
 	float: right;
-	width: 665px;
+	width: 410px;
+	padding: 5px;
+}
+div.container div#ajaxData {
+	float: right;
+	width: 250px;
 }
 
 div.container img {
@@ -15,7 +20,6 @@ div.container img {
 div.container p {
 	margin: 0;
 	word-wrap: break-word;
-	padding: 5px 0;
 }
 div.container input {
 	width: 300px;
@@ -33,4 +37,22 @@ div.container table tr {
 div.container table tr td {
 	padding: 5px 0;
 	border: 0;
+}
+
+div.container div#ajaxData p {
+	margin: 0;
+	font-weight: bold;
+	font-size: 41px;
+	line-height: 50px;
+	text-align: right;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 37px;
+}
+div.container div#ajaxData p.timer {
+	background-image: url('images/clock.png');
+}
+div.container div#ajaxData p.prijs {
+	background-image: url('images/cr.png');
 }
