@@ -13,7 +13,6 @@ public class AlleCategorieen extends ActionSupport {
 	public String execute() {
 		CategorieDAOImpl cat = new CategorieDAOImpl();
 		categorieen = cat.getAll();
-		System.out.println("yolo alle categorieen");
 		return SUCCESS;
 	}
 
