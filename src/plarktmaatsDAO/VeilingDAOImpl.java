@@ -118,7 +118,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return mijnVeilingen;
 	}
 
 	public List<Bod> mijnBiedingen(String gebruikersNaam) {
@@ -144,7 +144,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return mijnBiedingen;
 	}
 	
 	public ArrayList<String> readBedragTijd(int pk) {

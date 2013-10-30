@@ -10,13 +10,13 @@
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
 			<h1>Mijn veilingen</h1>
-			<s:iterator value = "mijnVeilingenData">
+			<s:iterator value = "mijnVeilingen">
 				<li><s:property /></li>
 			</s:iterator>			
 		</div>
 		<div class="container">
 			<h1>Mijn biedingen</h1>
-			<s:iterator value = "mijnBiedingenData">
+			<s:iterator value = "mijnBiedingen">
 				<li><s:property /></li>
 			</s:iterator>			
 		</div>
