@@ -27,7 +27,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		System.out.println("voegveilingtoe execute");
 		Categorie cat = new Categorie(categorie);
 		img = null; //TODO foto toevoegen
-		int id = 0; //TODO hoogste id pakken
+		int id = 0; //goede id wordt opgezocht in de database bij het insert-statement mbv een sequence
 		Calendar eindtijd = Calendar.getInstance();
 		eindtijd.setTime(eindDatum);
 		Gebruiker gebruiker = (Gebruiker) user;
