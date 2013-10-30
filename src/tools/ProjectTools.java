@@ -1,6 +1,5 @@
 package tools;
 
-import java.math.BigInteger;
 
 public abstract class ProjectTools {
 
@@ -12,7 +11,6 @@ public abstract class ProjectTools {
 		} catch(Exception e) {
 			b = false;
 		}
-		
 		return b;
 	}
 	

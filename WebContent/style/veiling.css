@@ -1,20 +1,36 @@
-div.container img {
+div.container div.left {
 	float: left;
-	border: 1px solid #BACFE9;
 	width: 300px;
+}
+div.container div.right {
+	float: right;
+	width: 665px;
+}
+
+div.container img {
+	border: 1px solid #BACFE9;
 	padding: 0;
-	margin-right: 20px;
+	margin: 0;
+}
+div.container p {
+	margin: 0;
+	word-wrap: break-word;
+	padding: 5px 0;
 }
 div.container input {
 	width: 300px;
 	font-size: 27px;
 	height: 39px;
 	margin: 0;
+	padding: 0;
 }
 div.container table {
 	border-spacing: 0;
 }
-div.container table td {
+div.container table tr {
+	margin: 0;
+}
+div.container table tr td {
 	padding: 5px 0;
 	border: 0;
 }
