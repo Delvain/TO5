@@ -18,7 +18,7 @@ public class MijnVeilingen extends ActionSupport implements UserAware {
 	private String timer = "Error";
 	private String id = "";
 	private Persoon user;
-	private List<String> data;
+	private List<String> mijnVeilingData;
 
 	public String execute() {
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
@@ -30,9 +30,9 @@ public class MijnVeilingen extends ActionSupport implements UserAware {
 		
 		for (int i = 0; i < mijnVeilingen.size(); i++) {
 			try {
-				data = vDI.readBedragTijd((Integer) mijnVeilingen.get(i));
-				prijs = data.get(0);
-				String timerTemp = data.get(1);
+				mijnVeilingData = vDI.readBedragTijd((Integer) mijnVeilingen.get(i));
+				prijs = mijnVeilingData.get(0);
+				String timerTemp = mijnVeilingData.get(1);
 				if(Integer.parseInt(timerTemp) > 0) {
 					timer = ProjectTools.SecToString(timerTemp);
 				} else {
@@ -55,7 +55,7 @@ public class MijnVeilingen extends ActionSupport implements UserAware {
 	}
 	
 	public void setData(List<String> data) {
-		this.data = data;
+		this.mijnVeilingData = data;
 	}
 	
 	public String getPrijs() {
