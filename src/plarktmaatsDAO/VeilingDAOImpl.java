@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Categorie;
@@ -102,12 +103,32 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return null;
 	}
 
-	public ArrayList mijnVeilingen(String gebruikersNaam) {
+	public List mijnVeilingen(String gebruikersNaam) {
 		Connection con = connect();
-		ArrayList mijnVeilingen = null;
+		List mijnVeilingen = null;
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT ID FROM "
 					+ ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE GEBRUIKERSNAAM = ?");
+			read.setString(1, gebruikersNaam);
+			ResultSet rs = read.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("ID");
+				mijnVeilingen.add(id);
+				return mijnVeilingen;
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List mijnBiedingen(String gebruikersNaam) {
+		Connection con = connect();
+		List mijnVeilingen = null;
+		try {
+			PreparedStatement read = con.prepareStatement("SELECT ID FROM "
+					+ ConnectionData.DATABASE + ".\"BIEDINGEN\" WHERE GEBRUIKERSNAAM = ?");
 			read.setString(1, gebruikersNaam);
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {

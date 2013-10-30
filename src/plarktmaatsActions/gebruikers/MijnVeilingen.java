@@ -1,6 +1,7 @@
 package plarktmaatsActions.gebruikers;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import plarktmaatsAware.UserAware;
 import plarktmaatsDAO.VeilingDAOImpl;
@@ -11,7 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MijnVeilingen extends ActionSupport implements UserAware {
 	private static final long serialVersionUID = 1L;
-	private ArrayList mijnVeilingen = null;
+	private List mijnVeilingen = null;
 	private String gebruikersNaam;
 	private String prijs = "Error";
 	private String timer = "Error";
@@ -28,7 +29,7 @@ public class MijnVeilingen extends ActionSupport implements UserAware {
 		
 		for (int i = 0; i < mijnVeilingen.size(); i++) {
 			try {
-				ArrayList<String> data = vDI.readBedragTijd((Integer) mijnVeilingen.get(i));
+				List<String> data = vDI.readBedragTijd((Integer) mijnVeilingen.get(i));
 				prijs = data.get(0);
 				String timerTemp = data.get(1);
 				if(Integer.parseInt(timerTemp) > 0) {

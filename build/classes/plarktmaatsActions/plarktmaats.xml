@@ -61,12 +61,11 @@
 		<action name="Logout" class="plarktmaatsActions.gebruikers.Logout">
 			<result name="success">/jsp/member/LoggedOut.jsp</result>
 		</action>
-		<action name="ToonPersoonPagina">
+		<action name="PersoonPagina">
 			<result name="success">/jsp/member/PersoonPagina.jsp</result>
 		</action>
-		<action name="MijnVeilingen" class="plaktmaatsActions.gebruikers.MijnVeilingen">
+		<action name="MijnVeilingen" class="plarktmaatsActions.gebruikers.MijnVeilingen">
 			<result name="success">/jsp/member/PersoonPagina.jsp</result>
-			<result name="input" type="redirectAction">PersoonPagina</result>
 		</action>
 		<action name="VoegVeilingToeForm">
 			<interceptor-ref name="store">
