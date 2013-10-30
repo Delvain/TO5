@@ -1,5 +1,5 @@
 package plarktmaatsActions.visitor;
-import java.util.ArrayList;
+import java.util.List;
 
 import plarktmaatsDAO.CategorieDAOImpl;
 import plarktmaatsDomein.Categorie;
@@ -8,19 +8,20 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 public class AlleCategorieen extends ActionSupport {
-	private ArrayList<Categorie> categorieen;
+	private List<Categorie> categorieen;
 	
 	public String execute() {
 		CategorieDAOImpl cat = new CategorieDAOImpl();
-		setCategorieen(cat.getAll());
+		categorieen = cat.getAll();
+		System.out.println("yolo alle categorieen");
 		return SUCCESS;
 	}
 
-	public ArrayList<Categorie> getCategorieen() {
+	public List<Categorie> getCategorieen() {
 		return categorieen;
 	}
 
-	public void setCategorieen(ArrayList<Categorie> categorieen) {
+	public void setCategorieen(List<Categorie> categorieen) {
 		this.categorieen = categorieen;
 	}
 }
