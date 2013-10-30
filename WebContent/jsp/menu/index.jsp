@@ -23,7 +23,7 @@
             	};
             	request.open("GET", "/TO5/visitor/AlleVeilingenAJAX.action?id="+id, true);
             	request.send(null);
-            	setTimeout(function() {sendRequest(id, index);},2000);
+            	setTimeout(function() {sendRequest(id, index);},1000);
             }
 		</script>
 	</head>
