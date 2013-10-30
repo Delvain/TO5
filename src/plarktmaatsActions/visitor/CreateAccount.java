@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class CreateAccount extends ActionSupport {
 	
 	PersoonDAOImpl pdi = new PersoonDAOImpl();
-	private String gebruikersnaam;
+	private String gebruikersNaam;
 	private String voornaam;
 	private String achternaam;
 	private String email;
@@ -29,14 +29,15 @@ public class CreateAccount extends ActionSupport {
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 	
 	public String execute(){
-		p = new Gebruiker(gebruikersnaam, voornaam, achternaam, email, geboorteDatum, bankRekening, wachtwoord);
+		System.out.println("Creating user " + gebruikersNaam);
+		p = new Gebruiker(gebruikersNaam, voornaam, achternaam, email, geboorteDatum, bankRekening, wachtwoord);
 		pdi.create(p);
 		
 		return SUCCESS;
 	}
 
 	public void validate(){
-		gebruikersnaam = gebruikersnaam.toLowerCase();
+		gebruikersNaam = gebruikersNaam.toLowerCase();
 		voornaam = voornaam.trim();
 		achternaam = achternaam.trim();
 		email = email.trim();
@@ -55,8 +56,10 @@ public class CreateAccount extends ActionSupport {
 			addFieldError("strGeboorteDatum", "Geboortedatum is verplicht");			
 		}
 		
-		if (gebruikersnaam.length() == 0 ){			
+		if (gebruikersNaam.length() == 0 ){			
 			addFieldError("gebruikersnaam", "Gebruikersnaam is verplicht");
+		} else if (pdi.read(gebruikersNaam) != null){		
+			addFieldError("gebruikersnaam", "Gebruiker bestaat al");
 		}
 		
 		if (email.length() == 0 ){			
@@ -69,10 +72,6 @@ public class CreateAccount extends ActionSupport {
 		
 		if (achternaam.length() == 0) {
 			addFieldError("achternaam", "Achternaam is verplicht");
-		}
-	
-		else if (pdi.read(gebruikersnaam) != null){		
-			addFieldError("gebruikersnaam", "Gebruiker bestaat al");
 		}
 		
 		if (wachtwoord.length() == 0 ) {			
@@ -90,11 +89,11 @@ public class CreateAccount extends ActionSupport {
 	
 //	Getters&Setters
 	public String getGebruikersnaam() {
-		return email;
+		return gebruikersNaam;
 	}
 	
 	public void setGebruikersnaam(String gebruikersnaam) {
-		this.gebruikersnaam = gebruikersnaam;
+		this.gebruikersNaam = gebruikersnaam;
 	}
 	
 	public String getVoornaam() {

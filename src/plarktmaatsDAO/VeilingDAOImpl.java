@@ -101,6 +101,26 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		}
 		return null;
 	}
+
+	public ArrayList mijnVeilingen(String gebruikersNaam) {
+		Connection con = connect();
+		ArrayList mijnVeilingen = null;
+		try {
+			PreparedStatement read = con.prepareStatement("SELECT ID FROM "
+					+ ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE GEBRUIKERSNAAM = ?");
+			read.setString(1, gebruikersNaam);
+			ResultSet rs = read.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("ID");
+				mijnVeilingen.add(id);
+				return mijnVeilingen;
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public ArrayList<String> readBedragTijd(int pk) {
 		ArrayList<String> returnVal = new ArrayList<String>();
