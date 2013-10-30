@@ -5,6 +5,7 @@ import java.util.List;
 
 import plarktmaatsAware.UserAware;
 import plarktmaatsDAO.VeilingDAOImpl;
+import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Persoon;
 import plarktmaatsDomein.Veiling;
 import tools.ProjectTools;
@@ -13,8 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PersoonPagina extends ActionSupport implements UserAware {
 	private static final long serialVersionUID = 1L;
-	private List mijnVeilingen = null;
-	private List mijnBiedingen = null;
+	private List<Veiling> mijnVeilingen = null;
+	private List<Bod> mijnBiedingen = null;
 	private String gebruikersNaam;
 	private String prijs = "Error";
 	private String timer = "Error";
@@ -34,7 +35,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		
 		for (int i = 0; i < mijnVeilingen.size(); i++) {
 			try {
-				mijnVeilingen.add(vDI.mijnVeilingen(gebruikersNaam));
+				mijnVeilingen.add((Veiling) vDI.mijnVeilingen(gebruikersNaam));
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -42,14 +43,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		
 		for (int i = 0; i < mijnBiedingen.size(); i++) {
 			try {
-				mijnBiedingenData = vDI.readBedragTijd((Integer) mijnBiedingen.get(i));
-				prijs = mijnBiedingenData.get(0);
-				String timerTemp = mijnBiedingenData.get(1);
-				if(Integer.parseInt(timerTemp) > 0) {
-					timer = ProjectTools.SecToString(timerTemp);
-				} else {
-					timer = "Gesloten";
-				}
+				mijnBiedingen.add((Bod) vDI.mijnBiedingen(gebruikersNaam));
 			} catch(Exception e) {
 				e.printStackTrace();
 				return SUCCESS;
