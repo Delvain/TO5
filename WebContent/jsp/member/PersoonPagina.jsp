@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html>
 <html>
 	<head>
 		<jsp:include page="/jsp/include/head.jsp" />
@@ -9,7 +10,13 @@
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
 			<h1>Mijn veilingen</h1>
-			<s:iterator value = "data">
+			<s:iterator value = "mijnVeilingenData">
+				<li><s:property /></li>
+			</s:iterator>			
+		</div>
+		<div class="container">
+			<h1>Mijn biedingen</h1>
+			<s:iterator value = "mijnBiedingenData">
 				<li><s:property /></li>
 			</s:iterator>			
 		</div>
