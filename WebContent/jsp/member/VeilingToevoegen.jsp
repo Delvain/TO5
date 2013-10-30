@@ -13,7 +13,7 @@
 			<h1>Voeg een veiling toe</h1>
 
 			<s:form action="VoegVeilingToe">
-				<s:select name="categorie" list='categorieen' listKey = "naam" listValue = "naam" label="Categorie"></s:select>
+				<s:select name="categorie" list="categorieen" listKey = "naam" listValue = "naam" label="Categorie"></s:select>
 				<s:textfield name="productnaam" label="Naam"/><br/>
 				<s:textfield name="productomschrijving" label="Omschrijving" /><br/>
 
