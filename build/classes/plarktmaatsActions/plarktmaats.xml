@@ -54,10 +54,6 @@
 		<action name="MemberMenu" class="plarktmaatsActions.gebruikers.MemberMenu">
 			<result>/jsp/menu/MemberMenu.jsp</result>
 		</action>
-	
-		<action name="ChangePasswordForm">
-			<result name="success">/jsp/member/ChangePasswordForm.jsp</result>
-		</action>
 		<action name="Logout" class="plarktmaatsActions.gebruikers.Logout">
 			<result name="success">/jsp/member/LoggedOut.jsp</result>
 		</action>
@@ -79,5 +75,13 @@
 			<result name="success">/jsp/menu/index.jsp</result>
 			<result name="input" type="redirectAction">VoegVeilingToeForm</result>
 		</action>
+		<action name="PasGegevensAanForm">
+			<result name="success">/jsp/member/GegevensAanpassen.jsp</result>
+		</action>
+		<action name="PasGegevensAan" class="plarktmaatsActions.gebruikers.GegevensAanpassen">
+			<result name="success">/jsp/menu/index.jsp</result>
+			<result name="input">/jsp/member/GegevensAanpassen.jsp</result>
+		</action>
+		
 	</package>
 </struts>
