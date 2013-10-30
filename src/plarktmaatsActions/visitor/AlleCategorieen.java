@@ -1,3 +1,4 @@
+package plarktmaatsActions.visitor;
 import java.util.ArrayList;
 
 import plarktmaatsDAO.CategorieDAOImpl;
