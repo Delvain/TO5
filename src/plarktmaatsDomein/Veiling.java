@@ -12,7 +12,7 @@ public class Veiling {
 	private int			veilingId;
 	private String 		veilingNaam;
 	private String 		veilingOmschrijving;
-	private Object 		foto;
+	private String 		foto;
 	private int 		minBedrag;
 	private Calendar 	eindTijd;
 	
@@ -24,7 +24,7 @@ public class Veiling {
 		alleBiedingen = new ArrayList<Bod>();
 	}
 	
-	public Veiling(int id, String nm, String omsch, Object ft, int min, Calendar eind, Gebruiker aanb, Categorie cat) {
+	public Veiling(int id, String nm, String omsch, String ft, int min, Calendar eind, Gebruiker aanb, Categorie cat) {
 		veilingId			= id;
 		veilingNaam 		= nm;
 		veilingOmschrijving = omsch;
@@ -105,11 +105,11 @@ public class Veiling {
 		this.veilingOmschrijving = veilingOmschrijving;
 	}
 
-	public Object getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Object foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 

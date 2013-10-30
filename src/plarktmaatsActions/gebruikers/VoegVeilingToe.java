@@ -18,7 +18,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	private String categorie;
 	private String productnaam;
 	private String productomschrijving;
-	private Object img;
+	private String img;
 	private String minbedrag;
 	private Date eindDatum;
 	private Persoon user;
@@ -26,7 +26,6 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	public String execute() {
 		System.out.println("voegveilingtoe execute");
 		Categorie cat = new Categorie(categorie);
-		img = null; // TODO foto toevoegen
 		int id = 0; // goede id wordt opgezocht in de database bij het
 					// insert-statement mbv een sequence
 		Calendar eindtijd = Calendar.getInstance();
@@ -105,11 +104,11 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		this.productomschrijving = productomschrijving;
 	}
 
-	public Object getImg() {
+	public String getImg() {
 		return img;
 	}
 
-	public void setImg(Object img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 

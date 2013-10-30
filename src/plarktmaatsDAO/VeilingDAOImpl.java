@@ -34,22 +34,13 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
-
-		// TODO foto erin zetten als blob
-		// File image = new File(path);
-		// FileInputStream fis = new FileInputStream ( image );
-		//
-		// String sql="insert into imgtst (username,image) values (?, ?)";
-		// pst=con.prepareStatement(sql);
-		//
-		// pst.setString(1, user);
-		// pst.setBinaryStream (2, fis, (int) file.length() );
+		String foto = v.getFoto();
 
 		String query = "INSERT INTO " + ConnectionData.DATABASE
 				+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '"
 				+ omschrijving + "', '" + minbedrag + "', To_Date('"
 				+ einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '"
-				+ categorieNaam + "', '" + 4371938 + "')";
+				+ categorieNaam + "', '" + foto + "')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -78,14 +69,12 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String gebruikersnaam = rs
 						.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
-
-				// TODO foto toevoegen
-				// InputStream imgStream = resultSet.getBinaryStream(2);
+				String foto = rs.getString("FOTO");
 
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				Veiling veil = new Veiling(id, naam, omschrijving, null,
+				Veiling veil = new Veiling(id, naam, omschrijving, foto,
 						minbedrag, eindtijd, aanbieder, cat);
 				BodDAOImpl boddao = new BodDAOImpl();
 				ArrayList<Bod> biedingen = boddao.getAllFromVeiling(id);
@@ -208,14 +197,12 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String gebruikersnaam = rs
 						.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
-
-				// TODO foto toevoegen
-				// InputStream imgStream = resultSet.getBinaryStream(2);
+				String foto = rs.getString("FOTO");
 
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				array.add(new Veiling(id, naam, omschrijving, null, minbedrag,
+				array.add(new Veiling(id, naam, omschrijving, foto, minbedrag,
 						eindtijd, aanbieder, cat));
 			}
 			con.close();
@@ -244,16 +231,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
-
-		// TODO foto erin zetten als blob
-		// File image = new File(path);
-		// FileInputStream fis = new FileInputStream ( image );
-		//
-		// String sql="insert into imgtst (username,image) values (?, ?)";
-		// pst=con.prepareStatement(sql);
-		//
-		// pst.setString(1, user);
-		// pst.setBinaryStream (2, fis, (int) file.length() );
+		String foto = v.getFoto();
 
 		String query = "UPDATE \"STUD1630460\".\"VEILINGEN\" ";
 		query += "SET id='" + id + "',naam='" + naam + "',omschrijving='"
@@ -261,7 +239,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				+ "',eindtijd= To_Date('" + einddatum
 				+ "','yyyy-mm-dd'),gebruikers_gebruikersnaam='"
 				+ gebruikersNaam + "',categorieen_naam='" + categorieNaam
-				+ "',foto='" + 78374 + "' ";
+				+ "',foto='" + foto + "' ";
 		query += "WHERE id = '" + pk + "'";
 		Connection con = connect();
 		try {
