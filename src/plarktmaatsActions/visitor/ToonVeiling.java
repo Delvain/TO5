@@ -31,5 +31,4 @@ public class ToonVeiling extends ActionSupport {
 	public Veiling getVeiling() {
 		return veiling;
 	}
-
 }

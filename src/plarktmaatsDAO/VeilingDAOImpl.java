@@ -103,18 +103,27 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return null;
 	}
 
-	public List mijnVeilingen(String gebruikersNaam) {
+	public List<Veiling> mijnVeilingen(String gebruikersNaam) {
 		Connection con = connect();
-		List mijnVeilingen = null;
+		List<Veiling> mijnVeilingen = null;
 		try {
-			PreparedStatement read = con.prepareStatement("SELECT ID FROM "
-					+ ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE GEBRUIKERSNAAM = ?");
+			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE GEBRUIKERSNAAM = ?");
 			read.setString(1, gebruikersNaam);
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");
-				mijnVeilingen.add(id);
-				return mijnVeilingen;
+				String naam = rs.getString("NAAM");
+				String omschrijving = rs.getString("OMSCHRIJVING");
+				int minbedrag = rs.getInt("MINBEDRAG");
+				Date eindtijdTemp = rs.getDate("EINDTIJD"); // rs.getDate("GEBDATUM");
+				Calendar eindtijd = Calendar.getInstance();
+				eindtijd.setTime(eindtijdTemp);
+				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
+				PersoonDAOImpl dao = new PersoonDAOImpl();
+				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
+				Categorie cat = new Categorie(categorienaam);
+				Veiling v = new Veiling(id, naam, omschrijving, null, minbedrag, eindtijd, aanbieder, cat);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -123,18 +132,24 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return null;
 	}
 
-	public List mijnBiedingen(String gebruikersNaam) {
+	public List<Bod> mijnBiedingen(String gebruikersNaam) {
 		Connection con = connect();
-		List mijnVeilingen = null;
+		List<Bod> mijnBiedingen = null;
 		try {
-			PreparedStatement read = con.prepareStatement("SELECT ID FROM "
-					+ ConnectionData.DATABASE + ".\"BIEDINGEN\" WHERE GEBRUIKERSNAAM = ?");
+			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"BIEDINGEN\" WHERE GEBRUIKERSNAAM = ?");
 			read.setString(1, gebruikersNaam);
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");
-				mijnVeilingen.add(id);
-				return mijnVeilingen;
+				int bedrag = rs.getInt("BEDRAG");
+				Date tijdstipTemp = rs.getDate("TIJDSTIP");
+				Calendar tijdstip = Calendar.getInstance();
+				tijdstip.setTime(tijdstipTemp);
+				int veilingId = rs.getInt("VEILINGEN_ID");
+				PersoonDAOImpl dao = new PersoonDAOImpl();
+				Gebruiker bieder = (Gebruiker) dao.read(gebruikersNaam);
+				Bod b = new Bod(id, bedrag, tijdstip, bieder);
+				mijnBiedingen.add(b);
 			}
 			con.close();
 		} catch (SQLException e) {
