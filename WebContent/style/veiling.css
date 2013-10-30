@@ -4,12 +4,12 @@ div.container div.left {
 }
 div.container div.right {
 	float: right;
-	width: 410px;
+	width: 660px;
 	padding: 5px;
 }
 div.container div#ajaxData {
 	float: right;
-	width: 250px;
+	width: 660px;
 }
 
 div.container img {
@@ -42,13 +42,13 @@ div.container table tr td {
 div.container div#ajaxData p {
 	margin: 0;
 	font-weight: bold;
-	font-size: 41px;
-	line-height: 50px;
+	font-size: 110px;
+	line-height: 120px;
 	text-align: right;
 	width: 100%;
 	background-repeat: no-repeat;
 	background-position: left center;
-	background-size: 37px;
+	background-size: 70px;
 }
 div.container div#ajaxData p.timer {
 	background-image: url('images/clock.png');
