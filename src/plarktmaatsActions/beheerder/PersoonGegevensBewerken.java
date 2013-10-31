@@ -4,6 +4,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import plarktmaatsAware.UserAware;
 import plarktmaatsDAO.PersoonDAOImpl;
@@ -13,8 +16,9 @@ import plarktmaatsDomein.Beheerder;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class PersoonGegevensBewerken extends ActionSupport {
+public class PersoonGegevensBewerken extends ActionSupport implements SessionAware {
 	PersoonDAOImpl pdi = new PersoonDAOImpl();
+	private String gebruikersnaam;
 	private String voornaam;
 	private String achternaam;
 	private String email;
@@ -25,23 +29,30 @@ public class PersoonGegevensBewerken extends ActionSupport {
 	private String bankRekening;
 	private boolean geblokkeerd;
 	private Gebruiker gebruiker;
+	private Map<String,Object> session;
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
 	public String execute() {
 		System.out.println("Updating user " + gebruiker.getGebruikersnaam());
-		Gebruiker g = (Gebruiker) gebruiker;
-		g.setVoornaam(voornaam);
-		g.setAchternaam(achternaam);
-		g.setEmail(email);
-		g.setWachtwoord(wachtwoord);
-		g.setGeboortedatum(geboorteDatum);
-		g.setBankNr(bankRekening);
-		pdi.update(g.getGebruikersnaam(), g);
+		gebruiker.setVoornaam(voornaam);
+		gebruiker.setAchternaam(achternaam);
+		gebruiker.setEmail(email);
+		gebruiker.setWachtwoord(wachtwoord);
+		gebruiker.setGeboortedatum(geboorteDatum);
+		gebruiker.setBankNr(bankRekening);
+		gebruiker.setGeblokkeerd(geblokkeerd);
+		pdi.update(gebruiker.getGebruikersnaam(), gebruiker);
 
 		return ActionSupport.SUCCESS;
 	}
 
 	public void validate() {
+		gebruiker = (Gebruiker)session.get("gebruiker");
+		if (gebruiker != null) {
+			System.out.println(gebruiker.toString());
+		} else {
+			System.out.println("gebruiker == null");
+		}
 		voornaam = voornaam.trim();
 		achternaam = achternaam.trim();
 		email = email.trim();
@@ -84,10 +95,17 @@ public class PersoonGegevensBewerken extends ActionSupport {
 			Gebruiker g = (Gebruiker) gebruiker;
 			bankRekening = g.getBankNr();
 		}
-		
 	}
 
 	// Getters&Setters
+	public String getGebruikersnaam() {
+		return gebruikersnaam;
+	}
+
+	public void setGebruikersnaam(String gebruikersnaam) {
+		this.gebruikersnaam = gebruikersnaam;
+	}
+
 	public String getVoornaam() {
 		return voornaam;
 	}
@@ -166,6 +184,11 @@ public class PersoonGegevensBewerken extends ActionSupport {
 
 	public void setGebruiker(Gebruiker gebruiker) {
 		this.gebruiker = gebruiker;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> sess) {
+		session = sess;
 	}
 
 	

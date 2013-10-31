@@ -5,12 +5,12 @@ import java.util.Calendar;
 
 public abstract class Persoon {
 	
-	private String 	gebruikersnaam;
-	private String	voornaam;
-	private String	achternaam;
-	private String	email;
-	private Calendar geboortedatum;
-	private String wachtwoord;
+	protected String 	gebruikersnaam;
+	protected String	voornaam;
+	protected String	achternaam;
+	protected String	email;
+	protected Calendar geboortedatum;
+	protected String wachtwoord;
 	
 	public Persoon(String gNm, String vNm, String aNm, String mail, Calendar gebdat, String ww) {
 		gebruikersnaam = gNm;

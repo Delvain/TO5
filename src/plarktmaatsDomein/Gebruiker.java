@@ -64,4 +64,8 @@ public class Gebruiker extends Persoon {
 	public ArrayList<Veiling> getAlleVeilingen() {
 		return alleVeilingen;
 	}
+	
+	public String toString() {
+		return "" + gebruikersnaam + " " + voornaam + " " + achternaam + " " + geboortedatum;
+	}
 }
