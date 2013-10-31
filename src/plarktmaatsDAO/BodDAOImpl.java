@@ -8,10 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import plarktmaatsDomein.Bod;
-import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Veiling;
 
@@ -62,10 +60,12 @@ public void create(int veilingId, Bod b) {
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String veilingId = rs.getString("VEILING_ID");
 
-				PersoonDAOImpl dao = new PersoonDAOImpl();
-				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
-				return new Bod(id, bedrag, tijdstip, bieder);
+				PersoonDAOImpl persoonDAO = new PersoonDAOImpl();
+				Gebruiker bieder = (Gebruiker)persoonDAO.read(gebruikersnaam);
+				
+				return new Bod(id, bedrag, tijdstip, bieder, veilingId);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -87,10 +87,12 @@ public void create(int veilingId, Bod b) {
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String veilingId = rs.getString("VEILINGEN_ID");
 				
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
-				array.add(new Bod(id, bedrag, tijdstip, bieder));
+				
+				array.add(new Bod(id, bedrag, tijdstip, bieder, veilingId));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -113,10 +115,12 @@ public void create(int veilingId, Bod b) {
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String idVeiling = rs.getString("VEILING_ID");
 				
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
-				array.add(new Bod(id, bedrag, tijdstip, bieder));
+				
+				array.add(new Bod(id, bedrag, tijdstip, bieder, idVeiling));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -180,7 +184,7 @@ public void create(int veilingId, Bod b) {
 		BodDAOImpl impl = new BodDAOImpl();
 		Calendar gebdat = Calendar.getInstance();
 		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superloser@superfreak.com", gebdat, "8482929", "super");
-		Bod bod = new Bod(2, 50, Calendar.getInstance(), freak);
+		//Bod bod = new Bod(2, 50, Calendar.getInstance(), freak);
 //		impl.create(bod);
 //		bod = impl.read("2");
 //		System.out.println(bod);

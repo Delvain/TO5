@@ -35,12 +35,15 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
 		String foto = v.getFoto();
+		int verwerkt = 0;
+		if(v.getVerwerkt())
+			verwerkt = 1;
 
 		String query = "INSERT INTO " + ConnectionData.DATABASE
 				+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '"
 				+ omschrijving + "', '" + minbedrag + "', To_Date('"
 				+ einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '"
-				+ categorieNaam + "', '" + foto + "')";
+				+ categorieNaam + "', '" + foto + "', '"+verwerkt+"')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -69,13 +72,16 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String gebruikersnaam = rs
 						.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
+				boolean verwerkt = false;
+				if(rs.getInt("Verwerkt") == 1)
+					verwerkt = true;
 				String foto = rs.getString("FOTO");
 
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
 				Veiling veil = new Veiling(id, naam, omschrijving, foto,
-						minbedrag, eindtijd, aanbieder, cat);
+						minbedrag, eindtijd, aanbieder, cat, verwerkt);
 				BodDAOImpl boddao = new BodDAOImpl();
 				ArrayList<Bod> biedingen = boddao.getAllFromVeiling(id);
 				if (!biedingen.isEmpty()) {
@@ -113,7 +119,10 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat);
+				boolean verwerkt = false;
+				if(rs.getInt("Verwerkt") == 1)
+					verwerkt = true;
+				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat, verwerkt);
 				mijnVeilingen.add(v);
 			}
 			con.close();
@@ -136,10 +145,10 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				Date tijdstipTemp = rs.getDate("TIJDSTIP");
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
-				int veilingId = rs.getInt("VEILINGEN_ID");
+				String veilingId = rs.getString("VEILINGEN_ID");
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker) dao.read(gebruikersNaam);
-				Bod b = new Bod(id, bedrag, tijdstip, bieder);
+				Bod b = new Bod(id, bedrag, tijdstip, bieder, veilingId);
 				mijnBiedingen.add(b);
 			}
 			con.close();
@@ -201,11 +210,21 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
 				String foto = rs.getString("FOTO");
 
-				PersoonDAOImpl dao = new PersoonDAOImpl();
-				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
+				PersoonDAOImpl persoonDAO = new PersoonDAOImpl();
+				Gebruiker aanbieder = (Gebruiker) persoonDAO.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				array.add(new Veiling(id, naam, omschrijving, foto, minbedrag,
-						eindtijd, aanbieder, cat));
+				boolean verwerkt = false;
+				if(rs.getInt("Verwerkt") == 1)
+					verwerkt = true;
+				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag,
+						eindtijd, aanbieder, cat, verwerkt);
+				array.add(v);
+				BodDAOImpl bodDAO = new BodDAOImpl();
+				ArrayList<Bod> alleBiedingen = bodDAO.getAll();
+				for(Bod b : alleBiedingen) {
+					if(b.getVeilingId().equals(id+""))
+						v.voegBodToe(b);
+				}
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -234,6 +253,9 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
 		String foto = v.getFoto();
+		int verwerkt = 0;
+		if(v.getVerwerkt())
+			verwerkt = 1;
 
 		String query = "UPDATE \"STUD1630460\".\"VEILINGEN\" ";
 		query += "SET id='" + id + "',naam='" + naam + "',omschrijving='"
@@ -241,7 +263,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				+ "',eindtijd= To_Date('" + einddatum
 				+ "','yyyy-mm-dd'),gebruikers_gebruikersnaam='"
 				+ gebruikersNaam + "',categorieen_naam='" + categorieNaam
-				+ "',foto='" + foto + "' ";
+				+ "',foto='" + foto + "', verwerkt='"+verwerkt+"' ";
 		query += "WHERE id = '" + pk + "'";
 		Connection con = connect();
 		try {

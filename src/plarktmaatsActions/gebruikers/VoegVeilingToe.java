@@ -33,7 +33,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		Gebruiker gebruiker = (Gebruiker) user;
 		int min = Integer.parseInt(minbedrag);
 		Veiling veiling = new Veiling(id, productnaam, productomschrijving,
-				img, min, eindtijd, gebruiker, cat);
+				img, min, eindtijd, gebruiker, cat, false);
 		VeilingDAOImpl database = new VeilingDAOImpl();
 		database.create(veiling);
 		System.out.println("voegveilingtoe execute succes");

@@ -19,9 +19,12 @@ public class Gebruiker extends Persoon {
 		alleVeilingen 	= new ArrayList<Veiling>();
 	}
 	
-	public Gebruiker(String gNm, String vNm, String aNm, String mail, Calendar gebdat,
-						int cred, String bank,	boolean geblok, String ww) {
+	public Gebruiker(String gNm, String vNm, String aNm, String mail, Calendar gebdat, int cred, String bank, boolean geblok, String ww) {
 		super(gNm, vNm, aNm, mail, gebdat, ww);		
+		credits 		= cred;
+		bankNr 			= bank;
+		geblokkeerd 	= geblok;
+		alleVeilingen	= new ArrayList<Veiling>();
 	}
 
 	//getters&setters Geblokkeerd:

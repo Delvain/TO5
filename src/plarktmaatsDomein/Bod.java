@@ -9,19 +9,22 @@ public class Bod {
 	private Calendar 	datum;
 	
 	private Gebruiker	bieder;
+	private String		veilingId;
 	
-	public Bod(int id, int bdrg, Gebruiker bdr) {
+	public Bod(int id, int bdrg, Gebruiker bdr, String veilId) {
 		this.id = id;
 		bedrag 	= bdrg;
 		datum 	= Calendar.getInstance();
 		bieder	= bdr;
+		veilingId = veilId;
 	}
 	
-	public Bod(int id, int bdrg, Calendar tijd, Gebruiker bdr) {
+	public Bod(int id, int bdrg, Calendar tijd, Gebruiker bdr, String veilId) {
 		this.id = id;
 		bedrag 	= bdrg;
 		datum 	= tijd;
 		bieder	= bdr;
+		veilingId = veilId;
 	}
 	
 	public int getId() {
@@ -54,5 +57,13 @@ public class Bod {
 
 	public void setBieder(Gebruiker bieder) {
 		this.bieder = bieder;
+	}
+	
+	public void setVeilingId(String veilId) {
+		veilingId = veilId;
+	}
+	
+	public String getVeilingId() {
+		return veilingId;
 	}
 }

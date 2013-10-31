@@ -1,11 +1,7 @@
 package plarktmaatsDomein;
 
-import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Veiling {
 	
@@ -20,11 +16,13 @@ public class Veiling {
 	private Categorie	deCategorie;
 	private ArrayList<Bod> alleBiedingen;
 	
+	private boolean verwerkt;
+	
 	public Veiling() {
 		alleBiedingen = new ArrayList<Bod>();
 	}
 	
-	public Veiling(int id, String nm, String omsch, String ft, int min, Calendar eind, Gebruiker aanb, Categorie cat) {
+	public Veiling(int id, String nm, String omsch, String ft, int min, Calendar eind, Gebruiker aanb, Categorie cat, boolean ver) {
 		veilingId			= id;
 		veilingNaam 		= nm;
 		veilingOmschrijving = omsch;
@@ -34,13 +32,8 @@ public class Veiling {
 		
 		aanbieder = aanb;
 		deCategorie = cat;
+		verwerkt = ver;
 		alleBiedingen = new ArrayList<Bod>();
-		
-		Date eindDate 	= eindTijd.getTime();
-		Date nuDate 	= Calendar.getInstance().getTime();
-		long verschil	= eindDate.getTime() - nuDate.getTime();
-		if(verschil > 0)	
-			new Timer().schedule(new veilingTimer(), eindTijd.getTime()); //timer starten
 	}
 	
 	public Bod getHoogsteBod() {
@@ -77,18 +70,6 @@ public class Veiling {
 		return true;
 	}
 	
-	private class veilingTimer extends TimerTask {
-		public void run() {
-			//TODO
-			this.cancel();
-			//System.out.println("De veiling van "+veilingNaam+" is afgelopen. ");
-			if(getHoogsteBod() == null)	
-				System.out.println("Niet verkocht");
-			else
-				System.out.println("Verkocht aan "+getHoogsteBod().getBieder().getVoornaam()+" voor "+getHoogsteBod().getBedrag());
-		}
-	}
-
 	public String getVeilingNaam() {
 		return veilingNaam;
 	}
@@ -151,6 +132,13 @@ public class Veiling {
 
 	public void setVeilingId(int veilingId) {
 		this.veilingId = veilingId;
+	}
+	public boolean getVerwerkt() {
+		return verwerkt;
+	}
+
+	public void setVerwerkt(boolean verwerkt) {
+		this.verwerkt = verwerkt;
 	}
 	public ArrayList<Bod> getAlleBiedingen() {
 		return alleBiedingen;
