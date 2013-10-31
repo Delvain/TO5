@@ -39,6 +39,17 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	}
 
 	public void validate() {
+		// checken of gebruiker geblokkeerd is
+		if (user instanceof Gebruiker) {
+			Gebruiker g = (Gebruiker) user;
+			if (g.getGeblokkeerd()) {
+				addFieldError("categorie", "Uw account is geblokkeerd");
+			}
+		}
+		// checken of user geen beheerder is
+		if (user instanceof Beheerder) {
+			addFieldError("categorie","Als beheerder mag u geen veilingen toevoegen!");
+		}
 		// checken of categorie bestaat
 		CategorieDAOImpl categoriecheck = new CategorieDAOImpl();
 		Categorie cat = categoriecheck.read(categorie);
@@ -49,8 +60,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		try {
 			int min = Integer.parseInt(minbedrag);
 			if (min < 0) {
-				addFieldError("minbedrag",
-						"Minimumbod mag geen negatief getal zijn!");
+				addFieldError("minbedrag","Minimumbod mag geen negatief getal zijn!");
 			}
 		} catch (NumberFormatException nfe) {
 			addFieldError("minbedrag", "Geen geldig minimumbod!");
@@ -65,15 +75,10 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		}
 		// checken of productomschrijving goed is
 		if (productomschrijving.equals("")) {
-			addFieldError("productomschrijving", "Productomschrijving mag niet leeg zijn!");
+			addFieldError("productomschrijving","Productomschrijving mag niet leeg zijn!");
 		}
 		if (productomschrijving.length() > 250) {
-			addFieldError("productomschrijving",
-					"Productomschrijving mag maximaal 250 tekens zijn!");
-		}
-		//checken of user geen beheerder is
-		if (user instanceof Beheerder) {
-			addFieldError("categorie","Als beheerder mag u geen veilingen toevoegen!");
+			addFieldError("productomschrijving","Productomschrijving mag maximaal 250 tekens zijn!");
 		}
 	}
 

@@ -164,6 +164,19 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 			e.printStackTrace();
 		}
 	}
+	
+	public void addCredits(String pk) {
+		String query = 	"UPDATE \"STUD1630460\".\"GEBRUIKERS\" ";
+		query +=		"SET credits= credits + 100";
+		query +=		"WHERE gebruikersnaam = '"+pk+"'";
+		Connection con = connect();
+		try {
+			con.createStatement().execute(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void delete(String pk) {
