@@ -2,6 +2,7 @@ package plarktmaatsActions.gebruikers;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import plarktmaatsAware.UserAware;
 import plarktmaatsDAO.VeilingDAOImpl;
@@ -16,12 +17,16 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 	private ArrayList<Veiling> mijnVeilingen = new ArrayList<Veiling>();
 	private ArrayList<Bod> mijnBiedingen = new ArrayList<Bod>();
 	private Persoon user;
-
+	private HashMap veilingNamen;
+	
 	public String execute() {
 		System.out.println("Executing PersoonPagina.java for user " + user.getGebruikersnaam());
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
 		mijnVeilingen = (ArrayList<Veiling>) vDI.mijnVeilingen(user.getGebruikersnaam());
 		mijnBiedingen = (ArrayList<Bod>) vDI.mijnBiedingen(user.getGebruikersnaam());
+		for (Bod b : mijnBiedingen) {
+			veilingNamen.put(b.getId(), vDI.getVeilingNaam(b.getVeilingId()));
+		}
 		
 		return SUCCESS;
 	}
@@ -41,5 +46,13 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 	
 	public ArrayList<Bod> getMijnBiedingen() {
 		return mijnBiedingen;
+	}
+
+	public HashMap getVeilingNamen() {
+		return veilingNamen;
+	}
+
+	public void setVeilingNamen(HashMap veilingNamen) {
+		this.veilingNamen = veilingNamen;
 	}
 }

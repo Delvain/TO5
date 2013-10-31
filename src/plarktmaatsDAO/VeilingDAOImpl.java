@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -159,6 +160,21 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			e.printStackTrace();
 		}
 		return mijnBiedingen;
+	}
+	
+	public String getVeilingNaam(int veilingId) {
+		String veilingNaam = null;
+		Connection con = connect();
+		String query = "SELECT veilingnaam FROM " + ConnectionData.DATABASE + ".\"veilingen\" WHERE id = " + veilingId + ";";
+		
+		try {
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(query);
+			veilingNaam = rs.getString("NAAM");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return veilingNaam;
 	}
 	
 	public ArrayList<String> readBedragTijd(int pk) {
