@@ -11,17 +11,16 @@
 			<h1>Verander hier de gegevens van <s:property value="gebruikersnaam" /></h1>
 			<p>Lege velden worden niet veranderd</p>
 			<s:form action="BewerkGegevens">
-				<s:textfield name="voornaam" label="Voornaam" /><br/>
-				<s:textfield name="achternaam" label="Achternaam" /><br/>
-				<s:textfield name="email" label="E-mailadres" /><br/>
-				<s:password name="wachtwoord" label="Wachtwoord" /><br/>
-				<s:password name="wachtwoord2" label="Wachtwoord (controle)" /><br/>
-				<s:textfield name="bankRekening" label="Bankrekeningnummer" /><br/>
-				<s:textfield name="strGeboorteDatum" label="Geboortedatum (DD-MM-YYYY)" /><br/>
-				<s:checkbox name="geblokkeerd" label="Geblokkeerd"/><br/>
+				<s:textfield name="voornaam" label="Voornaam" />
+				<s:textfield name="achternaam" label="Achternaam" />
+				<s:textfield name="email" label="E-mailadres" />
+				<s:password name="wachtwoord" label="Wachtwoord" />
+				<s:password name="wachtwoord2" label="Wachtwoord (controle)" />
+				<s:textfield name="bankRekening" label="Bankrekeningnummer" />
+				<s:textfield name="strGeboorteDatum" label="Geboortedatum (DD-MM-YYYY)" />
+				<s:checkbox name="geblokkeerd" label="Geblokkeerd"/>
 				<s:submit value="Verander gegevens" />
 			</s:form>
-			<s:hidden name="gebruikersnaam" value="%{gebruikersnaam}" />
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
 	</body>

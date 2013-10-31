@@ -18,7 +18,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PersoonGegevensBewerken extends ActionSupport implements SessionAware {
 	PersoonDAOImpl pdi = new PersoonDAOImpl();
-	private String gebruikersnaam;
 	private String voornaam;
 	private String achternaam;
 	private String email;
@@ -98,14 +97,6 @@ public class PersoonGegevensBewerken extends ActionSupport implements SessionAwa
 	}
 
 	// Getters&Setters
-	public String getGebruikersnaam() {
-		return gebruikersnaam;
-	}
-
-	public void setGebruikersnaam(String gebruikersnaam) {
-		this.gebruikersnaam = gebruikersnaam;
-	}
-
 	public String getVoornaam() {
 		return voornaam;
 	}
