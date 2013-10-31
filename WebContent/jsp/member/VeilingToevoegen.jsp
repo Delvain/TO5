@@ -12,7 +12,7 @@
 		<div class="container">
 			<h1>Voeg een veiling toe</h1>
 
-			<s:form action="VoegVeilingToe">
+			<s:form namespace="/member" action="VoegVeilingToe">
 				<s:select name="categorie" list="categorieen" listKey = "naam" listValue = "naam" label="Categorie"></s:select>
 				<s:textfield name="productnaam" label="Naam"/><br/>
 				<s:textarea name="productomschrijving" label="Omschrijving" /><br/>

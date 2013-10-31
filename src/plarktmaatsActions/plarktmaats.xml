@@ -64,17 +64,9 @@
 			<result name="success" type="redirectAction">Menu</result>
 		</action>
 		<action name="VoegVeilingToeForm" class="plarktmaatsActions.visitor.AlleCategorieen">
-			<interceptor-ref name="store">
-				<param name="operationMode">RETRIEVE</param>
-			</interceptor-ref>
-			<interceptor-ref name="MemberStack" />
 			<result name="success">/jsp/member/VeilingToevoegen.jsp</result>
 		</action>
 		<action name="VoegVeilingToe" class="plarktmaatsActions.gebruikers.VoegVeilingToe">
-			<interceptor-ref name="store">
-				<param name="operationMode">STORE</param>
-			</interceptor-ref>
-			<interceptor-ref name="MemberStack" />
 			<result name="success" type="redirectAction">Menu</result>
 			<result name="input" type="redirectAction">VoegVeilingToeForm</result>
 		</action>
