@@ -96,24 +96,29 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 	public List<Veiling> mijnVeilingen(String gebruikersNaam) {
 		Connection con = connect();
-		List<Veiling> mijnVeilingen = null;
+		ArrayList<Veiling> mijnVeilingen = new ArrayList<Veiling>();
 		try {
-			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE GEBRUIKERSNAAM = ?");
+			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE GEBRUIKERS_GEBRUIKERSNAAM = ?");
 			read.setString(1, gebruikersNaam);
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");
+				System.out.println("Retrieve ID from database: " + id);
 				String naam = rs.getString("NAAM");
+				System.out.println("Retrieve naam from database: " + naam);
 				String omschrijving = rs.getString("OMSCHRIJVING");
+				System.out.println("Retrieve omschrijving from database: " + omschrijving);
 				int minbedrag = rs.getInt("MINBEDRAG");
+				System.out.println("Retrieve minbedrag from database: " + minbedrag);
 				Date eindtijdTemp = rs.getDate("EINDTIJD"); // rs.getDate("GEBDATUM");
 				Calendar eindtijd = Calendar.getInstance();
 				eindtijd.setTime(eindtijdTemp);
-				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				String foto = rs.getString("FOTO");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
+				System.out.println("Retrieve categorienaam from database: " + categorienaam);
+				System.out.println("__________________________________________________________");
 				PersoonDAOImpl dao = new PersoonDAOImpl();
-				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
+				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersNaam);
 				Categorie cat = new Categorie(categorienaam);
 				boolean verwerkt = false;
 				if(rs.getInt("Verwerkt") == 1)
@@ -130,9 +135,9 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 	public List<Bod> mijnBiedingen(String gebruikersNaam) {
 		Connection con = connect();
-		List<Bod> mijnBiedingen = null;
+		ArrayList<Bod> mijnBiedingen = new ArrayList<Bod>();
 		try {
-			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"BIEDINGEN\" WHERE GEBRUIKERSNAAM = ?");
+			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"BIEDINGEN\" WHERE GEBRUIKERS_GEBRUIKERSNAAM = ?");
 			read.setString(1, gebruikersNaam);
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {

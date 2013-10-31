@@ -11,14 +11,13 @@
 		<div class="container">
 			<h1>Mijn veilingen</h1>
 			<s:iterator value = "mijnVeilingen">
-				<s:property value="veilingNaam" />
-				<a href="<s:url namespace="/member" action="PersoonPagina"></s:url>"><s:property value="veilingNaam" /></a>
+				<s:property value="veilingNaam" /></br>
 			</s:iterator>			
 		</div>
 		<div class="container">
 			<h1>Mijn biedingen</h1>
 			<s:iterator value = "mijnBiedingen">
-				<li><s:property /></li>
+				<s:property value="bedrag" /><s:property value="veiling.getNaam(veilingId)" /></br>
 			</s:iterator>			
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
