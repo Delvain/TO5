@@ -8,13 +8,7 @@ public class VoegBodToe extends ActionSupport {
 	private String credits;
 
 	public String execute() {
-		System.out.println(id);
-		
 		return SUCCESS;
-	}
-
-	public void validate() {
-		
 	}
 	
 	public String getCredits() {

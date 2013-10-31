@@ -36,7 +36,8 @@
 				<object data="<s:property value="veiling.foto" />">
     				<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Vraagteken.png" />
   				</object>
-				<s:form action="">
+				<s:form action="VoegBodToe" namespace="/member">
+					<s:hidden name="id" value="%{veiling.veilingId}" />
 					<s:textfield name="credits" />
 					<s:submit value="Bieden" />
 				</s:form>

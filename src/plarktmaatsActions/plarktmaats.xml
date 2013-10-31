@@ -75,6 +75,12 @@
 			<result name="success">/jsp/menu/index.jsp</result>
 			<result name="input" type="redirectAction">VoegVeilingToeForm</result>
 		</action>
+		<action name="VoegBodToe">
+			<result type="redirectAction">
+				<param name="actionName">ToonVeiling?id=${id}</param>
+        		<param name="namespace">/visitor</param>
+			</result>
+		</action>
 		<action name="PasGegevensAanForm">
 			<result name="success">/jsp/member/GegevensAanpassen.jsp</result>
 		</action>
