@@ -8,12 +8,24 @@
 	<body>
 		<jsp:include page="/jsp/include/top.jsp" />
 		<div class="container">
-			<s:iterator value="items" status="status">
-					<p class="meer">- <a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a>
-					<a href="<s:url namespace="/beheerder" action="BlokkeerVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>">Blokkeren</a>
-					<a href="<s:url namespace="/beheerder" action="VerwijderVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>">Verwijderen</a>
-					</p>
-			</s:iterator>			
+			<table>
+				<thead>
+					<tr>
+						<th>Veilingnaam</th>
+						<th>Blokkeren</th>
+						<th>Verwijderen</th>
+					</tr>
+				</thead>
+				<s:iterator value="items" status="status">
+					<tbody>
+						<tr>
+							<td><a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></td>
+							<td><a href="<s:url namespace="/beheerder" action="BlokkeerVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>">Blokkeren</a></td>
+							<td><a href="<s:url namespace="/beheerder" action="VerwijderVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>">Verwijderen</a></td>
+						</tr>
+					</tbody>
+				</s:iterator>
+			</table>
 			<div style="clear: both"></div>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
