@@ -114,7 +114,7 @@ public void create(int veilingId, Bod b) {
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
-				String idVeiling = rs.getString("VEILING_ID");
+				String idVeiling = rs.getString("VEILINGEN_ID");
 				
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)dao.read(gebruikersnaam);
