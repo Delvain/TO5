@@ -113,7 +113,14 @@
 			<result name="success">/jsp/menu/index.jsp</result>
 			<result name="input">/jsp/beheerder/PersoonGegevensBewerken.jsp</result>
 		</action>
-		
+		<action name="BlokkeerVeiling" class="plarktmaatsActions.beheerder.BlokkeerVeiling">
+			<result name="success">/jsp/menu/index.jsp</result>
+			<result name="input">/jsp/beheerder/VeilingenBlokkerenVerwijderen.jsp</result>
+		</action>
+		<action name="VerwijderVeiling" class="plarktmaatsActions.beheerder.VerwijderVeiling">
+			<result name="success">/jsp/menu/index.jsp</result>
+			<result name="input">/jsp/beheerder/VeilingenBlokkerenVerwijderen.jsp</result>
+		</action>
 	</package>
 	
 </struts>
