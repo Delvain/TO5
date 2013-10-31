@@ -39,11 +39,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		if(v.getVerwerkt())
 			verwerkt = 1;
 
-		String query = "INSERT INTO " + ConnectionData.DATABASE
-				+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '"
-				+ omschrijving + "', '" + minbedrag + "', To_Date('"
-				+ einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '"
-				+ categorieNaam + "', '" + foto + "', '"+verwerkt+"')";
+		String query = "INSERT INTO " + ConnectionData.DATABASE	+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '" + omschrijving + "', '" + minbedrag + "', To_Date('" + einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '" + categorieNaam + "', '" + foto + "', '"+verwerkt+"');";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
