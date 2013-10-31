@@ -11,7 +11,6 @@ import java.util.Calendar;
 
 import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Gebruiker;
-import plarktmaatsDomein.Veiling;
 
 public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 
