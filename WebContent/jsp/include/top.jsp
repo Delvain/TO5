@@ -4,6 +4,7 @@
 		<a class="logo" href="<s:url action="Menu" namespace="/visitor" />">&nbsp;</a>
 		<div class="right">
 			<p>
+				<a href="<s:url action='BlokkeerVerwijderForm' namespace="/beheerder"/>" class="plaats_ad_but">Blokkeren/verwijderen</a> |
 				<a href="<s:url action='PasGegevensAanForm' namespace="/member"/>" class="plaats_ad_but">Pas gegevens aan</a> |
 				<a href="<s:url action='SelecteerGebruikerForm' namespace="/beheerder"/>">Selecteer Gebruiker</a> |
 				<a href="<s:url action='LoginForm' namespace="/visitor"/>">Log in</a> |

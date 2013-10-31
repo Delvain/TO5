@@ -19,7 +19,7 @@ public class BlokkeerVeiling extends ActionSupport {
 			return ActionSupport.INPUT;
 		}
 		
-		veiling = dao.read(id);
+		dao.blokkeer(id);
 
 		return ActionSupport.SUCCESS;
 	}

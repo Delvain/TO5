@@ -113,6 +113,9 @@
 			<result name="success">/jsp/menu/index.jsp</result>
 			<result name="input">/jsp/beheerder/PersoonGegevensBewerken.jsp</result>
 		</action>
+		<action name="BlokkeerVerwijderForm" class="plarktmaatsActions.visitor.AlleVeilingen">
+			<result name="success">/jsp/beheerder/VeilingenBlokkerenVerwijderen.jsp</result>
+		</action>
 		<action name="BlokkeerVeiling" class="plarktmaatsActions.beheerder.BlokkeerVeiling">
 			<result name="success">/jsp/menu/index.jsp</result>
 			<result name="input">/jsp/beheerder/VeilingenBlokkerenVerwijderen.jsp</result>

@@ -24,7 +24,6 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	private Persoon user;
 
 	public String execute() {
-		System.out.println("voegveilingtoe execute");
 		Categorie cat = new Categorie(categorie);
 		int id = 0; // goede id wordt opgezocht in de database bij het
 					// insert-statement mbv een sequence
@@ -33,15 +32,13 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		Gebruiker gebruiker = (Gebruiker) user;
 		int min = Integer.parseInt(minbedrag);
 		Veiling veiling = new Veiling(id, productnaam, productomschrijving,
-				img, min, eindtijd, gebruiker, cat, false);
+				img, min, eindtijd, gebruiker, cat, false, false);
 		VeilingDAOImpl database = new VeilingDAOImpl();
 		database.create(veiling);
-		System.out.println("voegveilingtoe execute succes");
 		return SUCCESS;
 	}
 
 	public void validate() {
-		System.out.println("voegveilingtoe validate");
 		// checken of categorie bestaat
 		CategorieDAOImpl categoriecheck = new CategorieDAOImpl();
 		Categorie cat = categoriecheck.read(categorie);

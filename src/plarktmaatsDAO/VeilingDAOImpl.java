@@ -38,8 +38,10 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		int verwerkt = 0;
 		if(v.getVerwerkt())
 			verwerkt = 1;
-
-		String query = "INSERT INTO " + ConnectionData.DATABASE	+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '" + omschrijving + "', '" + minbedrag + "', To_Date('" + einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '" + categorieNaam + "', '" + foto + "', "+verwerkt+")";
+		int geblokkeerd = 0;
+		if(v.getGeblokkeerd())
+			geblokkeerd = 1;
+		String query = "INSERT INTO " + ConnectionData.DATABASE	+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '" + omschrijving + "', '" + minbedrag + "', To_Date('" + einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '" + categorieNaam + "', '" + foto + "', "+verwerkt+"', "+geblokkeerd+")";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -71,13 +73,16 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				boolean verwerkt = false;
 				if(rs.getInt("Verwerkt") == 1)
 					verwerkt = true;
+				boolean geblokkeerd = false;
+				if(rs.getInt("GEBLOKKEERD") == 1)
+					geblokkeerd = true;
 				String foto = rs.getString("FOTO");
 
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
 				Veiling veil = new Veiling(id, naam, omschrijving, foto,
-						minbedrag, eindtijd, aanbieder, cat, verwerkt);
+						minbedrag, eindtijd, aanbieder, cat, verwerkt, geblokkeerd);
 				BodDAOImpl boddao = new BodDAOImpl();
 				ArrayList<Bod> biedingen = boddao.getAllFromVeiling(id);
 				if (!biedingen.isEmpty()) {
@@ -103,27 +108,24 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");
-				System.out.println("Retrieve ID from database: " + id);
 				String naam = rs.getString("NAAM");
-				System.out.println("Retrieve naam from database: " + naam);
 				String omschrijving = rs.getString("OMSCHRIJVING");
-				System.out.println("Retrieve omschrijving from database: " + omschrijving);
 				int minbedrag = rs.getInt("MINBEDRAG");
-				System.out.println("Retrieve minbedrag from database: " + minbedrag);
 				Date eindtijdTemp = rs.getDate("EINDTIJD"); // rs.getDate("GEBDATUM");
 				Calendar eindtijd = Calendar.getInstance();
 				eindtijd.setTime(eindtijdTemp);
 				String foto = rs.getString("FOTO");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
-				System.out.println("Retrieve categorienaam from database: " + categorienaam);
-				System.out.println("__________________________________________________________");
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersNaam);
 				Categorie cat = new Categorie(categorienaam);
 				boolean verwerkt = false;
 				if(rs.getInt("Verwerkt") == 1)
 					verwerkt = true;
-				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat, verwerkt);
+				boolean geblokkeerd = false;
+				if(rs.getInt("GEBLOKKEERD") == 1)
+					geblokkeerd = true;
+				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat, verwerkt, geblokkeerd);
 				mijnVeilingen.add(v);
 			}
 			con.close();
@@ -217,8 +219,11 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				boolean verwerkt = false;
 				if(rs.getInt("Verwerkt") == 1)
 					verwerkt = true;
+				boolean geblokkeerd = false;
+				if(rs.getInt("GEBLOKKEERD") == 1)
+					geblokkeerd = true;
 				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag,
-						eindtijd, aanbieder, cat, verwerkt);
+						eindtijd, aanbieder, cat, verwerkt, geblokkeerd);
 				array.add(v);
 				BodDAOImpl bodDAO = new BodDAOImpl();
 				ArrayList<Bod> alleBiedingen = bodDAO.getAll();
@@ -257,6 +262,9 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		int verwerkt = 0;
 		if(v.getVerwerkt())
 			verwerkt = 1;
+		int geblokkeerd = 0;
+		if(v.getGeblokkeerd())
+			geblokkeerd = 1;
 
 		String query = "UPDATE \"STUD1630460\".\"VEILINGEN\" ";
 		query += "SET id='" + id + "',naam='" + naam + "',omschrijving='"
@@ -264,7 +272,20 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				+ "',eindtijd= To_Date('" + einddatum
 				+ "','yyyy-mm-dd'),gebruikers_gebruikersnaam='"
 				+ gebruikersNaam + "',categorieen_naam='" + categorieNaam
-				+ "',foto='" + foto + "', verwerkt='"+verwerkt+"' ";
+				+ "',foto='" + foto + "', verwerkt='"+verwerkt+"', geblokkeerd='"+geblokkeerd+"' ";
+		query += "WHERE id = '" + pk + "'";
+		Connection con = connect();
+		try {
+			con.createStatement().execute(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void blokkeer(String pk) {
+		String query = "UPDATE \"STUD1630460\".\"VEILINGEN\" ";
+		query += "SET geblokkeerd='1'";
 		query += "WHERE id = '" + pk + "'";
 		Connection con = connect();
 		try {
