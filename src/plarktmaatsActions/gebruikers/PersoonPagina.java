@@ -16,19 +16,13 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 	private static final long serialVersionUID = 1L;
 	private List<Veiling> mijnVeilingen = null;
 	private List<Bod> mijnBiedingen = null;
-	private String gebruikersNaam;
-	private String prijs = "Error";
-	private String timer = "Error";
-	private String id = "";
 	private Persoon user;
-	private List<String> mijnVeilingData;
-	private List<String> mijnBiedingenData;
 
 	public String execute() {
 		System.out.println("Executing PersoonPagina.java for user " + user);
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
-		mijnVeilingen = vDI.mijnVeilingen(gebruikersNaam);
-		mijnBiedingen = vDI.mijnBiedingen(gebruikersNaam);
+		mijnVeilingen = vDI.mijnVeilingen(user.getGebruikersnaam());
+		mijnBiedingen = vDI.mijnBiedingen(user.getGebruikersnaam());
 		
 		if(mijnVeilingen.size() < 1 && mijnBiedingen.size() < 1) {
 			return SUCCESS;
@@ -36,7 +30,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		
 		for (int i = 0; i < mijnVeilingen.size(); i++) {
 			try {
-				mijnVeilingen.add((Veiling) vDI.mijnVeilingen(gebruikersNaam));
+				mijnVeilingen.add((Veiling) vDI.mijnVeilingen(user.getGebruikersnaam()));
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -44,29 +38,13 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		
 		for (int i = 0; i < mijnBiedingen.size(); i++) {
 			try {
-				mijnBiedingen.add((Bod) vDI.mijnBiedingen(gebruikersNaam));
+				mijnBiedingen.add((Bod) vDI.mijnBiedingen(user.getGebruikersnaam()));
 			} catch(Exception e) {
 				e.printStackTrace();
 				return SUCCESS;
 			}
 		}
 		return SUCCESS;
-	}
-	
-	public String getGebruikersnaam() {
-		return user.getGebruikersnaam();
-	}
-	
-	public void setGebruikersnaam(String gebruikersnaam) {
-		this.gebruikersNaam = gebruikersnaam;
-	}
-	
-	public void setData(List<String> data) {
-		this.mijnVeilingData = data;
-	}
-	
-	public String getPrijs() {
-		return prijs;
 	}
 	
 	public Persoon getUser() {
