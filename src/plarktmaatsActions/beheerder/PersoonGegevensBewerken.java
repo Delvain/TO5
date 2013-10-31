@@ -1,4 +1,5 @@
 package plarktmaatsActions.beheerder;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ import plarktmaatsDomein.Beheerder;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class PersoonGegevensBewerken extends ActionSupport implements UserAware{
+public class PersoonGegevensBewerken extends ActionSupport {
 	PersoonDAOImpl pdi = new PersoonDAOImpl();
 	private String voornaam;
 	private String achternaam;
@@ -22,30 +23,21 @@ public class PersoonGegevensBewerken extends ActionSupport implements UserAware{
 	private String strGeboorteDatum;
 	private Calendar geboorteDatum = Calendar.getInstance();
 	private String bankRekening;
-	private Persoon user;
+	private boolean geblokkeerd;
+	private Gebruiker gebruiker;
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
 	public String execute() {
-		System.out.println("Updating user " + user.getGebruikersnaam());
-		if (user instanceof Gebruiker) {
-			Gebruiker g = (Gebruiker) user;
-			g.setVoornaam(voornaam);
-			g.setAchternaam(achternaam);
-			g.setEmail(email);
-			g.setWachtwoord(wachtwoord);
-			g.setGeboortedatum(geboorteDatum);
-			g.setBankNr(bankRekening);
-			pdi.update(g.getGebruikersnaam(), g);
-		}
-		if (user instanceof Beheerder) {
-			Beheerder b = (Beheerder) user;
-			b.setVoornaam(voornaam);
-			b.setAchternaam(achternaam);
-			b.setEmail(email);
-			b.setWachtwoord(wachtwoord);
-			b.setGeboortedatum(geboorteDatum);
-			pdi.update(b.getGebruikersnaam(), b);
-		}
+		System.out.println("Updating user " + gebruiker.getGebruikersnaam());
+		Gebruiker g = (Gebruiker) gebruiker;
+		g.setVoornaam(voornaam);
+		g.setAchternaam(achternaam);
+		g.setEmail(email);
+		g.setWachtwoord(wachtwoord);
+		g.setGeboortedatum(geboorteDatum);
+		g.setBankNr(bankRekening);
+		pdi.update(g.getGebruikersnaam(), g);
+
 		return ActionSupport.SUCCESS;
 	}
 
@@ -62,42 +54,37 @@ public class PersoonGegevensBewerken extends ActionSupport implements UserAware{
 			try {
 				geboorteDatum.setTime(df.parse(strGeboorteDatum));
 			} catch (ParseException e) {
-				addFieldError("strGeboorteDatum","Geen geldige datum!");
+				addFieldError("strGeboorteDatum", "Geen geldige datum!");
 			}
 		} else {
-			geboorteDatum = user.getGeboortedatum();
+			geboorteDatum = gebruiker.getGeboortedatum();
 		}
-		
-		if (email.length() == 0 ){			
-			email = user.getEmail();
+
+		if (email.length() == 0) {
+			email = gebruiker.getEmail();
 		}
-		
+
 		if (voornaam.length() == 0) {
-			voornaam = user.getVoornaam();
+			voornaam = gebruiker.getVoornaam();
 		}
-		
+
 		if (achternaam.length() == 0) {
-			achternaam = user.getAchternaam();
+			achternaam = gebruiker.getAchternaam();
 		}
-		
+
 		if (!wachtwoord.equals(wachtwoord2)) {
 			addFieldError("wachtwoord2", "Wachtwoorden komen niet overeen!");
 		}
-		
-		if (wachtwoord.length() == 0) {			
-			wachtwoord = user.getWachtwoord();
-		}
-		if (user instanceof Beheerder) {
-			if (bankRekening.length() != 0 ) {			
-				addFieldError("bankRekening", "Als beheerder mag u geen rekeningnummer opgeven!");
-			}
-		} else if (user instanceof Gebruiker) {
-			if (bankRekening.length() == 0 ) {			
-				Gebruiker g = (Gebruiker) user;
-				bankRekening = g.getBankNr();
-			}
+
+		if (wachtwoord.length() == 0) {
+			wachtwoord = gebruiker.getWachtwoord();
 		}
 
+		if (bankRekening.length() == 0) {
+			Gebruiker g = (Gebruiker) gebruiker;
+			bankRekening = g.getBankNr();
+		}
+		
 	}
 
 	// Getters&Setters
@@ -156,13 +143,31 @@ public class PersoonGegevensBewerken extends ActionSupport implements UserAware{
 	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
 	}
+	
+	public String getWachtwoord2() {
+		return wachtwoord2;
+	}
 
 	public void setWachtwoord2(String wachtwoord2) {
 		this.wachtwoord2 = wachtwoord2;
 	}
 
-	@Override
-	public void setUser(Persoon user) {
-		this.user = user;
+	public boolean isGeblokkeerd() {
+		return geblokkeerd;
 	}
+
+	public void setGeblokkeerd(boolean geblokkeerd) {
+		this.geblokkeerd = geblokkeerd;
+	}
+
+	public Gebruiker getGebruiker() {
+		return gebruiker;
+	}
+
+	public void setGebruiker(Gebruiker gebruiker) {
+		this.gebruiker = gebruiker;
+	}
+
+	
+
 }

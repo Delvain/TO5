@@ -18,6 +18,7 @@
 				<s:password name="wachtwoord2" label="Wachtwoord (controle)" />
 				<s:textfield name="bankRekening" label="Bankrekeningnummer" />
 				<s:textfield name="strGeboorteDatum" label="Geboortedatum (DD-MM-YYYY)" />
+				<s:checkbox name=geblokkeerd ></s:checkbox>
 				<s:submit value="Knop" />
 			</s:form>
 		</div>

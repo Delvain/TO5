@@ -1,12 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+	<head>
+		<jsp:include page="/jsp/include/head.jsp" />
+		<sx:head />
+	</head>
+	<body>
+		<jsp:include page="/jsp/include/top.jsp" />
+		<div class="container">
+			<h1>Selecteer een persoon</h1>
 
-</body>
+			<s:form action="SelecteerGebruiker">
+				<s:select name="gebruikersnaam" list="gebruikers" listKey = "gebruikersnaam" listValue = "gebruikersnaam" label="Gebruiker"></s:select>
+				<s:submit value="Bewerk gebruikersgegevens" />
+			</s:form>
+		</div>
+		<jsp:include page="/jsp/include/footer.jsp" />
+	</body>
 </html>
