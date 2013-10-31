@@ -162,15 +162,17 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return mijnBiedingen;
 	}
 	
-	public String getVeilingNaam(int veilingId) {
+	public String getVeilingNaam(String veilingId) {
 		String veilingNaam = null;
 		Connection con = connect();
-		String query = "SELECT veilingnaam FROM " + ConnectionData.DATABASE + ".\"veilingen\" WHERE id = " + veilingId + ";";
+		String query = "SELECT naam FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE id = " + veilingId;
 		
 		try {
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery(query);
-			veilingNaam = rs.getString("NAAM");
+			while (rs.next()) {
+				veilingNaam = rs.getString("NAAM");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

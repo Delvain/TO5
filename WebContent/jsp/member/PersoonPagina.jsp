@@ -17,7 +17,7 @@
 		<div class="container">
 			<h1>Mijn biedingen</h1>
 			<s:iterator value = "mijnBiedingen">
-				<s:property value="bedrag" /><s:property value="veiling.getNaam(veilingId)" /></br>
+				<s:property value="veilingNamen.getValue(bodId)" />: <s:property value="bedrag" /></br>
 			</s:iterator>			
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />

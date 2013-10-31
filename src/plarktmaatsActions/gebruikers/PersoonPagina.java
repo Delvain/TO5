@@ -17,7 +17,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 	private ArrayList<Veiling> mijnVeilingen = new ArrayList<Veiling>();
 	private ArrayList<Bod> mijnBiedingen = new ArrayList<Bod>();
 	private Persoon user;
-	private HashMap veilingNamen;
+	private HashMap<Integer, String> veilingNamen;
 	
 	public String execute() {
 		System.out.println("Executing PersoonPagina.java for user " + user.getGebruikersnaam());
