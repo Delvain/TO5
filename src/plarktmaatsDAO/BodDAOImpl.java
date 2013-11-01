@@ -16,10 +16,6 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 
 	@Override
 	public void create(Bod b) { 
-		
-	}
-	
-public void create(int veilingId, Bod b) { 
 		int bedrag = b.getBedrag();
 		Calendar tijdstip = b.getDatum();
 		if (tijdstip == null) {
@@ -27,6 +23,7 @@ public void create(int veilingId, Bod b) {
 		}
 		Date bodtijdstip = new java.sql.Date(tijdstip.getTimeInMillis());
 		String gebruikersNaam = b.getBieder().getGebruikersnaam();
+		String veilingId = b.getVeilingId();
 		
 		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"BIEDINGEN\" VALUES (seq_bod.nextval, '"+bedrag+"', To_Date('"+bodtijdstip+"','yyyy-mm-dd'), '"+gebruikersNaam+"', '"+veilingId+"')";
 		Connection con = connect();
@@ -37,8 +34,6 @@ public void create(int veilingId, Bod b) {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	@Override
 	public Bod read(String pk) {

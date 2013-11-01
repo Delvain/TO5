@@ -18,7 +18,7 @@ public class BodTest {
 		BodDAOImpl impl = new BodDAOImpl();
 		Gebruiker jonathan = new Gebruiker("jopie", "Jonathan", "Karssen", "jonathan@mail.com", Calendar.getInstance(), 5000, "78473923", false, "J");
 		Bod bod = new Bod(2, 50, jonathan, "21");
-		impl.create(21, bod);
+		impl.create(bod);
 		Bod b = impl.read("2");
 		assertEquals("Create of read van Bod faalt", bod, b);
 
