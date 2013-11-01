@@ -48,7 +48,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		return mijnBiedingen;
 	}
 
-	public ArrayList getMijnBiedingenData() {
+	public ArrayList<String> getMijnBiedingenData() {
 		return mijnBiedingenData;
 	}
 }
