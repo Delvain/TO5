@@ -200,18 +200,4 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		}
 		return null;
 	}
-
-	public static void main(String[] args) {
-		// TESTS
-		
-		PersoonDAOImpl impl = new PersoonDAOImpl();
-		Calendar gebdat = Calendar.getInstance();
-		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superloser@superfreak.com", gebdat, "8482929", "super");
-		impl.create(freak);
-//		Persoon p = impl.read("Freak");
-//		System.out.println(p);
-//		p.setAchternaam("yolo");
-//		impl.update("Freak", freak);
-//		impl.delete("Freak");
-	}
 }

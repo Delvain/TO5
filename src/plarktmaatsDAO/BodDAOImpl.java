@@ -178,19 +178,4 @@ public void create(int veilingId, Bod b) {
 		}
 		return null;
 	}
-
-	public static void main(String[] args) {
-		BodDAOImpl impl = new BodDAOImpl();
-		Calendar gebdat = Calendar.getInstance();
-		Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland", "superloser@superfreak.com", gebdat, "8482929", "super");
-		//Bod bod = new Bod(2, 50, Calendar.getInstance(), freak);
-//		impl.create(bod);
-//		bod = impl.read("2");
-//		System.out.println(bod);
-//		veil = new Bod("freak", "superfreak non-original", null, 5, gebdat, freak, cat);
-//		impl.update("0", veil);
-//		impl.delete("2");
-//		ArrayList<Bod> array = impl.getAll();
-//		System.out.println(array.toString());
-	}
 }
