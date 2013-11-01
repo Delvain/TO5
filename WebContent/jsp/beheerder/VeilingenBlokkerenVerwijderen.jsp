@@ -20,7 +20,12 @@
 					<tbody>
 						<tr>
 							<td><a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></td>
-							<td><a href="<s:url namespace="/beheerder" action="BlokkeerVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>">Blokkeren</a></td>
+							<s:if test="items.geblokkeerd == true">
+								<td><a href="<s:url namespace="/beheerder" action="DeblokkeerVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>">Deblokkeren</a></td>
+							</s:if>
+							<s:else>
+								<td><a href="<s:url namespace="/beheerder" action="BlokkeerVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>">Blokkeren <s:property value="%{items.geblokkeerd}" /></a></td>
+							</s:else>
 							<td><a href="<s:url namespace="/beheerder" action="VerwijderVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>">Verwijderen</a></td>
 						</tr>
 					</tbody>

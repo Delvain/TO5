@@ -313,6 +313,19 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			e.printStackTrace();
 		}
 	}
+	
+	public void deblokkeer(String pk) {
+		String query = "UPDATE \"STUD1630460\".\"VEILINGEN\" ";
+		query += "SET geblokkeerd='0'";
+		query += "WHERE id = '" + pk + "'";
+		Connection con = connect();
+		try {
+			con.createStatement().execute(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void delete(String pk) {
@@ -357,4 +370,6 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		// ArrayList<Veiling> array = impl.getAll();
 		// System.out.println(array.toString());
 	}
+
+	
 }

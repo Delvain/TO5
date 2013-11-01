@@ -125,6 +125,10 @@
 			<result name="success" type="redirectAction">Menu</result>
 			<result name="input">/jsp/beheerder/VeilingenBlokkerenVerwijderen.jsp</result>
 		</action>
+		<action name="DeblokkeerVeiling" class="plarktmaatsActions.beheerder.DeblokkeerVeiling">
+			<result name="success" type="redirectAction">Menu</result>
+			<result name="input">/jsp/beheerder/VeilingenBlokkerenVerwijderen.jsp</result>
+		</action>
 		<action name="VerwijderVeiling" class="plarktmaatsActions.beheerder.VerwijderVeiling">
 			<result name="success" type="redirectAction">Menu</result>
 			<result name="input">/jsp/beheerder/VeilingenBlokkerenVerwijderen.jsp</result>
