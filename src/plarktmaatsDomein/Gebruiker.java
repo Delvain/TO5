@@ -66,6 +66,19 @@ public class Gebruiker extends Persoon {
 	}
 	
 	public String toString() {
-		return "" + gebruikersnaam + " " + voornaam + " " + achternaam + " " + geboortedatum;
+		return super.toString();
+	}
+	
+	public boolean equals(Object o) {
+		boolean equals = false;
+		try {
+			Gebruiker g = (Gebruiker) o;
+			if (super.equals(g) && this.credits == g.credits && this.bankNr.equals(g.bankNr) && this.geblokkeerd == g.geblokkeerd) {
+				equals = true;
+			}
+		} catch (Exception e) {
+			
+		}
+		return equals;
 	}
 }

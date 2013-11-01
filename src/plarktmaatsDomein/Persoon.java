@@ -74,4 +74,22 @@ public abstract class Persoon {
 	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
 	}
+	
+	public String toString() {
+		return "" + gebruikersnaam + ", " + voornaam + ", " + achternaam + ", " + email + ", " + geboortedatum + ", " + wachtwoord;
+	}
+	
+	public boolean equals(Object o) {
+		boolean equals = false;
+		try {
+			Persoon p = (Persoon) o;
+			if (this.gebruikersnaam.equals(p.gebruikersnaam) && this.voornaam.equals(p.voornaam) && this.achternaam.equals(p.achternaam) && this.email.equals(p.email) && this.wachtwoord.equals(p.wachtwoord) && this.geboortedatum.equals(p.geboortedatum)) {
+				equals = true;
+			}
+		} catch (Exception e) {
+			
+		}
+		return equals;
+	}
+	
 }
