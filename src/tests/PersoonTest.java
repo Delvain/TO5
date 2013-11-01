@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import plarktmaatsDAO.PersoonDAOImpl;
 import plarktmaatsDomein.Gebruiker;
-import plarktmaatsDomein.Persoon;
 
 public class PersoonTest {
 	
