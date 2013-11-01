@@ -16,14 +16,13 @@ public class Veiling {
 	private Categorie	deCategorie;
 	private ArrayList<Bod> alleBiedingen;
 	
-	private boolean verwerkt;
 	private boolean geblokkeerd;
 	
 	public Veiling() {
 		alleBiedingen = new ArrayList<Bod>();
 	}
 	
-	public Veiling(int id, String nm, String omsch, String ft, int min, Calendar eind, Gebruiker aanb, Categorie cat, boolean ver, boolean geblokd) {
+	public Veiling(int id, String nm, String omsch, String ft, int min, Calendar eind, Gebruiker aanb, Categorie cat, boolean geblokd) {
 		veilingId			= id;
 		veilingNaam 		= nm;
 		veilingOmschrijving = omsch;
@@ -33,7 +32,6 @@ public class Veiling {
 		
 		aanbieder = aanb;
 		deCategorie = cat;
-		verwerkt = ver;
 		geblokkeerd = geblokd;
 		alleBiedingen = new ArrayList<Bod>();
 	}
@@ -135,13 +133,7 @@ public class Veiling {
 	public void setVeilingId(int veilingId) {
 		this.veilingId = veilingId;
 	}
-	public boolean getVerwerkt() {
-		return verwerkt;
-	}
-
-	public void setVerwerkt(boolean verwerkt) {
-		this.verwerkt = verwerkt;
-	}
+	
 	public ArrayList<Bod> getAlleBiedingen() {
 		return alleBiedingen;
 	}

@@ -16,11 +16,11 @@ public class VeilingTest {
 		 Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland",
 		 "superloser@superfreak.com", gebdat, "8482929", "super");
 		 Categorie cat = new Categorie("Personen");
-		 Veiling veil = new Veiling(0, "freak", "superfreak original", null, 5, gebdat, freak, cat, false, false);
+		 Veiling veil = new Veiling(0, "freak", "superfreak original", null, 5, gebdat, freak, cat, false);
 		  impl.create(veil);
 		  veil = impl.read("freak");
 		  System.out.println(veil);
-		  veil = new Veiling(0, "freak", "superfreak non-original", null, 5, gebdat, freak, cat, true, true);
+		  veil = new Veiling(0, "freak", "superfreak non-original", null, 5, gebdat, freak, cat, true);
 		  impl.update("0", veil);
 		  impl.delete("0");
 		 ArrayList<Veiling> array = impl.getAll();

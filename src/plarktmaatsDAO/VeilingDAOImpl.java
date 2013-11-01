@@ -36,13 +36,10 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
 		String foto = v.getFoto();
-		int verwerkt = 0;
-		if(v.getVerwerkt())
-			verwerkt = 1;
 		int geblokkeerd = 0;
 		if(v.getGeblokkeerd())
 			geblokkeerd = 1;
-		String query = "INSERT INTO " + ConnectionData.DATABASE	+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '" + omschrijving + "', '" + minbedrag + "', To_Date('" + einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '" + categorieNaam + "', '" + foto + "', "+verwerkt+"', "+geblokkeerd+")";
+		String query = "INSERT INTO " + ConnectionData.DATABASE	+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '" + omschrijving + "', '" + minbedrag + "', To_Date('" + einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '" + categorieNaam + "', '" + foto + "', "+geblokkeerd+")";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -71,9 +68,6 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String gebruikersnaam = rs
 						.getString("GEBRUIKERS_GEBRUIKERSNAAM");
 				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
-				boolean verwerkt = false;
-				if(rs.getInt("Verwerkt") == 1)
-					verwerkt = true;
 				boolean geblokkeerd = false;
 				if(rs.getInt("GEBLOKKEERD") == 1)
 					geblokkeerd = true;
@@ -83,7 +77,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
 				Veiling veil = new Veiling(id, naam, omschrijving, foto,
-						minbedrag, eindtijd, aanbieder, cat, verwerkt, geblokkeerd);
+						minbedrag, eindtijd, aanbieder, cat, geblokkeerd);
 				BodDAOImpl boddao = new BodDAOImpl();
 				ArrayList<Bod> biedingen = boddao.getAllFromVeiling(id);
 				if (!biedingen.isEmpty()) {
@@ -120,13 +114,10 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				PersoonDAOImpl dao = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) dao.read(gebruikersNaam);
 				Categorie cat = new Categorie(categorienaam);
-				boolean verwerkt = false;
-				if(rs.getInt("Verwerkt") == 1)
-					verwerkt = true;
 				boolean geblokkeerd = false;
 				if(rs.getInt("GEBLOKKEERD") == 1)
 					geblokkeerd = true;
-				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat, verwerkt, geblokkeerd);
+				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat, geblokkeerd);
 				mijnVeilingen.add(v);
 			}
 			con.close();
@@ -234,14 +225,11 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				PersoonDAOImpl persoonDAO = new PersoonDAOImpl();
 				Gebruiker aanbieder = (Gebruiker) persoonDAO.read(gebruikersnaam);
 				Categorie cat = new Categorie(categorienaam);
-				boolean verwerkt = false;
-				if(rs.getInt("Verwerkt") == 1)
-					verwerkt = true;
 				boolean geblokkeerd = false;
 				if(rs.getInt("GEBLOKKEERD") == 1)
 					geblokkeerd = true;
 				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag,
-						eindtijd, aanbieder, cat, verwerkt, geblokkeerd);
+						eindtijd, aanbieder, cat, geblokkeerd);
 				array.add(v);
 				BodDAOImpl bodDAO = new BodDAOImpl();
 				ArrayList<Bod> alleBiedingen = bodDAO.getAll();
@@ -277,9 +265,6 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
 		String foto = v.getFoto();
-		int verwerkt = 0;
-		if(v.getVerwerkt())
-			verwerkt = 1;
 		int geblokkeerd = 0;
 		if(v.getGeblokkeerd())
 			geblokkeerd = 1;
@@ -290,7 +275,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				+ "',eindtijd= To_Date('" + einddatum
 				+ "','yyyy-mm-dd'),gebruikers_gebruikersnaam='"
 				+ gebruikersNaam + "',categorieen_naam='" + categorieNaam
-				+ "',foto='" + foto + "', verwerkt='"+verwerkt+"', geblokkeerd='"+geblokkeerd+"' ";
+				+ "',foto='" + foto + "', geblokkeerd='"+geblokkeerd+"' ";
 		query += "WHERE id = '" + pk + "'";
 		Connection con = connect();
 		try {
