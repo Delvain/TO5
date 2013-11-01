@@ -70,4 +70,18 @@ public class Bod {
 	public String toString() {
 		return "" + id + ", " + bedrag + ", " + bieder.getGebruikersnaam() + ", " + veilingId;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		boolean equals = false;
+		try {
+			Bod b = (Bod) o;
+			if (this.id == b.id && this.bedrag == b.bedrag && this.bieder.gebruikersnaam.equals(b.bieder.gebruikersnaam) && this.veilingId.equals(b.veilingId)) {
+				equals = true;
+			}
+		} catch (Exception e) {
+			
+		}
+		return equals;
+	}
 }

@@ -69,6 +69,7 @@ public class Gebruiker extends Persoon {
 		return super.toString();
 	}
 	
+	@Override
 	public boolean equals(Object o) {
 		boolean equals = false;
 		try {

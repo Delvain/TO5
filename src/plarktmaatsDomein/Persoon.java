@@ -79,11 +79,12 @@ public abstract class Persoon {
 		return "" + gebruikersnaam + ", " + voornaam + ", " + achternaam + ", " + email + ", " + geboortedatum + ", " + wachtwoord;
 	}
 	
+	@Override
 	public boolean equals(Object o) {
 		boolean equals = false;
 		try {
 			Persoon p = (Persoon) o;
-			if (this.gebruikersnaam.equals(p.gebruikersnaam) && this.voornaam.equals(p.voornaam) && this.achternaam.equals(p.achternaam) && this.email.equals(p.email) && this.wachtwoord.equals(p.wachtwoord) && this.geboortedatum.equals(p.geboortedatum)) {
+			if (this.gebruikersnaam.equals(p.gebruikersnaam) && this.voornaam.equals(p.voornaam) && this.achternaam.equals(p.achternaam) && this.email.equals(p.email) && this.wachtwoord.equals(p.wachtwoord)) {
 				equals = true;
 			}
 		} catch (Exception e) {

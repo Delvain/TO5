@@ -125,18 +125,14 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 		int id = b.getId();
 		int bedrag = b.getBedrag();
 		Calendar tijdstip = b.getDatum();
-		Date bodtijdstip = null;
-		if (tijdstip != null) {
-			bodtijdstip = new java.sql.Date(tijdstip.getTimeInMillis());
-		} else {
-			Calendar morgen = Calendar.getInstance();
-			morgen.add(Calendar.DAY_OF_MONTH, 1);
-			bodtijdstip = new java.sql.Date(morgen.getTimeInMillis());
+		if (tijdstip == null) {
+			tijdstip = Calendar.getInstance();
 		}
+		Date bodtijdstip = new java.sql.Date(tijdstip.getTimeInMillis());
 		String gebruikersNaam = b.getBieder().getGebruikersnaam();
 		
 		String query = 	"UPDATE \"STUD1630460\".\"BIEDINGEN\" ";
-		query +=		"SET id='"+id+"',bedrag='"+bedrag+"',tijdstip= To_Date('"+tijdstip+"','yyyy-mm-dd'),gebruikers_gebruikersnaam='"+gebruikersNaam+"' ";
+		query +=		"SET id='"+id+"',bedrag='"+bedrag+"',tijdstip= To_Date('"+bodtijdstip+"','yyyy-mm-dd'),gebruikers_gebruikersnaam='"+gebruikersNaam+"' ";
 		query +=		"WHERE id = '"+primaryKey+"'";
 		Connection con = connect();
 		try {
