@@ -22,14 +22,10 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 public void create(int veilingId, Bod b) { 
 		int bedrag = b.getBedrag();
 		Calendar tijdstip = b.getDatum();
-		Date bodtijdstip = null;
-		if (tijdstip != null) {
-			bodtijdstip = new java.sql.Date(tijdstip.getTimeInMillis());
-		} else {
-			Calendar morgen = Calendar.getInstance();
-			morgen.add(Calendar.DAY_OF_MONTH, 1);
-			bodtijdstip = new java.sql.Date(morgen.getTimeInMillis());
+		if (tijdstip == null) {
+			tijdstip = Calendar.getInstance();
 		}
+		Date bodtijdstip = new java.sql.Date(tijdstip.getTimeInMillis());
 		String gebruikersNaam = b.getBieder().getGebruikersnaam();
 		
 		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"BIEDINGEN\" VALUES (seq_bod.nextval, '"+bedrag+"', To_Date('"+bodtijdstip+"','yyyy-mm-dd'), '"+gebruikersNaam+"', '"+veilingId+"')";
