@@ -13,7 +13,6 @@ public class ToonVeiling extends ActionSupport {
 
 	public String execute() {
 		VeilingDAOImpl dao = new VeilingDAOImpl();
-		System.out.println(id);
 		if(!ProjectTools.isNumeric(id))
 			return ActionSupport.INPUT;
 		if(dao.read(id) == null) {
