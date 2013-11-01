@@ -24,9 +24,8 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
 		mijnVeilingen = (ArrayList<Veiling>) vDI.mijnVeilingen(user.getGebruikersnaam());
 		mijnBiedingen = (ArrayList<Bod>) vDI.mijnBiedingen(user.getGebruikersnaam());
-		for (Bod b : mijnBiedingen) {
-			String data = "" + vDI.getVeilingNaam(b.getVeilingId()) + ": " + b.getBedrag();
-			mijnBiedingenData.add(data);
+		for (Bod b: mijnBiedingen) {
+			mijnBiedingenData.add(vDI.getVeilingNaam(b.getVeilingId()) + ": " + b.getBedrag());
 		}
 		
 		return SUCCESS;
@@ -52,4 +51,17 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 	public ArrayList getMijnBiedingenData() {
 		return mijnBiedingenData;
 	}
+	
+//	public String toString() {
+//		String s = "";
+//		VeilingDAOImpl vDI = new VeilingDAOImpl();
+//		if (mijnBiedingen == null) {
+//			s = "U heeft geen actieve biedingen.";
+//		} else {
+//			for (Bod b : mijnBiedingen) {
+//				s = s + vDI.getVeilingNaam(b.getVeilingId()) + ": " + b.getBedrag();
+//			}
+//		}
+//		return s;
+//	}
 }

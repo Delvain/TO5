@@ -8,6 +8,7 @@
 				<a href="<s:url action='BlokkeerVerwijderForm' namespace="/beheerder"/>" class="plaats_ad_but">Blokkeren/verwijderen</a> |
 				<a href="<s:url action='PasGegevensAanForm' namespace="/member"/>" class="plaats_ad_but">Pas gegevens aan</a> |
 				<a href="<s:url action='SelecteerGebruikerForm' namespace="/beheerder"/>">Bewerk Gebruiker</a> |
+				<a href="<s:url action='PersoonPagina' namespace="/member"/>">Mijn Account</a> |
 				<a href="<s:url action='LoginForm' namespace="/visitor"/>">Log in</a> |
 				<a href="<s:url action='CreateAccountForm' namespace="/visitor"/>">Registreer</a>
 			</p>
