@@ -59,7 +59,7 @@ public void create(int veilingId, Bod b) {
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
-				String veilingId = rs.getString("VEILING_ID");
+				String veilingId = rs.getString("VEILINGEN_ID");
 
 				PersoonDAOImpl persoonDAO = new PersoonDAOImpl();
 				Gebruiker bieder = (Gebruiker)persoonDAO.read(gebruikersnaam);

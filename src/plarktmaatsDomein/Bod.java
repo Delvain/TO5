@@ -66,4 +66,8 @@ public class Bod {
 	public String getVeilingId() {
 		return veilingId;
 	}
+	
+	public String toString() {
+		return "" + id + ", " + bedrag + ", " + bieder.getGebruikersnaam() + ", " + veilingId;
+	}
 }
