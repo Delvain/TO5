@@ -51,17 +51,4 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 	public ArrayList getMijnBiedingenData() {
 		return mijnBiedingenData;
 	}
-	
-//	public String toString() {
-//		String s = "";
-//		VeilingDAOImpl vDI = new VeilingDAOImpl();
-//		if (mijnBiedingen == null) {
-//			s = "U heeft geen actieve biedingen.";
-//		} else {
-//			for (Bod b : mijnBiedingen) {
-//				s = s + vDI.getVeilingNaam(b.getVeilingId()) + ": " + b.getBedrag();
-//			}
-//		}
-//		return s;
-//	}
 }
