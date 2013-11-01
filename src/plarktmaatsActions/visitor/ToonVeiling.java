@@ -24,11 +24,15 @@ public class ToonVeiling extends ActionSupport {
 
 		return ActionSupport.SUCCESS;
 	}
+	
+	public String getId() {
+		return id;
+	}
 
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
 	public Veiling getVeiling() {
 		return veiling;
 	}

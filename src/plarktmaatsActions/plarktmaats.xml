@@ -70,7 +70,7 @@
 			<result name="success" type="redirectAction">Menu</result>
 			<result name="input" type="redirectAction">VoegVeilingToeForm</result>
 		</action>
-		<action name="VoegBodToe">
+		<action name="VoegBodToe" class="plarktmaatsActions.gebruikers.VoegBodToe">
 			<result type="redirectAction">
 				<param name="actionName">ToonVeiling?id=${id}</param>
         		<param name="namespace">/visitor</param>
