@@ -16,8 +16,8 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Veiling> mijnVeilingen = new ArrayList<Veiling>();
 	private ArrayList<Bod> mijnBiedingen = new ArrayList<Bod>();
+	private ArrayList<String> mijnBiedingenData = new ArrayList<String>();
 	private Persoon user;
-	private HashMap<Integer, String> veilingNamen;
 	
 	public String execute() {
 		System.out.println("Executing PersoonPagina.java for user " + user.getGebruikersnaam());
@@ -25,7 +25,8 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		mijnVeilingen = (ArrayList<Veiling>) vDI.mijnVeilingen(user.getGebruikersnaam());
 		mijnBiedingen = (ArrayList<Bod>) vDI.mijnBiedingen(user.getGebruikersnaam());
 		for (Bod b : mijnBiedingen) {
-			veilingNamen.put(b.getId(), vDI.getVeilingNaam(b.getVeilingId()));
+			String data = "" + vDI.getVeilingNaam(b.getVeilingId()) + ": " + b.getBedrag();
+			mijnBiedingenData.add(data);
 		}
 		
 		return SUCCESS;
@@ -48,11 +49,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		return mijnBiedingen;
 	}
 
-	public HashMap getVeilingNamen() {
-		return veilingNamen;
-	}
-
-	public void setVeilingNamen(HashMap veilingNamen) {
-		this.veilingNamen = veilingNamen;
+	public ArrayList getMijnBiedingenData() {
+		return mijnBiedingenData;
 	}
 }
