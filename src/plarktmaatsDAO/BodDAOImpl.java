@@ -46,6 +46,34 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 			while(rs.next()) {
 				int id = rs.getInt("ID");
 				int bedrag = rs.getInt("BEDRAG");;
+				Date tijdstipTemp = rs.getDate("TIJDSTIP");
+				Calendar tijdstip = Calendar.getInstance();
+				tijdstip.setTime(tijdstipTemp);
+				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String veilingId = rs.getString("VEILINGEN_ID");
+
+				PersoonDAOImpl persoonDAO = new PersoonDAOImpl();
+				Gebruiker bieder = (Gebruiker)persoonDAO.read(gebruikersnaam);
+				
+				return new Bod(id, bedrag, tijdstip, bieder, veilingId);
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Bod getHoogsteBodTussen(Calendar begin, Calendar eind) {
+		Connection con = connect();
+		try {
+			Date begintijdstip = new java.sql.Date(begin.getTimeInMillis());
+			Date eindtijdstip = new java.sql.Date(eind.getTimeInMillis());
+			PreparedStatement read = con.prepareStatement("SELECT * FROM (SELECT * FROM "+ConnectionData.DATABASE+".\"BIEDINGEN\" WHERE tijdstip >= To_Date('"+ begintijdstip+"','yyyy-mm-dd') AND tijdstip <= To_Date('"+eindtijdstip+"','yyyy-mm-dd') ORDER BY bedrag DESC) WHERE ROWNUM = 1");
+			ResultSet rs = read.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("ID");
+				int bedrag = rs.getInt("BEDRAG");;
 				Date tijdstipTemp = rs.getDate("TIJDSTIP"); //rs.getDate("GEBDATUM");
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);

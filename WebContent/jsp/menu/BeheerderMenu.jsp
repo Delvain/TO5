@@ -14,6 +14,9 @@
 
 			<a href="<s:url action='BlokkeerVerwijderForm' namespace="/beheerder"/>" class="plaats_ad_but">Blokkeer/verwijder veilingen</a><br/>
 			<a href="<s:url action='SelecteerGebruikerForm' namespace="/beheerder"/>">Bewerk Gebruiker</a><br/>
+			
+			<p>Statistieken</p>
+			<a href="<s:url action='StatistiekHoogsteBieding' namespace="/beheerder"/>">Hoogste biedingen</a><br/>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
 	</body>

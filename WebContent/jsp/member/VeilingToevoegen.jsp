@@ -14,11 +14,11 @@
 
 			<s:form namespace="/member" action="VoegVeilingToe">
 				<s:select name="categorie" list="categorieen" listKey = "naam" listValue = "naam" label="Categorie"></s:select>
-				<s:textfield name="productnaam" label="Naam"/><br/>
-				<s:textarea name="productomschrijving" label="Omschrijving" /><br/>
-				<s:textfield name="minbedrag" label="Minimumbod" /><br/>
-				<sx:datetimepicker name="eindDatum" label="Eindtijdstip (yyyy-MM-dd-HH-mm)" displayFormat="yyyy-MM-dd-HH-mm" value="todayDate" /><br/>
-				<s:textfield name="img" label="URL van foto" /><br/>
+				<s:textfield name="productnaam" label="Naam"/>
+				<s:textarea name="productomschrijving" label="Omschrijving" />
+				<s:textfield name="minbedrag" label="Minimumbod" />
+				<sx:datetimepicker name="eindDatum" label="Eindtijdstip (yyyy-MM-dd-HH-mm)" displayFormat="yyyy-MM-dd-HH-mm" value="todayDate" />
+				<s:textfield name="img" label="URL van foto" />
 				<s:submit value="Maak veiling aan" />
 			</s:form>
 		</div>

@@ -204,7 +204,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		}
 		return returnVal;
 	}
-
+	
 	public ArrayList<Veiling> getAll() {
 		ArrayList<Veiling> array = new ArrayList<Veiling>();
 		Connection con = connect();
@@ -217,7 +217,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String naam = rs.getString("NAAM");
 				String omschrijving = rs.getString("OMSCHRIJVING");
 				int minbedrag = rs.getInt("MINBEDRAG");
-				Date eindtijdTemp = rs.getDate("EINDTIJD"); // rs.getDate("GEBDATUM");
+				Date eindtijdTemp = rs.getDate("EINDTIJD");
 				Calendar eindtijd = Calendar.getInstance();
 				eindtijd.setTime(eindtijdTemp);
 				String gebruikersnaam = rs
