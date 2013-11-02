@@ -7,6 +7,7 @@ import plarktmaatsDomein.Gebruiker;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+@SuppressWarnings("serial")
 public class AlleGebruikers extends ActionSupport {
 	private List<Gebruiker> gebruikers;
 	

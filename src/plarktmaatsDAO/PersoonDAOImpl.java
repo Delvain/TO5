@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import plarktmaatsDomein.Beheerder;
-import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Persoon;
-import plarktmaatsDomein.Veiling;
 
 public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 

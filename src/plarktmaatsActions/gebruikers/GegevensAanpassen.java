@@ -12,6 +12,7 @@ import plarktmaatsDomein.Beheerder;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings("serial")
 public class GegevensAanpassen extends ActionSupport implements UserAware{
 	PersoonDAOImpl pdi = new PersoonDAOImpl();
 	private String voornaam;

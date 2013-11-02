@@ -1,4 +1,5 @@
 package plarktmaatsActions.visitor;
+
 import java.util.List;
 
 import plarktmaatsDAO.CategorieDAOImpl;
@@ -6,7 +7,7 @@ import plarktmaatsDomein.Categorie;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-
+@SuppressWarnings("serial")
 public class AlleCategorieen extends ActionSupport {
 	private List<Categorie> categorieen;
 	

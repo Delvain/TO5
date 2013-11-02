@@ -10,6 +10,7 @@ import plarktmaatsDomein.Persoon;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+@SuppressWarnings("serial")
 public class SelecteerGebruiker extends ActionSupport implements SessionAware {
 	private String gebruikersnaam;
 	private Gebruiker gebruiker;

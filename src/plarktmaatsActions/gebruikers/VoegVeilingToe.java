@@ -14,6 +14,7 @@ import plarktmaatsDomein.Veiling;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings("serial")
 public class VoegVeilingToe extends ActionSupport implements UserAware {
 	private String categorie;
 	private String productnaam;

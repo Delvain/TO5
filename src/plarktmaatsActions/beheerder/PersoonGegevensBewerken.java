@@ -8,14 +8,12 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import plarktmaatsAware.UserAware;
 import plarktmaatsDAO.PersoonDAOImpl;
 import plarktmaatsDomein.Gebruiker;
-import plarktmaatsDomein.Persoon;
-import plarktmaatsDomein.Beheerder;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings("serial")
 public class PersoonGegevensBewerken extends ActionSupport implements SessionAware {
 	PersoonDAOImpl pdi = new PersoonDAOImpl();
 	private String voornaam;

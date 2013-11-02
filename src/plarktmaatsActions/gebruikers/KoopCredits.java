@@ -6,6 +6,7 @@ import plarktmaatsDomein.Persoon;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings("serial")
 public class KoopCredits extends ActionSupport implements UserAware {
 	private Persoon user;
 	
