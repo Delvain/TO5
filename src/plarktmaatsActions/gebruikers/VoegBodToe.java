@@ -61,6 +61,9 @@ public class VoegBodToe extends ActionSupport implements UserAware {
 		if(usergebruiker.getGeblokkeerd()) {
 			addFieldError("credits", "U mag niet bieden");
 		}
+		if(usergebruiker.getCredits()-creditsInt < 0) {
+			addFieldError("credits", "U heeft niet genoeg credits");
+		}
 		Date eindTijd = v.getEindTijd().getTime();
 		Date nu = Calendar.getInstance().getTime();
 		long diff = (eindTijd.getTime() - nu.getTime())/1000;
