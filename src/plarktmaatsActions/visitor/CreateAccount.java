@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import plarktmaatsDAO.PersoonDAOImpl;
-import plarktmaatsDAO.PlarktmaatsDAOInterface;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Persoon;
 
@@ -37,15 +36,16 @@ public class CreateAccount extends ActionSupport {
 	}
 
 	public void validate(){
-		gebruikersNaam = gebruikersNaam.toLowerCase();
+		//Gebruikersnaam krijgt een .toLowerCase() bij het registreren en inloggen zodat het hoofdletterongevoelig is
+		gebruikersNaam = gebruikersNaam.trim().toLowerCase();
 		voornaam = voornaam.trim();
 		achternaam = achternaam.trim();
-		email = email.trim();
+		email = email.trim().toLowerCase();
 		wachtwoord = wachtwoord.trim();
 		wachtwoord2 = wachtwoord2.trim();
 		geboorteDatum = Calendar.getInstance();
 		
-		// Geboortedatum omzetten naar Calendar
+		//Geboortedatum omzetten naar Calendar
 		if (strGeboorteDatum != null) {
 			try {
 				geboorteDatum.setTime(df.parse(strGeboorteDatum));
@@ -56,6 +56,7 @@ public class CreateAccount extends ActionSupport {
 			addFieldError("strGeboorteDatum", "Geboortedatum is verplicht");			
 		}
 		
+		//Checks
 		if (gebruikersNaam.length() == 0 ){			
 			addFieldError("gebruikersnaam", "Gebruikersnaam is verplicht");
 		} else if (pdi.read(gebruikersNaam) != null){		
@@ -87,7 +88,7 @@ public class CreateAccount extends ActionSupport {
 		}
 	}
 	
-//	Getters&Setters
+	//Getters&Setters
 	public String getGebruikersnaam() {
 		return gebruikersNaam;
 	}

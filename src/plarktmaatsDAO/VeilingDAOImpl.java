@@ -93,7 +93,8 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		}
 		return null;
 	}
-
+	
+	//Ophalen alle veilingen van een specifieke gebruiker
 	public List<Veiling> mijnVeilingen(String gebruikersNaam) {
 		Connection con = connect();
 		ArrayList<Veiling> mijnVeilingen = new ArrayList<Veiling>();
@@ -127,6 +128,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return mijnVeilingen;
 	}
 
+	//Ophalen alle biedingen van een specifieke gebruiker
 	public List<Bod> mijnBiedingen(String gebruikersNaam) {
 		Connection con = connect();
 		ArrayList<Bod> mijnBiedingen = new ArrayList<Bod>();
@@ -153,6 +155,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return mijnBiedingen;
 	}
 	
+	//Ophalen van de veilingNaam (voor de associate tussen bod en veiling; in bod bestaat alleen een verwijzing dmv veilingId)
 	public String getVeilingNaam(String veilingId) {
 		String veilingNaam = null;
 		Connection con = connect();

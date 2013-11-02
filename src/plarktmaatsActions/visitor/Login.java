@@ -30,9 +30,11 @@ public class Login extends ActionSupport implements SessionAware {
 	}
 
 	public void validate(){
+		//Gebruikersnaam krijgt een .toLowerCase() bij het registreren en inloggen zodat het hoofdletterongevoelig is
 		username = username.trim().toLowerCase();
 		user = database.read(username);
 		
+		//Checks
 		if(username.length() == 0){			
 			addFieldError("username", "Voer uw gebruikersnaam in.");
 		}
@@ -45,6 +47,7 @@ public class Login extends ActionSupport implements SessionAware {
 		}
 	}
 	
+	//Getters&Setters	
 	public String getUsername() {
 		return username;
 	}

@@ -2,7 +2,6 @@ package plarktmaatsActions.gebruikers;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import plarktmaatsAware.UserAware;
 import plarktmaatsDAO.VeilingDAOImpl;
@@ -24,6 +23,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
 		mijnVeilingen = (ArrayList<Veiling>) vDI.mijnVeilingen(user.getGebruikersnaam());
 		mijnBiedingen = (ArrayList<Bod>) vDI.mijnBiedingen(user.getGebruikersnaam());
+		//vul mijnBiedingenData met strings waarin het bod wordt teruggegeven samen met de veilingnaam
 		for (Bod b: mijnBiedingen) {
 			mijnBiedingenData.add(vDI.getVeilingNaam(b.getVeilingId()) + ": " + b.getBedrag());
 		}
@@ -31,6 +31,7 @@ public class PersoonPagina extends ActionSupport implements UserAware {
 		return SUCCESS;
 	}
 	
+	//Getters&Setters
 	public Persoon getUser() {
 		return user;
 	}
