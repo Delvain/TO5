@@ -17,7 +17,8 @@
 				<s:textfield name="productnaam" label="Naam"/>
 				<s:textarea name="productomschrijving" label="Omschrijving" />
 				<s:textfield name="minbedrag" label="Minimumbod" />
-				<sx:datetimepicker name="eindDatum" label="Eindtijdstip (yyyy-MM-dd-HH-mm)" displayFormat="yyyy-MM-dd-HH-mm" value="todayDate" />
+				<s:textfield name="eindDatum" label="Einddatum (DD-MM-YYYY)" />
+				<s:textfield name="eindTijd" label="Eindtijdstip (hh:mm)" />
 				<s:textfield name="img" label="URL van foto" />
 				<s:submit value="Maak veiling aan" />
 			</s:form>

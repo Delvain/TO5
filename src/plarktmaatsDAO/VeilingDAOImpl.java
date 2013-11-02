@@ -15,6 +15,7 @@ import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Veiling;
+import tools.ProjectTools;
 
 public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
@@ -24,14 +25,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String omschrijving = v.getVeilingOmschrijving();
 		int minbedrag = v.getMinBedrag();
 		Calendar eindtijd = v.getEindTijd();
-		Date einddatum = null;
-		if (eindtijd != null) {
-			einddatum = new java.sql.Date(eindtijd.getTimeInMillis());
-		} else {
-			Calendar morgen = Calendar.getInstance();
-			morgen.add(Calendar.DAY_OF_MONTH, 1);
-			einddatum = new java.sql.Date(morgen.getTimeInMillis());
-		}
+		String einddatum = ProjectTools.CalendarToString(eindtijd);
 
 		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
@@ -39,7 +33,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		int geblokkeerd = 0;
 		if(v.getGeblokkeerd())
 			geblokkeerd = 1;
-		String query = "INSERT INTO " + ConnectionData.DATABASE	+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '" + omschrijving + "', '" + minbedrag + "', To_Date('" + einddatum + "','yyyy-mm-dd'), '" + gebruikersNaam + "', '" + categorieNaam + "', '" + foto + "', "+geblokkeerd+")";
+		String query = "INSERT INTO " + ConnectionData.DATABASE	+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '" + omschrijving + "', '" + minbedrag + "', To_Date('" + einddatum + "','yyyy-mm-dd HH24:MI:SS'), '" + gebruikersNaam + "', '" + categorieNaam + "', '" + foto + "', "+geblokkeerd+")";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -338,5 +332,10 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static void main(String[] args) {
+		Calendar c = Calendar.getInstance();
+		System.out.println(ProjectTools.CalendarToString(c));
 	}
 }
