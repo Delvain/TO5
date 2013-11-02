@@ -23,7 +23,7 @@
 		</action>
 		<action name="Login" class="plarktmaatsActions.visitor.Login">
 			<result name="success" type="redirectAction">Menu</result>
-			<result name="managermenu" type="redirectAction">Menu</result>
+			<result name="beheerdermenu">/jsp/menu/BeheerderMenu.jsp</result>
 			<result name="input">/jsp/visitor/LoginForm.jsp</result>
 		</action>
 		<action name="ToonVeiling" class="plarktmaatsActions.visitor.ToonVeiling">

@@ -24,7 +24,7 @@ public class Login extends ActionSupport implements SessionAware {
 	public String execute(){
 		session.put("user", user);
 		if (user instanceof Beheerder) {
-			return "managermenu";
+			return "beheerdermenu";
 		} 
 		return SUCCESS;
 	}
