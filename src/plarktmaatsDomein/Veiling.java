@@ -59,20 +59,17 @@ public class Veiling {
 
 	public boolean doeBod(Bod b) {
 		if (getHoogsteBod() != null) {
-			if (b.getBedrag() <= getHoogsteBod().getBedrag()) { // nieuwe bod
-																// mag niet
-																// lager of
-																// gelijk zijn
-																// aan het
-																// huidige bod
+			// nieuwe bod mag niet lager of gelijk zijn aan het huidige bod
+			if (b.getBedrag() <= getHoogsteBod().getBedrag()) {
 				return false;
 			}
 		}
-		if (b.getBedrag() <= minBedrag) { // checken of bod hoger is dan het
-											// minimum bedrag
+		// checken of bod hoger is dan het minimum bedrag
+		if (b.getBedrag() <= minBedrag) {
 			return false;
 		}
-		alleBiedingen.add(b); // alles goed: huidige bod is nieuwe bod
+		// alles goed: huidige bod is nieuwe bod
+		alleBiedingen.add(b);
 		return true;
 	}
 
