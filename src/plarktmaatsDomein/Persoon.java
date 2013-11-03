@@ -91,6 +91,5 @@ public abstract class Persoon {
 			
 		}
 		return equals;
-	}
-	
+	}	
 }
