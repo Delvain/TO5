@@ -149,6 +149,69 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return mijnBiedingen;
 	}
 	
+	//Ophalen alle veilingen van een specifieke gebruiker
+	public List<Veiling> zoekVeiling(String zoekterm) {
+		Connection con = connect();
+		ArrayList<Veiling> zoekResultaten = new ArrayList<Veiling>();
+		try {
+			//Zoek op naam
+			PreparedStatement readNaam = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE naam COLLATE UTF8_GENERAL_CI LIKE %?%");
+			readNaam.setString(1, zoekterm);			
+			ResultSet rsNaam = readNaam.executeQuery();	
+			
+			while (rsNaam.next()) {
+				int id = rsNaam.getInt("ID");
+				String naam = rsNaam.getString("NAAM");
+				String omschrijving = rsNaam.getString("OMSCHRIJVING");
+				int minbedrag = rsNaam.getInt("MINBEDRAG");
+				Date eindtijdTemp = rsNaam.getDate("EINDTIJD"); // rs.getDate("GEBDATUM");
+				Calendar eindtijd = Calendar.getInstance();
+				eindtijd.setTime(eindtijdTemp);
+				String foto = rsNaam.getString("FOTO");
+				String categorienaam = rsNaam.getString("CATEGORIEEN_NAAM");
+				PersoonDAOImpl dao = new PersoonDAOImpl();
+				Gebruiker aanbieder = (Gebruiker) dao.read(zoekterm);
+				Categorie cat = new Categorie(categorienaam);
+				boolean geblokkeerd = false;
+				if(rsNaam.getInt("GEBLOKKEERD") == 1)
+					geblokkeerd = true;
+				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat, geblokkeerd);
+				zoekResultaten.add(v);
+			}
+			
+			//Zoek op omschrijving
+			PreparedStatement readOmschrijving = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE omschrijving COLLATE UTF8_GENERAL_CI LIKE %?%");
+			readOmschrijving.setString(1, zoekterm);
+			ResultSet rsOmschrijving = readOmschrijving.executeQuery();
+			
+			while (rsOmschrijving.next()) {
+				int id = rsOmschrijving.getInt("ID");
+				String naam = rsOmschrijving.getString("NAAM");
+				String omschrijving = rsOmschrijving.getString("OMSCHRIJVING");
+				int minbedrag = rsOmschrijving.getInt("MINBEDRAG");
+				Date eindtijdTemp = rsOmschrijving.getDate("EINDTIJD"); // rs.getDate("GEBDATUM");
+				Calendar eindtijd = Calendar.getInstance();
+				eindtijd.setTime(eindtijdTemp);
+				String foto = rsOmschrijving.getString("FOTO");
+				String categorienaam = rsOmschrijving.getString("CATEGORIEEN_NAAM");
+				PersoonDAOImpl dao = new PersoonDAOImpl();
+				Gebruiker aanbieder = (Gebruiker) dao.read(zoekterm);
+				Categorie cat = new Categorie(categorienaam);
+				boolean geblokkeerd = false;
+				if(rsOmschrijving.getInt("GEBLOKKEERD") == 1)
+					geblokkeerd = true;
+				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag, eindtijd, aanbieder, cat, geblokkeerd);
+				if (!zoekResultaten.contains(v)) {
+					zoekResultaten.add(v);
+				}
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return zoekResultaten;
+	}
+	
 	//Ophalen van de veilingNaam (voor de associate tussen bod en veiling; in bod bestaat alleen een verwijzing dmv veilingId)
 	public String getVeilingNaam(String veilingId) {
 		String veilingNaam = null;
