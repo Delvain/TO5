@@ -141,7 +141,6 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		String wachtwoord = p.getWachtwoord();
 		
 		if (p instanceof Gebruiker) {
-			System.out.println("persoonDAO persoon is gebruiker");
 			Gebruiker g = (Gebruiker)p;
 			functie = "Gebruiker";
 			credits = g.getCredits();

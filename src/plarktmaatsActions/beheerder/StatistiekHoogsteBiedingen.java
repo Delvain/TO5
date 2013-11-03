@@ -8,6 +8,7 @@ import plarktmaatsDomein.Bod;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings("serial")
 public class StatistiekHoogsteBiedingen extends ActionSupport {
 	private BodDAOImpl boddata = new BodDAOImpl();
 	private VeilingDAOImpl veilingdata = new VeilingDAOImpl();

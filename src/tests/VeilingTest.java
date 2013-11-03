@@ -1,8 +1,13 @@
 package tests;
 
-import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Calendar;
 
+import org.junit.Test;
+
+import plarktmaatsDAO.CategorieDAOImpl;
+import plarktmaatsDAO.PersoonDAOImpl;
 import plarktmaatsDAO.VeilingDAOImpl;
 import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
@@ -10,20 +15,23 @@ import plarktmaatsDomein.Veiling;
 
 public class VeilingTest {
 	
-	public static void main(String[] args) {
-		 VeilingDAOImpl impl = new VeilingDAOImpl();
-		 Calendar gebdat = Calendar.getInstance();
-		 Gebruiker freak = new Gebruiker("Freak","Freek", "Nederland",
-		 "superloser@superfreak.com", gebdat, "8482929", "super");
-		 Categorie cat = new Categorie("Personen");
-		 Veiling veil = new Veiling(0, "freak", "superfreak original", null, 5, gebdat, freak, cat, false);
-		  impl.create(veil);
-		  veil = impl.read("freak");
-		  System.out.println(veil);
-		  veil = new Veiling(0, "freak", "superfreak non-original", null, 5, gebdat, freak, cat, true);
-		  impl.update("0", veil);
-		  impl.delete("0");
-		 ArrayList<Veiling> array = impl.getAll();
-		 System.out.println(array.toString());
+	@Test
+	public void testVeilingDAO() {
+		VeilingDAOImpl veilingImpl = new VeilingDAOImpl();
+		PersoonDAOImpl persoonImpl = new PersoonDAOImpl();
+		CategorieDAOImpl categorieImpl = new CategorieDAOImpl();
+		Categorie c = (Categorie)categorieImpl.read("Gereedschap");
+		Gebruiker p = (Gebruiker)persoonImpl.read("freek");
+		Calendar eindtijd = Calendar.getInstance();
+		Veiling v1 = new Veiling(0, "Zippo", "Steekt dingen aan", "http://upload.wikimedia.org/wikipedia/commons/7/75/Zippo_burning_with_black_background.jpg", 20, eindtijd, p, c, false);
+		veilingImpl.create(v1);
+		Veiling v2 = veilingImpl.read("0");
+		assertEquals("Create van v1 mislukt", v1, v2);
+		Veiling v3 = new Veiling(0, "Zippo", "Steekt dingen aan", "http://upload.wikimedia.org/wikipedia/commons/7/75/Zippo_burning_with_black_background.jpg", 30, eindtijd, p, c, false);
+		veilingImpl.update("0", v3);
+		assertEquals("Update van v1 mislukt", v1, v3);
+		veilingImpl.delete("0");
+		v1 = veilingImpl.read("0");
+		assertEquals("Delete van v1 mislukt", v1, null);
 	}
 }
