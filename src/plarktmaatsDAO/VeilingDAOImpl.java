@@ -1,5 +1,6 @@
 package plarktmaatsDAO;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -384,9 +385,19 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		Date eindtijdstip = new java.sql.Date(eind.getTimeInMillis());
 		List<String[]> array = new ArrayList<String[]>();
 		Connection con = connect();
+		
+		CallableStatement callableStatement = null;
+		try {
+			callableStatement = con.prepareCall("{call inkomstenoverzicht_procedure}");
+			callableStatement.executeUpdate();
+		} catch (SQLException e1) {
+			
+		}
+		
+		
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "
-					+ ConnectionData.DATABASE + ".\"INKOMSTENOVERZICHT\" WHERE tijdstip >= To_Date('"+ begintijdstip+"','yyyy-mm-dd') AND tijdstip <= To_Date('"+eindtijdstip+"','yyyy-mm-dd') ORDER BY bedrag DESC");
+					+ ConnectionData.DATABASE + ".\"INKOMSTENOVERZICHT\" WHERE eindtijd >= To_Date('"+ begintijdstip+"','yyyy-mm-dd') AND eindtijd < To_Date('"+eindtijdstip+"','yyyy-mm-dd') ORDER BY bedrag DESC");
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {
 				String[] inkomsten;

@@ -46,13 +46,13 @@ public abstract class ProjectTools {
 	}
 
 	public static String CalendarToString(Calendar c) {
-		return "" + c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-"
+		return "" + c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-"
 				+ c.get(Calendar.DATE) + " " + c.get(Calendar.HOUR_OF_DAY)
 				+ ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
 	}
 	
 	public static String CalendarToNiceString(Calendar c) {
-		return "" + c.get(Calendar.DATE) + "-" + c.get(Calendar.MONTH) + "-"
+		return "" + c.get(Calendar.DATE) + "-" + (c.get(Calendar.MONTH) + 1) + "-"
 				+ c.get(Calendar.YEAR);
 	}
 

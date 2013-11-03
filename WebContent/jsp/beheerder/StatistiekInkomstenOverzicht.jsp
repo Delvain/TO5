@@ -11,6 +11,12 @@
 		<div class="container">
 			<h1>Statistiek: Inkomstenoverzicht</h1>
 			
+			<p>Voer hier een maand in. Als u geen geldige maand invoert wordt de laatste maand getoond!</p>
+			
+			<s:form action="StatistiekInkomstenOverzicht">
+				<s:textfield name="maand" label="Maand (mm-yyyy)"/>
+				<s:submit value="Inkomsten van deze maand" />
+			</s:form>
 			<table>
 				<thead>
 					<tr>
