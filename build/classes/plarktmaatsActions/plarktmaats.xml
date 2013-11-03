@@ -144,6 +144,9 @@
 		<action name="StatistiekHoogsteBieding" class="plarktmaatsActions.beheerder.StatistiekHoogsteBiedingen">
 			<result name="success">/jsp/beheerder/StatistiekHoogsteBiedingen.jsp</result>
 		</action>
+		<action name="StatistiekInkomstenOverzicht" class="plarktmaatsActions.beheerder.StatistiekInkomstenOverzicht">
+			<result name="success">/jsp/beheerder/StatistiekInkomstenOverzicht.jsp</result>
+		</action>
 	</package>
 	
 </struts>

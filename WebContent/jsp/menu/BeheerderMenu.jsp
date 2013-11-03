@@ -17,6 +17,7 @@
 			
 			<p>Statistieken</p>
 			<a href="<s:url action='StatistiekHoogsteBieding' namespace="/beheerder"/>">Hoogste biedingen</a><br/>
+			<a href="<s:url action='StatistiekInkomstenOverzicht' namespace="/beheerder"/>">Inkomstenoverzicht</a><br/>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
 	</body>

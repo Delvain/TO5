@@ -227,13 +227,13 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 					geblokkeerd = true;
 				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag,
 						eindtijd, aanbieder, cat, geblokkeerd);
-				array.add(v);
 				BodDAOImpl bodDAO = new BodDAOImpl();
 				ArrayList<Bod> alleBiedingen = bodDAO.getAll();
 				for(Bod b : alleBiedingen) {
 					if(b.getVeilingId().equals(id+""))
 						v.voegBodToe(b);
 				}
+				array.add(v);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -315,8 +315,37 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<String[]> getInkomstenOverzicht(Calendar begin, Calendar eind) {
+		Date begintijdstip = new java.sql.Date(begin.getTimeInMillis());
+		Date eindtijdstip = new java.sql.Date(eind.getTimeInMillis());
+		List<String[]> array = new ArrayList<String[]>();
+		Connection con = connect();
+		try {
+			PreparedStatement read = con.prepareStatement("SELECT * FROM "
+					+ ConnectionData.DATABASE + ".\"INKOMSTENOVERZICHT\" WHERE tijdstip >= To_Date('"+ begintijdstip+"','yyyy-mm-dd') AND tijdstip <= To_Date('"+eindtijdstip+"','yyyy-mm-dd') ORDER BY bedrag DESC");
+			ResultSet rs = read.executeQuery();
+			while (rs.next()) {
+				String[] inkomsten;
+				int id = rs.getInt("VEILING_ID");
+				String naam = rs.getString("VEILING_NAAM");
+				int bedrag = rs.getInt("BEDRAG");
+				Date eindtijdTemp = rs.getDate("EINDTIJD");
+				Calendar eindtijd = Calendar.getInstance();
+				eindtijd.setTime(eindtijdTemp);
+				
+				inkomsten = new String[] {"" +id, naam, "" + bedrag, ProjectTools.CalendarToNiceString(eindtijd) };
+				array.add(inkomsten);
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	private Connection connect() { // DONE
+		return array;
+	}
+
+	private Connection connect() {
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			return DriverManager.getConnection(ConnectionData.HOST,
