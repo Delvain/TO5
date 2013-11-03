@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Gebruiker;
+import tools.ProjectTools;
 
 public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 
@@ -21,11 +22,11 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 		if (tijdstip == null) {
 			tijdstip = Calendar.getInstance();
 		}
-		Date bodtijdstip = new java.sql.Date(tijdstip.getTimeInMillis());
+		String bodtijdstip = ProjectTools.CalendarToString(tijdstip);
 		String gebruikersNaam = b.getBieder().getGebruikersnaam();
 		String veilingId = b.getVeilingId();
 		
-		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"BIEDINGEN\" VALUES (seq_bod.nextval, '"+bedrag+"', To_Date('"+bodtijdstip+"','yyyy-mm-dd'), '"+gebruikersNaam+"', '"+veilingId+"')";
+		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"BIEDINGEN\" VALUES (seq_bod.nextval, '"+bedrag+"', To_Date('"+bodtijdstip+"','yyyy-mm-dd HH24:MI:SS'), '"+gebruikersNaam+"', '"+veilingId+"')";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
@@ -156,11 +157,11 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 		if (tijdstip == null) {
 			tijdstip = Calendar.getInstance();
 		}
-		Date bodtijdstip = new java.sql.Date(tijdstip.getTimeInMillis());
+		String bodtijdstip = ProjectTools.CalendarToString(tijdstip);
 		String gebruikersNaam = b.getBieder().getGebruikersnaam();
 		
 		String query = 	"UPDATE \"STUD1630460\".\"BIEDINGEN\" ";
-		query +=		"SET id='"+id+"',bedrag='"+bedrag+"',tijdstip= To_Date('"+bodtijdstip+"','yyyy-mm-dd'),gebruikers_gebruikersnaam='"+gebruikersNaam+"' ";
+		query +=		"SET id='"+id+"',bedrag='"+bedrag+"',tijdstip= To_Date('"+bodtijdstip+"','yyyy-mm-dd HH24:MI:SS'),gebruikers_gebruikersnaam='"+gebruikersNaam+"' ";
 		query +=		"WHERE id = '"+primaryKey+"'";
 		Connection con = connect();
 		try {

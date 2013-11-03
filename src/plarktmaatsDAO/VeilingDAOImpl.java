@@ -250,14 +250,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String omschrijving = v.getVeilingOmschrijving();
 		int minbedrag = v.getMinBedrag();
 		Calendar eindtijd = v.getEindTijd();
-		Date einddatum = null;
-		if (eindtijd != null) {
-			einddatum = new java.sql.Date(eindtijd.getTimeInMillis());
-		} else {
-			Calendar morgen = Calendar.getInstance();
-			morgen.add(Calendar.DAY_OF_MONTH, 1);
-			einddatum = new java.sql.Date(morgen.getTimeInMillis());
-		}
+		String einddatum = ProjectTools.CalendarToString(eindtijd);
 
 		String gebruikersNaam = v.getAanbieder().getGebruikersnaam();
 		String categorieNaam = v.getDeCategorie().getNaam();
@@ -270,7 +263,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		query += "SET id='" + id + "',naam='" + naam + "',omschrijving='"
 				+ omschrijving + "',minbedrag='" + minbedrag
 				+ "',eindtijd= To_Date('" + einddatum
-				+ "','yyyy-mm-dd'),gebruikers_gebruikersnaam='"
+				+ "','yyyy-mm-dd HH24:MI:SS'),gebruikers_gebruikersnaam='"
 				+ gebruikersNaam + "',categorieen_naam='" + categorieNaam
 				+ "',foto='" + foto + "', geblokkeerd='"+geblokkeerd+"' ";
 		query += "WHERE id = '" + pk + "'";

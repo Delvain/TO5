@@ -24,6 +24,6 @@ public class PersoonTest {
 		assertEquals("Update van Persoon faalt", jonathan, p);
 		impl.delete("jonathan");
 		p = (Gebruiker)impl.read("jonathan");
-		assertEquals("Create of read van Persoon faalt", p, null);
+		assertEquals("Delete van Persoon faalt", p, null);
 	}
 }
