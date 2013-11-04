@@ -36,7 +36,7 @@
 						<a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a>
 						<div class="imgBox">
 							<object data="<s:property value="foto" />">
-    							<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Vraagteken.png" />
+    							<img src="/TO5/style/images/Vraagteken.png" />
   							</object>
 						</div>
 						<input type="button" class="bieden" value="Bieden" onclick="javascript: window.location='<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>'" />

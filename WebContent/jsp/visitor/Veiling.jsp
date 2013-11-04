@@ -34,7 +34,7 @@
 			<h1><s:property value="veiling.VeilingNaam" /></h1>
 			<div class="left">
 				<object data="<s:property value="veiling.foto" />">
-    				<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Vraagteken.png" />
+    				<img src="/TO5/style/images/Vraagteken.png" />
   				</object>
 				<s:form action="VoegBodToe" namespace="/member">
 					<s:hidden name="id" value="%{veiling.veilingId}" />
