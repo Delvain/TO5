@@ -65,6 +65,7 @@
 		</action>
 		<action name="KoopCredits" class="plarktmaatsActions.gebruikers.KoopCredits">
 			<result name="success" type="redirectAction">Menu</result>
+			<result name="input">/jsp/member/KoopCredits.jsp</result>
 		</action>
 		<action name="VoegVeilingToeForm" class="plarktmaatsActions.visitor.AlleCategorieen">
 			<interceptor-ref name="store">
