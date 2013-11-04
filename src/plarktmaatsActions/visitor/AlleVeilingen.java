@@ -19,21 +19,22 @@ public class AlleVeilingen extends ActionSupport {
 			items = dAI.getAll();
 		} catch(NullPointerException e) {}
 		
-		ArrayList<Veiling> tempGesloten = new ArrayList<Veiling>();
-		ArrayList<Veiling> tempOpen		= new ArrayList<Veiling>();
+		ArrayList<Veiling> tempGesloten = new ArrayList<Veiling>(); //Lijst van gesloten veilingen
+		ArrayList<Veiling> tempOpen		= new ArrayList<Veiling>();// Lijst van open veilingen
 		
 		for(Veiling v : items) {
 			Calendar nu = Calendar.getInstance();
 			if(nu.getTime().getTime() < v.getEindTijd().getTime().getTime())
-				tempOpen.add(v);
-			else
-				tempGesloten.add(v);
+				tempOpen.add(v); //open toevoegen aan tempOpen
+			else 
+				tempGesloten.add(v); //Gesloten toevoegen aan tempGesloten
 		}
 		
-		items = new ArrayList<Veiling>();
+		items = new ArrayList<Veiling>(); //items leegmaken
 		
+		//Eerst alle open veilingen, dan de gesloten:
 		for(Veiling v : tempOpen) {
-			items.add(v);
+			items.add(v); 
 		}
 		for(Veiling v : tempGesloten) {
 			items.add(v);

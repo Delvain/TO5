@@ -17,6 +17,7 @@ public class CreditsAJAX extends ActionSupport {
 		
 		PersoonDAOImpl pDI = new PersoonDAOImpl();
 		
+		//credits ophalen van een gebruiker
 		String creditsTemp = pDI.getCredits(gebruikersnaam);
 		if(creditsTemp != null)
 			credits = "U heeft " + creditsTemp + " credits.";
