@@ -88,6 +88,10 @@
 			</result>
 			<result name="input">/jsp/member/BodErrors.jsp</result>
 		</action>
+		<action name="VerwijderVeiling" class="plarktmaatsActions.beheerder.VerwijderVeiling">
+			<result name="success" type="redirectAction">Menu</result>
+			<result name="input">/jsp/member/MijnAccount.jsp</result>
+		</action>
 		<action name="PasGegevensAanForm">
 			<result name="success">/jsp/member/GegevensAanpassen.jsp</result>
 		</action>

@@ -26,7 +26,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	private String img;
 	private String minbedrag;
 	private String strDuur;
-	private int duur = 0;
+	private int duur;
 	private Calendar eindTijd = Calendar.getInstance();
 	private Persoon user;
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -35,6 +35,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		Categorie cat = new Categorie(categorie);
 		int id = 0; // goede id wordt opgezocht in de database bij het
 					// insert-statement mbv een sequence
+		duur = Integer.parseInt(strDuur);
 		Gebruiker gebruiker = (Gebruiker) user;
 		eindTijd.add(Calendar.HOUR_OF_DAY, duur);
 		int min = Integer.parseInt(minbedrag);
@@ -75,7 +76,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		}
 		// checken of duur een getal is
 				try {
-					int duur = Integer.parseInt(strDuur);
+					duur = Integer.parseInt(strDuur);
 					if (duur < 0) {
 						addFieldError("strDuur","Duur mag geen negatief getal zijn!");
 					}
