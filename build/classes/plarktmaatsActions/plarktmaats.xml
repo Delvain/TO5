@@ -60,6 +60,9 @@
 		<action name="PersoonPagina" class="plarktmaatsActions.gebruikers.PersoonPagina">
 			<result name="success">/jsp/member/PersoonPagina.jsp</result>
 		</action>
+		<action name="KoopCreditsForm">
+			<result name="success">/jsp/member/KoopCredits.jsp</result>
+		</action>
 		<action name="KoopCredits" class="plarktmaatsActions.gebruikers.KoopCredits">
 			<result name="success" type="redirectAction">Menu</result>
 		</action>

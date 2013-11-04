@@ -4,7 +4,7 @@
 		<a class="logo" href="<s:url action="Menu" namespace="/visitor" />">&nbsp;</a>
 		<div class="right">
 			<p>
-				<a href="<s:url action='KoopCredits' namespace="/member"/>" class="plaats_ad_but">Koop Credits</a> |
+				<a href="<s:url action='KoopCreditsForm' namespace="/member"/>" class="plaats_ad_but">Koop Credits</a> |
 				<a href="<s:url action='PasGegevensAanForm' namespace="/member"/>" class="plaats_ad_but">Pas gegevens aan</a> |
 				<a href="<s:url action='PersoonPagina' namespace="/member"/>">Mijn Account</a> |
 				<a href="<s:url action='LoginForm' namespace="/visitor"/>">Log in</a> |

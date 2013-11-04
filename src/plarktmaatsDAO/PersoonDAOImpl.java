@@ -162,10 +162,10 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		}
 	}
 	
-	public void addCredits(String pk) {
+	public void addCredits(String pk, int credits) {
 		String query = 	"UPDATE \"STUD1630460\".\"GEBRUIKERS\" ";
-		query +=		"SET credits= credits + 100";
-		query +=		"WHERE gebruikersnaam = '"+pk+"'";
+		query +=		"SET credits= credits + " + credits;
+		query +=		" WHERE gebruikersnaam = '"+pk+"'";
 		Connection con = connect();
 		try {
 			con.createStatement().execute(query);
