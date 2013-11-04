@@ -5,12 +5,14 @@
 		<div class="right">
 			<p>
 				<s:if test="%{#session.user instanceof plarktmaatsDomein.Beheerder}">
+					<a href="<s:url action="Menu" namespace="/beheerder" />">Beheerdersmenu</a> |
 					<a href="<s:url action="Logout" namespace="/member" />">Log uit</a>
 				</s:if>
 				<s:elseif test="%{#session.user instanceof plarktmaatsDomein.Gebruiker}">
 					<a href="<s:url action='KoopCreditsForm' namespace="/member"/>" class="plaats_ad_but">Koop Credits</a> |
 					<a href="<s:url action='PasGegevensAanForm' namespace="/member"/>" class="plaats_ad_but">Pas gegevens aan</a> |
 					<a href="<s:url action='PersoonPagina' namespace="/member"/>">Mijn Account</a> |
+					<a href="<s:url action="Logout" namespace="/member" />">Log uit</a>
 				</s:elseif>
 				<s:else>
 					<a href="<s:url action='LoginForm' namespace="/visitor"/>">Log in</a> |
@@ -24,7 +26,15 @@
 <div class="top_bar">
 	<div class="content">
 		<a href="<s:url action='VoegVeilingToeForm' namespace="/member"/>" class="plaats_ad_but">&nbsp;</a>
-		<p class="welkom">Welkom, <s:property value="%{#session.user.gebruikersnaam}" />. U heeft 290 Credits.</p>
+		<s:if test="%{#session.user instanceof plarktmaatsDomein.Beheerder}">
+			<p class="welkom">Welkom, <s:property value="%{#session.user.gebruikersnaam}" />.</p>
+		</s:if>
+		<s:elseif test="%{#session.user instanceof plarktmaatsDomein.Gebruiker}">
+			<p class="welkom">Welkom, <s:property value="%{#session.user.gebruikersnaam}" />. U heeft <s:property value="%{#session.user.credits}" /> Credits.</p>
+		</s:elseif>
+		<s:else>
+			<p class="welkom">Welkom, <a href="<s:url action="LoginForm" namespace="/visitor" />">log in</a> of <a href="<s:url action="CreateAccountForm" namespace="/visitor" />">maak een account</a>.</p>
+		</s:else>
 		<div class="search">
 			<form method="post" action="#zoeken">
 				<input type="text" name="q" /> <input type="submit" value="Zoek" />

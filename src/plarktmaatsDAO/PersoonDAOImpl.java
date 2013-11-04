@@ -2,7 +2,6 @@ package plarktmaatsDAO;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +11,7 @@ import java.util.Calendar;
 import plarktmaatsDomein.Beheerder;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Persoon;
+import tools.ConnectionHandler;
 
 public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
@@ -44,7 +44,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 			}
 		} 
 		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"GEBRUIKERS\" VALUES ('"+gebruikersnaam+"', '"+voornaam+"', '"+achternaam+"', '"+email+"', '"+functie+"', To_Date('"+gebdatum+"','yyyy-mm-dd'), '"+credits+"', '"+banknr+"', '"+geblokkeerd+"', '"+wachtwoord+"')";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -56,7 +56,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
 	@Override
 	public Persoon read(String pk) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"GEBRUIKERS\" WHERE gebruikersnaam = ?");
 			read.setString(1, pk);
@@ -90,7 +90,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 	
 	public ArrayList<Gebruiker> getAllGebruikers() {
 		ArrayList<Gebruiker> array = new ArrayList<Gebruiker>();
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "
 					+ ConnectionData.DATABASE + ".\"GEBRUIKERS\" ");
@@ -153,7 +153,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		String query = 	"UPDATE \"STUD1630460\".\"GEBRUIKERS\" ";
 		query +=		"SET gebruikersnaam='"+gebruikersnaam+"',voornaam='"+voornaam+"',achternaam='"+achternaam+"',email='"+email+"',functie='"+functie+"',gebdatum= To_Date('"+gebdatum+"','yyyy-mm-dd'),credits='"+credits+"',banknr='"+banknr+"',geblokkeerd='"+geblokkeerd+"',wachtwoord='"+wachtwoord+"' ";
 		query +=		"WHERE gebruikersnaam = '"+pk+"'";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -166,7 +166,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		String query = 	"UPDATE \"STUD1630460\".\"GEBRUIKERS\" ";
 		query +=		"SET credits= credits + " + credits;
 		query +=		" WHERE gebruikersnaam = '"+pk+"'";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -177,7 +177,7 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 
 	@Override
 	public void delete(String pk) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"GEBRUIKERS\" WHERE gebruikersnaam = ?");
 			delete.setString(1, pk);
@@ -186,15 +186,5 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private Connection connect() { //DONE
-		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			return DriverManager.getConnection(ConnectionData.HOST, ConnectionData.USERNAME, ConnectionData.PASSWORD);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 }

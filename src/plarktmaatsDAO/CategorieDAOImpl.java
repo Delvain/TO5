@@ -1,12 +1,13 @@
 package plarktmaatsDAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import plarktmaatsDomein.Categorie;
+import tools.ConnectionHandler;
 
 public class CategorieDAOImpl implements PlarktmaatsDAOInterface<Categorie> {
 
@@ -15,7 +16,7 @@ public class CategorieDAOImpl implements PlarktmaatsDAOInterface<Categorie> {
 		String naam = c.getNaam();
 				
 		String query = "INSERT INTO "+ConnectionData.DATABASE+".\"CATEGORIEEN\" VALUES ('"+naam+"')";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -26,7 +27,7 @@ public class CategorieDAOImpl implements PlarktmaatsDAOInterface<Categorie> {
 
 	@Override
 	public Categorie read(String pk) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"CATEGORIEEN\" WHERE NAAM = ?");
 			read.setString(1, pk);
@@ -44,7 +45,7 @@ public class CategorieDAOImpl implements PlarktmaatsDAOInterface<Categorie> {
 	
 	public ArrayList<Categorie> getAll() {
 		ArrayList<Categorie> array = new ArrayList<Categorie>();
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "+ConnectionData.DATABASE+".\"CATEGORIEEN\" ");
 			ResultSet rs = read.executeQuery();
@@ -66,7 +67,7 @@ public class CategorieDAOImpl implements PlarktmaatsDAOInterface<Categorie> {
 		String query = 	"UPDATE \"STUD1630460\".\"CATEGORIEEN\" ";
 		query +=		"SET naam='"+naam+"' ";
 		query +=		"WHERE naam = '"+pk+"'";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -77,7 +78,7 @@ public class CategorieDAOImpl implements PlarktmaatsDAOInterface<Categorie> {
 
 	@Override
 	public void delete(String pk) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement delete = con.prepareStatement("DELETE FROM "+ConnectionData.DATABASE+".\"CATEGORIEEN\" WHERE naam = ?");
 			delete.setString(1, pk);
@@ -86,15 +87,5 @@ public class CategorieDAOImpl implements PlarktmaatsDAOInterface<Categorie> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private Connection connect() { //DONE
-		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			return DriverManager.getConnection(ConnectionData.HOST, ConnectionData.USERNAME, ConnectionData.PASSWORD);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 }

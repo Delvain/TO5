@@ -2,7 +2,6 @@ package plarktmaatsDAO;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +15,7 @@ import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Categorie;
 import plarktmaatsDomein.Gebruiker;
 import plarktmaatsDomein.Veiling;
+import tools.ConnectionHandler;
 import tools.ProjectTools;
 
 public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
@@ -35,7 +35,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		if(v.getGeblokkeerd())
 			geblokkeerd = 1;
 		String query = "INSERT INTO " + ConnectionData.DATABASE	+ ".\"VEILINGEN\" VALUES (seq_veiling.nextval, '" + naam + "', '" + omschrijving + "', '" + minbedrag + "', To_Date('" + einddatum + "','yyyy-mm-dd HH24:MI:SS'), '" + gebruikersNaam + "', '" + categorieNaam + "', '" + foto + "', "+geblokkeerd+")";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -46,7 +46,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 	@Override
 	public Veiling read(String pk) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "
 					+ ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE ID = ?");
@@ -91,7 +91,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	
 	//Ophalen alle veilingen van een specifieke gebruiker
 	public List<Veiling> mijnVeilingen(String gebruikersNaam) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		ArrayList<Veiling> mijnVeilingen = new ArrayList<Veiling>();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE GEBRUIKERS_GEBRUIKERSNAAM = ?");
@@ -125,7 +125,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 	//Ophalen alle biedingen van een specifieke gebruiker
 	public List<Bod> mijnBiedingen(String gebruikersNaam) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		ArrayList<Bod> mijnBiedingen = new ArrayList<Bod>();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"BIEDINGEN\" WHERE GEBRUIKERS_GEBRUIKERSNAAM = ?");
@@ -152,7 +152,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	
 	//Ophalen alle veilingen van een specifieke gebruiker
 	public List<Veiling> zoekVeiling(String zoekterm) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		ArrayList<Veiling> zoekResultaten = new ArrayList<Veiling>();
 		try {
 			//Zoek op naam
@@ -216,7 +216,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	//Ophalen van de veilingNaam (voor de associate tussen bod en veiling; in bod bestaat alleen een verwijzing dmv veilingId)
 	public String getVeilingNaam(String veilingId) {
 		String veilingNaam = null;
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		String query = "SELECT naam FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE id = " + veilingId;
 		
 		try {
@@ -234,7 +234,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	public ArrayList<String> readBedragTijd(int pk) {
 		ArrayList<String> returnVal = new ArrayList<String>();
 		
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			String read = "SELECT minbedrag, eindtijd FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE ID = "+pk;
 			ResultSet rs = con.createStatement().executeQuery(read);
@@ -265,7 +265,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	
 	public ArrayList<Veiling> getAll() {
 		ArrayList<Veiling> array = new ArrayList<Veiling>();
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement read = con.prepareStatement("SELECT * FROM "
 					+ ConnectionData.DATABASE + ".\"VEILINGEN\" ORDER BY eindtijd ASC");
@@ -331,7 +331,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				+ gebruikersNaam + "',categorieen_naam='" + categorieNaam
 				+ "',foto='" + foto + "', geblokkeerd='"+geblokkeerd+"' ";
 		query += "WHERE id = '" + pk + "'";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -344,7 +344,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String query = "UPDATE \"STUD1630460\".\"VEILINGEN\" ";
 		query += "SET geblokkeerd='1'";
 		query += "WHERE id = '" + pk + "'";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -357,7 +357,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		String query = "UPDATE \"STUD1630460\".\"VEILINGEN\" ";
 		query += "SET geblokkeerd='0'";
 		query += "WHERE id = '" + pk + "'";
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			con.createStatement().execute(query);
 			con.close();
@@ -368,7 +368,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 
 	@Override
 	public void delete(String pk) {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		try {
 			PreparedStatement delete = con.prepareStatement("DELETE FROM "
 					+ ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE id = ?");
@@ -381,7 +381,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	}
 	
 	public String verwerkVeilingen() {
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		
 		CallableStatement callableStatement = null;
 		try {
@@ -411,7 +411,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		Date begintijdstip = new java.sql.Date(begin.getTimeInMillis());
 		Date eindtijdstip = new java.sql.Date(eind.getTimeInMillis());
 		List<String[]> array = new ArrayList<String[]>();
-		Connection con = connect();
+		Connection con = ConnectionHandler.connect();
 		
 		CallableStatement callableStatement = null;
 		try {
@@ -446,17 +446,6 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return array;
 	}
 
-	private Connection connect() {
-		try {
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			return DriverManager.getConnection(ConnectionData.HOST,
-					ConnectionData.USERNAME, ConnectionData.PASSWORD);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	public static void main(String[] args) {
 		Calendar c = Calendar.getInstance();
 		System.out.println(ProjectTools.CalendarToString(c));
