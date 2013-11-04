@@ -2,13 +2,9 @@ package plarktmaatsActions.gebruikers;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
 
 import plarktmaatsAware.UserAware;
 import plarktmaatsDAO.BodDAOImpl;
-import plarktmaatsDAO.PersoonDAOImpl;
 import plarktmaatsDAO.VeilingDAOImpl;
 import plarktmaatsDomein.Bod;
 import plarktmaatsDomein.Gebruiker;
@@ -18,12 +14,11 @@ import tools.ProjectTools;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class VoegBodToe extends ActionSupport implements UserAware, SessionAware {
+public class VoegBodToe extends ActionSupport implements UserAware {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String credits;
 	private Persoon user;
-	private Map<String, Object> session;
 
 	public String execute() {
 		Gebruiker g = (Gebruiker)user;
@@ -31,10 +26,6 @@ public class VoegBodToe extends ActionSupport implements UserAware, SessionAware
 		Bod b = new Bod(0, bedrag, g, id);
 		BodDAOImpl bodDAO = new BodDAOImpl();
 		bodDAO.create(b);
-		
-		PersoonDAOImpl persoonDAO = new PersoonDAOImpl();
-		Persoon ingelodePersoonUpdate = persoonDAO.read(user.getGebruikersnaam());
-		session.put("user", ingelodePersoonUpdate);
 		
 		return SUCCESS;
 	}
@@ -99,9 +90,5 @@ public class VoegBodToe extends ActionSupport implements UserAware, SessionAware
 	@Override
 	public void setUser(Persoon user) {
 		this.user = user;
-	}
-	@SuppressWarnings("rawtypes")
-	public void setSession(Map session) {
-		this.session = session;	
 	}
 }

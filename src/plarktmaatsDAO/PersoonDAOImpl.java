@@ -187,4 +187,19 @@ public class PersoonDAOImpl implements PlarktmaatsDAOInterface<Persoon> {
 			e.printStackTrace();
 		}
 	}
+
+	public String getCredits(String pk) {
+		Connection con = ConnectionHandler.connect();
+		try {
+			String query = "SELECT credits FROM "+ConnectionData.DATABASE+".\"GEBRUIKERS\" WHERE gebruikersnaam = '"+pk+"'";
+			ResultSet rs = con.createStatement().executeQuery(query);
+			while(rs.next()) {
+				return rs.getString("CREDITS");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

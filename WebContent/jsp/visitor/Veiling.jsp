@@ -5,15 +5,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="/TO5/style/veiling.css" />
 		<jsp:include page="/jsp/include/head.jsp" />
-		<script type="text/javascript">
-            function getRequestObject(){
-           		if (window.ActiveXObject){
-            		return (new ActiveXObject("Microsoft.XMLHTTP"));
-            	} else if (window.XMLHttpRequest){
-            		return(new XMLHttpRequest());
-            	}
-            }
-            
+		<script type="text/javascript">      
             function sendRequest(id){
             	var request = getRequestObject();
             	request.onreadystatechange = function() {

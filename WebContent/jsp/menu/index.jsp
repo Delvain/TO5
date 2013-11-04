@@ -5,14 +5,6 @@
 	<head>
 		<jsp:include page="/jsp/include/head.jsp" />
 		<script type="text/javascript">
-            function getRequestObject(){
-           		if (window.ActiveXObject){
-            		return (new ActiveXObject("Microsoft.XMLHTTP"));
-            	} else if (window.XMLHttpRequest){
-            		return(new XMLHttpRequest());
-            	}
-            }
-            
             function sendRequest(id, index){
             	var request = getRequestObject();
             	request.onreadystatechange = function() {

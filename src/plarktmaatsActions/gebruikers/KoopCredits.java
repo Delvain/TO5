@@ -1,9 +1,5 @@
 package plarktmaatsActions.gebruikers;
 
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
 import plarktmaatsAware.UserAware;
 import plarktmaatsDAO.PersoonDAOImpl;
 import plarktmaatsDomein.Gebruiker;
@@ -13,21 +9,15 @@ import tools.ProjectTools;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
-public class KoopCredits extends ActionSupport implements UserAware, SessionAware {
+public class KoopCredits extends ActionSupport implements UserAware {
 	private Persoon user;
 	String credits;
 	int creds;
-	private Map<String, Object> session;
 	
 	public String execute() {
 		PersoonDAOImpl pdi = new PersoonDAOImpl();
 		pdi.addCredits(user.getGebruikersnaam(), creds);
-		
-		//gewijzigde gebruiker in sessie zetten
-		PersoonDAOImpl persoonDAO = new PersoonDAOImpl();
-		Persoon ingelodePersoonUpdate = persoonDAO.read(user.getGebruikersnaam());
-		session.put("user", ingelodePersoonUpdate);
-		
+				
 		return SUCCESS;
 	}
 	
@@ -61,10 +51,5 @@ public class KoopCredits extends ActionSupport implements UserAware, SessionAwar
 
 	public void setCredits(String credits) {
 		this.credits = credits;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public void setSession(Map session) {
-		this.session = session;	
 	}
 }

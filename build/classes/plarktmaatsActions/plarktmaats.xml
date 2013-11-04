@@ -54,6 +54,9 @@
 		<action name="Menu" class="plarktmaatsActions.visitor.AlleVeilingen">
 			<result>/jsp/menu/index.jsp</result>
 		</action>
+		<action name="CreditsAJAX" class="plarktmaatsActions.gebruikers.CreditsAJAX">
+			<result name="success">/jsp/ajax/credits.jsp</result>
+		</action>
 		<action name="Logout" class="plarktmaatsActions.gebruikers.Logout">
 			<result type="redirectAction">Menu</result>
 		</action>

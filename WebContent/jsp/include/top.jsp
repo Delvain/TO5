@@ -1,4 +1,18 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<script type="text/javascript">
+            function sendRequestCredits(geb){
+            	var request = getRequestObject();
+            	request.onreadystatechange = function() {
+            		if((request.readyState == 4) && (request.status == 200)){
+                   			var serverResponse = request.responseText;
+                			document.getElementById("creditsAJAX").innerHTML=serverResponse;
+                	}
+            	};
+            	request.open("GET", "/TO5/member/CreditsAJAX.action?gebruikersnaam="+geb, true);
+            	request.send(null);
+            	setTimeout(function() {sendRequestCredits(geb);},5000);
+            }
+		</script>
 <div class="header">
 	<div class="content">
 		<a class="logo" href="<s:url action="Menu" namespace="/visitor" />">&nbsp;</a>
@@ -30,7 +44,9 @@
 			<p class="welkom">Welkom, <s:property value="%{#session.user.gebruikersnaam}" />.</p>
 		</s:if>
 		<s:elseif test="%{#session.user instanceof plarktmaatsDomein.Gebruiker}">
-			<p class="welkom">Welkom, <s:property value="%{#session.user.gebruikersnaam}" />. U heeft <s:property value="%{#session.user.credits}" /> Credits.</p>
+			<p class="welkom">Welkom, <s:property value="%{#session.user.gebruikersnaam}" />.
+			<script>sendRequestCredits('<s:property value="%{#session.user.gebruikersnaam}" />');</script>
+			<span id="creditsAJAX">Laden...</span></p>
 		</s:elseif>
 		<s:else>
 			<p class="welkom">Welkom, <a href="<s:url action="LoginForm" namespace="/visitor" />">log in</a> of <a href="<s:url action="CreateAccountForm" namespace="/visitor" />">maak een account</a>.</p>
