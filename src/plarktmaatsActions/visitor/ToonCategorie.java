@@ -19,10 +19,10 @@ public class ToonCategorie extends ActionSupport {
 		
 		Categorie c = cDI.read(cat);
 		if(c == null)
-			return ActionSupport.INPUT;
+			return ActionSupport.INPUT; //Categorie bestaat niet
 		
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
-		veilingen = vDI.getAllByCategorie(cat);
+		veilingen = vDI.getAllByCategorie(cat); //alle veilingen van de categorie ophalen
 		
 		return SUCCESS;
 	}

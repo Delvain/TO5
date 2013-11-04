@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public abstract class ProjectTools {
 
-	public static boolean isNumeric(String s) {
+	public static boolean isNumeric(String s) { //check of String s kan worden gepars naar een int:
 		boolean b = true;
 
 		try {

@@ -21,11 +21,11 @@ public class AlleVeilingenAJAX extends ActionSupport {
 		
 		VeilingDAOImpl vDI = new VeilingDAOImpl();
 		try {
-			ArrayList<String> data = vDI.readBedragTijd(Integer.parseInt(id));
-			prijs = data.get(0);
+			ArrayList<String> data = vDI.readBedragTijd(Integer.parseInt(id)); //data ophalen
+			prijs = data.get(0); //data(0) prijs
 			String timerTemp = data.get(1);
 			if(Integer.parseInt(timerTemp) > 0)
-				timer = ProjectTools.SecToString(timerTemp);
+				timer = ProjectTools.SecToString(timerTemp); //Niet gesloten. Format naar mooie string
 			else
 				timer = "Gesloten";
 		} catch(Exception e) {
