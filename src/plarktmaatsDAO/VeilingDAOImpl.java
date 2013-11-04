@@ -267,8 +267,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		ArrayList<Veiling> array = new ArrayList<Veiling>();
 		Connection con = ConnectionHandler.connect();
 		try {
-			PreparedStatement read = con.prepareStatement("SELECT * FROM "
-					+ ConnectionData.DATABASE + ".\"VEILINGEN\" ORDER BY eindtijd ASC");
+			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE geblokkeerd = '0' ORDER BY eindtijd ASC");
 			ResultSet rs = read.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("ID");
