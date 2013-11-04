@@ -25,11 +25,13 @@
 			<s:iterator value="items" status="status">
 				<s:if test="%{#status.index < 3}">
 					<div class="item">
-						<a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a>
+						<a class="link" href="<s:url namespace="/visitor" action="ToonVeiling?id=%{VeilingId}" />"><s:property value="veilingNaam" /></a>
 						<div class="imgBox">
+						<a href="<s:url namespace="/visitor" action="ToonVeiling?id=%{VeilingId}" />">
 							<object data="<s:property value="foto" />">
     							<img src="/TO5/style/images/Vraagteken.png" />
   							</object>
+  						</a>
 						</div>
 						<input type="button" class="bieden" value="Bieden" onclick="javascript: window.location='<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>'" />
 						<s:div id="ajaxData%{#status.index}" />
