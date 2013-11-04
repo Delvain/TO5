@@ -26,18 +26,12 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	private String img;
 	private String minbedrag;
 	private String strDuur;
+	private int duur = 0;
 	private Calendar eindTijd = Calendar.getInstance();
 	private Persoon user;
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
-	public String execute() {
-		int duur = 0;
-		try {
-			duur = Integer.parseInt(strDuur);
-		} catch (NumberFormatException nfe) {
-			addFieldError("strDuur","Geen geldige duur!");
-		}
-		
+	public String execute() {		
 		Categorie cat = new Categorie(categorie);
 		int id = 0; // goede id wordt opgezocht in de database bij het
 					// insert-statement mbv een sequence
@@ -79,6 +73,15 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		} catch (NumberFormatException nfe) {
 			addFieldError("minbedrag", "Geen geldig minimumbod!");
 		}
+		// checken of duur een getal is
+				try {
+					int duur = Integer.parseInt(strDuur);
+					if (duur < 0) {
+						addFieldError("strDuur","Duur mag geen negatief getal zijn!");
+					}
+				} catch (NumberFormatException nfe) {
+					addFieldError("strDuur", "Geen geldige duur!");
+				}
 		// checken of productnaam goed is
 		if (productnaam.equals("")) {
 			addFieldError("productnaam", "Productnaam mag niet leeg zijn!");
