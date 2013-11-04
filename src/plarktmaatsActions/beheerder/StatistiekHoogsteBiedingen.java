@@ -31,10 +31,26 @@ public class StatistiekHoogsteBiedingen extends ActionSupport {
 		Bod bodweek = boddata.getHoogsteBodTussen(vorigeweek, vandaag);
 		Bod bodmaand = boddata.getHoogsteBodTussen(vorigemaand, vandaag);
 		Bod bodjaar = boddata.getHoogsteBodTussen(vorigjaar, vandaag);
-		dag = veilingdata.getVeilingNaam(boddag.getVeilingId());
-		week = veilingdata.getVeilingNaam(bodweek.getVeilingId());
-		maand = veilingdata.getVeilingNaam(bodmaand.getVeilingId());
-		jaar = veilingdata.getVeilingNaam(bodjaar.getVeilingId());
+		if (boddag != null) {
+			dag = veilingdata.getVeilingNaam(boddag.getVeilingId());
+		} else {
+			dag = "Geen biedingen in deze periode";
+		}
+		if (bodweek != null) {
+			week = veilingdata.getVeilingNaam(bodweek.getVeilingId());
+		} else {
+			week = dag;
+		}
+		if (bodmaand != null) {
+			maand = veilingdata.getVeilingNaam(bodmaand.getVeilingId());
+		} else {
+			maand = week;
+		}
+		if (jaar != null) {
+			jaar = veilingdata.getVeilingNaam(bodjaar.getVeilingId());
+		} else {
+			jaar = maand;
+		}
 		return SUCCESS;
 	}
 
