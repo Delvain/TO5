@@ -37,7 +37,7 @@
 			<div id="ajaxData">Laden...</div>
 			<script>sendRequest('<s:property value="veiling.VeilingId" />');</script>
 			<div class="right">
-				<p><b>Categorie:</b> <s:property value="veiling.deCategorie.naam" /></p>
+				<p><b>Categorie:</b> <a href="<s:url action="ToonCategorie?cat=%{veiling.deCategorie.naam}" namespace="/visitor" />"><s:property value="veiling.deCategorie.naam" /></a></p>
 				<p><b>Aangeboden door:</b> <s:property value="veiling.aanbieder.gebruikersnaam" /></p>
 				<p><b>Omschrijving:</b></p>
 				<p><s:property value="veiling.VeilingOmschrijving" /></p>

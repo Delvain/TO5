@@ -18,6 +18,9 @@
 		<action name="AlleVeilingenAJAX" class="plarktmaatsActions.visitor.AlleVeilingenAJAX">
 			<result name="success">/jsp/ajax/index.jsp</result>
 		</action>
+		<action name="CreditsAJAX" class="plarktmaatsActions.gebruikers.CreditsAJAX">
+			<result name="success">/jsp/ajax/credits.jsp</result>
+		</action>
 		<action name="LoginForm" >
 			<result name="success">/jsp/visitor/LoginForm.jsp</result>
 		</action>
@@ -28,6 +31,10 @@
 		</action>
 		<action name="ToonVeiling" class="plarktmaatsActions.visitor.ToonVeiling">
 			<result name="success">/jsp/visitor/Veiling.jsp</result>
+			<result name="input" type="redirectAction">Menu</result>
+		</action>
+		<action name="ToonCategorie" class="plarktmaatsActions.visitor.ToonCategorie">
+			<result name="success">/jsp/visitor/Categorie.jsp</result>
 			<result name="input" type="redirectAction">Menu</result>
 		</action>
 	</package>
@@ -53,9 +60,6 @@
 		
 		<action name="Menu" class="plarktmaatsActions.visitor.AlleVeilingen">
 			<result>/jsp/menu/index.jsp</result>
-		</action>
-		<action name="CreditsAJAX" class="plarktmaatsActions.gebruikers.CreditsAJAX">
-			<result name="success">/jsp/ajax/credits.jsp</result>
 		</action>
 		<action name="Logout" class="plarktmaatsActions.gebruikers.Logout">
 			<result type="redirectAction">Menu</result>

@@ -1,7 +1,7 @@
 package plarktmaatsDomein;
 
 public class Categorie {
-	private String 	naam;
+	private String naam;
 	
 	public Categorie(String nm) {
 		setNaam(nm);

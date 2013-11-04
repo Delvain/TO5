@@ -8,7 +8,7 @@
                 			document.getElementById("creditsAJAX").innerHTML=serverResponse;
                 	}
             	};
-            	request.open("GET", "/TO5/member/CreditsAJAX.action?gebruikersnaam="+geb, true);
+            	request.open("GET", "/TO5/visitor/CreditsAJAX.action?gebruikersnaam="+geb, true);
             	request.send(null);
             	setTimeout(function() {sendRequestCredits(geb);},5000);
             }

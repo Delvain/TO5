@@ -89,6 +89,50 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		return null;
 	}
 	
+	public ArrayList<Veiling> getAllByCategorie(String c) {
+		ArrayList<Veiling> array = new ArrayList<Veiling>();
+		Connection con = ConnectionHandler.connect();
+		try {
+			PreparedStatement read = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE geblokkeerd = '0' AND categorieen_naam = '"+c+"' ORDER BY eindtijd ASC");
+			ResultSet rs = read.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("ID");
+				String naam = rs.getString("NAAM");
+				String omschrijving = rs.getString("OMSCHRIJVING");
+				int minbedrag = rs.getInt("MINBEDRAG");
+				Date eindtijdTemp = rs.getDate("EINDTIJD");
+				Calendar eindtijd = Calendar.getInstance();
+				eindtijd.setTime(eindtijdTemp);
+				String gebruikersnaam = rs
+						.getString("GEBRUIKERS_GEBRUIKERSNAAM");
+				String categorienaam = rs.getString("CATEGORIEEN_NAAM");
+				String foto = rs.getString("FOTO");
+
+				PersoonDAOImpl persoonDAO = new PersoonDAOImpl();
+				Gebruiker aanbieder = (Gebruiker) persoonDAO.read(gebruikersnaam);
+				Categorie cat = new Categorie(categorienaam);
+				boolean geblokkeerd = false;
+				if(rs.getInt("GEBLOKKEERD") == 1)
+					geblokkeerd = true;
+				Veiling v = new Veiling(id, naam, omschrijving, foto, minbedrag,
+						eindtijd, aanbieder, cat, geblokkeerd);
+				BodDAOImpl bodDAO = new BodDAOImpl();
+				ArrayList<Bod> alleBiedingen = bodDAO.getAll();
+				for(Bod b : alleBiedingen) {
+					if(b.getVeilingId().equals(id+""))
+						v.voegBodToe(b);
+				}
+				array.add(v);
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return array;
+	}
+
+	
 	//Ophalen alle veilingen van een specifieke gebruiker
 	public List<Veiling> mijnVeilingen(String gebruikersNaam) {
 		Connection con = ConnectionHandler.connect();
