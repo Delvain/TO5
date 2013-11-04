@@ -17,7 +17,6 @@ div.container div.item {
 }
 
 div.container div.item a {
-	color: inherit;
 	font-size: 20px;
 	font-weight: bold;
 	overflow: hidden;
@@ -62,7 +61,4 @@ div.container div.item input.bieden {
 
 div.container p.meer {
 	margin: 0;
-}
-div.container p.meer a {
-	color: #000;
 }

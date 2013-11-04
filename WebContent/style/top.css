@@ -22,9 +22,6 @@ div.header div.content div.right p {
 	height: 100%;
 	margin-top: 15px;
 }
-div.header div.content div.right p a {
-	color: #000;
-}
 div.top_bar {
 	min-width: 1024px;
 	height: 69px;
