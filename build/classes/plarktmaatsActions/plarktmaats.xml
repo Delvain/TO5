@@ -8,6 +8,9 @@
 		<action name="Menu" class="plarktmaatsActions.visitor.AlleVeilingen">
 			<result>/jsp/menu/index.jsp</result>
 		</action>
+		<action name="CategorieBox" class="plarktmaatsActions.visitor.AlleCategorieen">
+			<result>/jsp/visitor/AlleCategorieen.jsp</result>
+		</action>
 		<action name="CreateAccountForm" >
 			<result name="success">/jsp/visitor/CreateAccountForm.jsp</result>
 		</action>

@@ -1,9 +1,6 @@
 package plarktmaatsActions.visitor;
 
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
 
 import plarktmaatsDAO.CategorieDAOImpl;
 import plarktmaatsDomein.Categorie;

@@ -11,6 +11,9 @@
 		<div class="container">
 			<h1><s:property value="cat" /></h1>
 			<br />
+			<s:if test="%{veilingen.isEmpty()}">
+				<p>Er zijn geen veilingen in deze categorie.</p>
+			</s:if>
 			<s:iterator value="veilingen" status="status">
 				<p>- <a href="<s:url action="ToonVeiling?id=%{veilingId}" />"><s:property value="veilingNaam" /></a></p>
 			</s:iterator>

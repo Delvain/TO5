@@ -37,13 +37,19 @@
 					</div>
 				</s:if>
 				<s:elseif test="%{#status.index == 3}">
+					<div style="float: left; margin-right: 30px">
 					<h2>Meer veilingen:</h2>
 					<p class="meer">- <a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></p>
 				</s:elseif>
 				<s:else>
 					<p class="meer">- <a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></p>
 				</s:else>
-			</s:iterator>			
+				<s:if test="%{#status.isLast()}"></div></s:if>
+			</s:iterator>
+			<div style="float: left">
+				<h2>Categorieën:</h2>
+				<s:action name="CategorieBox" executeResult="true" namespace="/visitor"></s:action>
+			</div>	
 			<div style="clear: both"></div>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
