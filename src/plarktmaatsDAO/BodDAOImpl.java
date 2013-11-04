@@ -75,7 +75,7 @@ public class BodDAOImpl implements PlarktmaatsDAOInterface<Bod> {
 			while(rs.next()) {
 				int id = rs.getInt("ID");
 				int bedrag = rs.getInt("BEDRAG");;
-				Date tijdstipTemp = rs.getDate("TIJDSTIP"); //rs.getDate("GEBDATUM");
+				Date tijdstipTemp = rs.getDate("TIJDSTIP");
 				Calendar tijdstip = Calendar.getInstance();
 				tijdstip.setTime(tijdstipTemp);
 				String gebruikersnaam = rs.getString("GEBRUIKERS_GEBRUIKERSNAAM");
