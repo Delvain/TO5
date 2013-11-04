@@ -159,7 +159,7 @@ public class Veiling {
 					&& this.veilingOmschrijving.equals(v.veilingOmschrijving)
 					&& this.foto.equals(v.foto)					
 					&& this.eindTijd.compareTo(v.eindTijd) == 0
-					&& this.aanbieder.getGebruikersnaam().equals(v.aanbieder.getGebruikersnaam())
+//					&& this.aanbieder.gebruikersnaam.equals(v.getAanbieder())
 					&& this.deCategorie.getNaam().equals(v.deCategorie.getNaam())
 					&& this.geblokkeerd == v.geblokkeerd	) {
 				equals = true;

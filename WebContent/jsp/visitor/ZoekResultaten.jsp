@@ -14,7 +14,7 @@
 				<p>Uw zoekterm heeft geen resultaten opgeleverd.</p>
 			</s:if>
 			<s:iterator value="zoekResultaten">
-				<a href="<s:url namespace="/visitor" action="ZoekVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a>
+				<p>- <a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></p>
 			</s:iterator>			
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
