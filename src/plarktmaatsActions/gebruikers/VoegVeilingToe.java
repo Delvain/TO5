@@ -25,20 +25,27 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 	private String productomschrijving;
 	private String img;
 	private String minbedrag;
-	private String eindDatum;
-	private String eindTijd;
-	private Calendar eindCalendar = Calendar.getInstance();
+	private String strDuur;
+	private Calendar eindTijd = Calendar.getInstance();
 	private Persoon user;
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
 	public String execute() {
+		int duur = 0;
+		try {
+			duur = Integer.parseInt(strDuur);
+		} catch (NumberFormatException nfe) {
+			addFieldError("strDuur","Geen geldige duur!");
+		}
+		
 		Categorie cat = new Categorie(categorie);
 		int id = 0; // goede id wordt opgezocht in de database bij het
 					// insert-statement mbv een sequence
 		Gebruiker gebruiker = (Gebruiker) user;
+		eindTijd.add(Calendar.HOUR_OF_DAY, duur);
 		int min = Integer.parseInt(minbedrag);
 		Veiling veiling = new Veiling(id, productnaam, productomschrijving,
-				img, min, eindCalendar, gebruiker, cat, false);
+				img, min, eindTijd, gebruiker, cat, false);
 		VeilingDAOImpl database = new VeilingDAOImpl();
 		database.create(veiling);
 		return SUCCESS;
@@ -49,7 +56,7 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		if (user instanceof Gebruiker) {
 			Gebruiker g = (Gebruiker) user;
 			if (g.getGeblokkeerd()) {
-				addFieldError("categorie", "Uw account is geblokkeerd");
+				addFieldError("categorie", "Uw account is geblokkeerd. Neem contact op met een beheerder.");
 			}
 		}
 		
@@ -85,52 +92,6 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		} else if (productomschrijving.length() > 250) {
 			addFieldError("productomschrijving","Productomschrijving mag maximaal 250 tekens zijn!");
 		}
-		
-		//checken of de datum klopt
-		if (!eindDatum.equals("")) {
-			try {
-				eindCalendar.setTime(df.parse(eindDatum));
-				Calendar vandaag = Calendar.getInstance();
-				if (eindCalendar.before(vandaag)) {
-					addFieldError("eindDatum","De datum mag niet in het verleden zijn!");
-				}
-			} catch (ParseException e) {
-				addFieldError("eindDatum","Geen geldige datum!");
-			}
-		} else {
-			addFieldError("eindDatum","Datum mag niet leeg zijn!");
-		}
-		
-		//checken of de tijd klopt
-		int uur = 12;
-		int minuut = 0;
-		if (eindTijd != "") {
-			if (eindTijd.contains(":")) {
-				String[] parts = eindTijd.split(":");
-				String strUur = parts[0];
-				String strMinuut = parts[1];
-				try {
-					uur = Integer.parseInt(strUur);
-					minuut = Integer.parseInt(strMinuut);
-					if (uur < 0 || uur > 23 || minuut < 0 || minuut > 59) {
-						addFieldError("eindTijd","Geen geldige tijd!");
-					} else {
-						eindCalendar.set(Calendar.HOUR_OF_DAY, uur);
-						eindCalendar.set(Calendar.MINUTE, minuut);
-					}
-				} catch (NumberFormatException nfe) {
-					addFieldError("eindTijd","Geen geldige tijd!");
-				}
-			} else {
-				addFieldError("eindTijd","Geen geldige tijd!");
-			}
-		} else {
-			int seconde = (int)Math.random()*59;
-			eindCalendar.set(Calendar.HOUR_OF_DAY, uur);
-			eindCalendar.set(Calendar.MINUTE, minuut);
-			eindCalendar.set(Calendar.SECOND, seconde);
-		}
-		
 	}
 
 	public String getCategorie() {
@@ -173,20 +134,12 @@ public class VoegVeilingToe extends ActionSupport implements UserAware {
 		this.minbedrag = minbedrag;
 	}
 
-	public String getEindDatum() {
-		return eindDatum;
+	public String getStrDuur() {
+		return strDuur;
 	}
 
-	public void setEindDatum(String eindDatum) {
-		this.eindDatum = eindDatum;
-	}
-
-	public String getEindTijd() {
-		return eindTijd;
-	}
-
-	public void setEindTijd(String eindTijd) {
-		this.eindTijd = eindTijd;
+	public void setStrDuur(String strDuur) {
+		this.strDuur = strDuur;
 	}
 
 	public Persoon getUser() {

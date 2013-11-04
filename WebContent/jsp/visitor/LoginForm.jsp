@@ -11,7 +11,7 @@
 		<div class="container">
 			<h1>Inloggen</h1>
 			<s:form action="Login">
-				<s:textfield name="username" label="Naam" />
+				<s:textfield name="username" label="Gebruikersnaam" />
 				<s:password name="password" label="Wachtwoord" />
 				<s:submit value="Log in" />
 			</s:form>
