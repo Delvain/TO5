@@ -52,9 +52,9 @@
 			<p class="welkom">Welkom, <a href="<s:url action="LoginForm" namespace="/visitor" />">log in</a> of <a href="<s:url action="CreateAccountForm" namespace="/visitor" />">maak een account</a>.</p>
 		</s:else>
 		<div class="search">
-			<form method="post" action="#zoeken">
+			<s:form method="post" action="ZoekVeiling" namespace="/visitor">
 				<input type="text" name="q" /> <input type="submit" value="Zoek" />
-			</form>
+			</s:form>
 		</div>
 		<div style="clear: both"></div>
 	</div>

@@ -17,7 +17,7 @@ public class VeilingTest {
 	
 	@Test
 	public void testVeilingDAO() {
-		int veilingId = 51;
+		int veilingId = 60;
 		VeilingDAOImpl veilingImpl = new VeilingDAOImpl();
 		PersoonDAOImpl persoonImpl = new PersoonDAOImpl();
 		CategorieDAOImpl categorieImpl = new CategorieDAOImpl();

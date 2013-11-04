@@ -195,16 +195,18 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 	}
 	
 	//Ophalen alle veilingen van een specifieke gebruiker
-	public List<Veiling> zoekVeiling(String zoekterm) {
+	public List<Veiling> zoekVeiling(String q) {
 		Connection con = ConnectionHandler.connect();
 		ArrayList<Veiling> zoekResultaten = new ArrayList<Veiling>();
 		try {
 			//Zoek op naam
-			PreparedStatement readNaam = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE naam COLLATE UTF8_GENERAL_CI LIKE %?%");
-			readNaam.setString(1, zoekterm);			
-			ResultSet rsNaam = readNaam.executeQuery();	
+			PreparedStatement readNaam = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE upper(naam) LIKE ? AND geblokkeerd = '0'");
+			readNaam.setString(1, q);
+			ResultSet rsNaam = readNaam.executeQuery();
+			System.out.println("Executing search query: " + q);
 			
 			while (rsNaam.next()) {
+				System.out.println("Gevonden: " + rsNaam.getString("NAAM"));
 				int id = rsNaam.getInt("ID");
 				String naam = rsNaam.getString("NAAM");
 				String omschrijving = rsNaam.getString("OMSCHRIJVING");
@@ -215,7 +217,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String foto = rsNaam.getString("FOTO");
 				String categorienaam = rsNaam.getString("CATEGORIEEN_NAAM");
 				PersoonDAOImpl dao = new PersoonDAOImpl();
-				Gebruiker aanbieder = (Gebruiker) dao.read(zoekterm);
+				Gebruiker aanbieder = (Gebruiker) dao.read(q);
 				Categorie cat = new Categorie(categorienaam);
 				boolean geblokkeerd = false;
 				if(rsNaam.getInt("GEBLOKKEERD") == 1)
@@ -225,8 +227,8 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 			}
 			
 			//Zoek op omschrijving
-			PreparedStatement readOmschrijving = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE omschrijving COLLATE UTF8_GENERAL_CI LIKE %?%");
-			readOmschrijving.setString(1, zoekterm);
+			PreparedStatement readOmschrijving = con.prepareStatement("SELECT * FROM " + ConnectionData.DATABASE + ".\"VEILINGEN\" WHERE upper(omschrijving) LIKE ? AND geblokkeerd = '0'");
+			readOmschrijving.setString(1, q);
 			ResultSet rsOmschrijving = readOmschrijving.executeQuery();
 			
 			while (rsOmschrijving.next()) {
@@ -240,7 +242,7 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 				String foto = rsOmschrijving.getString("FOTO");
 				String categorienaam = rsOmschrijving.getString("CATEGORIEEN_NAAM");
 				PersoonDAOImpl dao = new PersoonDAOImpl();
-				Gebruiker aanbieder = (Gebruiker) dao.read(zoekterm);
+				Gebruiker aanbieder = (Gebruiker) dao.read(q);
 				Categorie cat = new Categorie(categorienaam);
 				boolean geblokkeerd = false;
 				if(rsOmschrijving.getInt("GEBLOKKEERD") == 1)

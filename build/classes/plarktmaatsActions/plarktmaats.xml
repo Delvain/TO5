@@ -40,6 +40,10 @@
 			<result name="success">/jsp/visitor/Categorie.jsp</result>
 			<result name="input" type="redirectAction">Menu</result>
 		</action>
+		<action name="ZoekVeiling" class="plarktmaatsActions.visitor.ZoekVeiling">
+			<result name="success">/jsp/visitor/ZoekResultaten.jsp</result>
+			<result name="input">/jsp/include/top.jsp</result>
+		</action>
 	</package>
 	
 	<package name="gebruikers" namespace="/member" extends="struts-default">
