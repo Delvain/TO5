@@ -55,7 +55,7 @@
 			<result>/jsp/menu/index.jsp</result>
 		</action>
 		<action name="Logout" class="plarktmaatsActions.gebruikers.Logout">
-			<result name="success">/jsp/member/LoggedOut.jsp</result>
+			<result type="redirectAction">Menu</result>
 		</action>
 		<action name="PersoonPagina" class="plarktmaatsActions.gebruikers.PersoonPagina">
 			<result name="success">/jsp/member/PersoonPagina.jsp</result>

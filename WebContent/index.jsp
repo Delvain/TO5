@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Refresh" content="5;URL=Menu.action" />
+		<meta http-equiv="Refresh" content="0;URL=Menu.action" />
     	<jsp:include page="/jsp/include/head.jsp" />
     	<style type="text/css">
     		div.container {
