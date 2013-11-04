@@ -380,6 +380,33 @@ public class VeilingDAOImpl implements PlarktmaatsDAOInterface<Veiling> {
 		}
 	}
 	
+	public String verwerkVeilingen() {
+		Connection con = connect();
+		
+		CallableStatement callableStatement = null;
+		try {
+			callableStatement = con.prepareCall("{call verwerk_veilingen}");
+			callableStatement.executeUpdate();
+		} catch (SQLException e1) {
+			
+		}
+		
+		try {
+			PreparedStatement read = con.prepareStatement("SELECT * FROM "
+					+ ConnectionData.DATABASE + ".\"VEILINGVERWERKTDATUM\" ");
+			ResultSet rs = read.executeQuery();
+			while (rs.next()) {
+				Date verwerktTotTemp = rs.getDate("VEILINGEN_VERWERKT_TOT");
+				Calendar verwerktTot = Calendar.getInstance();
+				verwerktTot.setTime(verwerktTotTemp);
+				return ProjectTools.CalendarToNiceString(verwerktTot);
+			}
+		}catch (SQLException e) {
+			
+		}
+		return "";
+	}
+	
 	public List<String[]> getInkomstenOverzicht(Calendar begin, Calendar eind) {
 		Date begintijdstip = new java.sql.Date(begin.getTimeInMillis());
 		Date eindtijdstip = new java.sql.Date(eind.getTimeInMillis());

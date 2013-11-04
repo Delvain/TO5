@@ -114,7 +114,7 @@
 		</global-results>
 		
 		<action name="Menu" class="plarktmaatsActions.visitor.AlleVeilingen">
-			<result>/jsp/menu/index.jsp</result>
+			<result>/jsp/menu/BeheerderMenu.jsp</result>
 		</action>
 		<action name="SelecteerGebruikerForm" class="plarktmaatsActions.beheerder.AlleGebruikers">
 			<result name="success">/jsp/beheerder/SelecteerPersoon.jsp</result>
@@ -140,6 +140,9 @@
 		<action name="VerwijderVeiling" class="plarktmaatsActions.beheerder.VerwijderVeiling">
 			<result name="success" type="redirectAction">Menu</result>
 			<result name="input">/jsp/beheerder/VeilingenBlokkerenVerwijderen.jsp</result>
+		</action>
+		<action name="VerwerkVeilingen" class="plarktmaatsActions.beheerder.VerwerkVeilingen">
+			<result name="success">/jsp/menu/BeheerderMenu.jsp</result>
 		</action>
 		<action name="StatistiekHoogsteBieding" class="plarktmaatsActions.beheerder.StatistiekHoogsteBiedingen">
 			<result name="success">/jsp/beheerder/StatistiekHoogsteBiedingen.jsp</result>

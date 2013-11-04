@@ -18,6 +18,10 @@
 			<p>Statistieken</p>
 			<a href="<s:url action='StatistiekHoogsteBieding' namespace="/beheerder"/>">Hoogste biedingen</a><br/>
 			<a href="<s:url action='StatistiekInkomstenOverzicht' namespace="/beheerder"/>">Inkomstenoverzicht</a><br/>
+			
+			
+			<p>Veilingen zijn verwerkt tot: <s:property value="datum"/></p>
+			<a href="<s:url action='VerwerkVeilingen' namespace="/beheerder"/>" class="plaats_ad_but">Verwerk veilingen</a><br/>
 		</div>
 		<jsp:include page="/jsp/include/footer.jsp" />
 	</body>
