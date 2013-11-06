@@ -46,7 +46,11 @@
 				<s:else>
 					<p class="meer">- <a href="<s:url namespace="/visitor" action="ToonVeiling"><s:param name="id" value="%{VeilingId}" /></s:url>"><s:property value="veilingNaam" /></a></p>
 				</s:else>
-				<s:if test="%{#status.isLast()}"></div></s:if>
+				<s:if test="%{#status.isLast()}">
+					<s:if test="%{#status.index > 2}" >
+						</div>
+					</s:if>
+				</s:if>
 			</s:iterator>
 			<div style="float: left">
 				<h2>Categorieën:</h2>
