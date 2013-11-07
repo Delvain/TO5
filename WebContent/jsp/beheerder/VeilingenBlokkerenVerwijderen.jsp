@@ -12,7 +12,6 @@
 				<thead>
 					<tr>
 						<th>Veilingnaam</th>
-						<th>Geblokkeerd</th>
 						<th>Blokkeren</th>
 						<th>Verwijderen</th>
 					</tr>

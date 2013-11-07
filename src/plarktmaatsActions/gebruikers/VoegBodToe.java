@@ -44,6 +44,9 @@ public class VoegBodToe extends ActionSupport implements UserAware {
 		if(v.getGeblokkeerd()) { //veiling mag niet geblokkeerd zijn
 			addFieldError("credits", "Deze veiling is geblokkeerd");
 		}
+		if (v.getAanbieder().getGebruikersnaam().equals(user.getGebruikersnaam())) { // niet op eigen veiling bieden
+			addFieldError("credits","U mag niet op uw eigen veiling bieden");
+		}
 		int creditsInt = Integer.parseInt(credits);
 		if(v.getMinBedrag() > creditsInt) { //credits moet hoger zijn dan minimumbedrag
 			addFieldError("credits", "Dit bod is onder het minimumbedrag");
